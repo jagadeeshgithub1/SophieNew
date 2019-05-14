@@ -658,7 +658,7 @@ public class ActionClass extends TestBaseClass {
 
 			// options.addArguments("--no-sandbox");
 			// options.addArguments("--disable-dev-shm-usage");
-			// options.addArguments("--headless");
+			options.addArguments("--headless");
 			// options.addArguments("window-size=1200x600");
 			// options.addArguments("--disable-gpu");
 
@@ -693,7 +693,7 @@ public class ActionClass extends TestBaseClass {
 			startTime = System.currentTimeMillis();
 			driver.get(prop.getProperty("url"));
 
-			System.out.println("getpageSource of Login>>" + driver.getPageSource());
+			// System.out.println("getpageSource of Login>>" + driver.getPageSource());
 
 			flag = true;
 		} catch (TimeoutException te) {
