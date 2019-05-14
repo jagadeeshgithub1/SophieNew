@@ -1062,9 +1062,17 @@ public class ActionClass extends TestBaseClass {
 		boolean flag = false;
 
 		// below code locate the toggle button for arbitration
-		WebElement btnArbitration = new WebDriverWait(driver, 30)
-				.until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//td[contains(text(),'" + offerName.trim()
-						+ "')]//following::div/button[@id='bypass-arb'])[1]")));
+		WebElement btnArbitration = null;
+		try {
+			btnArbitration = new WebDriverWait(driver, 30)
+					.until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//td[contains(text(),'"
+							+ offerName.trim() + "')]//following::div/button[@id='bypass-arb'])[1]")));
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			flag = false;
+			return flag;
+
+		}
 		if (btnArbitration.getAttribute("autocomplete").equals("off")) {
 			btnArbitration.click();
 			flag = true;

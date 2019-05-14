@@ -68,41 +68,23 @@ public class RegressionCases {
 	// First test to validate the CSV after engine run
 	public void Verify_DownloadedCSV_For_Existing_Version() {
 
-		/*
-		 * if (!driverEngine.mainMethod("VerifyCSVForExistingVersion")) {
-		 * Assert.assertTrue(false); Reporter.log("failed to find test sheet"); }
-		 */
-
 		Assert.assertTrue(driverEngine.mainMethod("VerifyCSVForExistingVersion"));
 
 		// TODO Auto-generated catch block
 
 	}
 
-	@Test(priority = 2)
+	@Test(priority = 2, enabled = false)
 	// Second case to verify the event API integration
 	public void Verify_DownloadedCSV_For_New_version() {
-
-		/*
-		 * if (!driverEngine.mainMethod("VerifyCSVForNewVersion")) {
-		 * 
-		 * // TODO Auto-generated catch block
-		 * 
-		 * Assert.assertTrue(false); Reporter.log("failed to find the testsheet"); }
-		 */
 
 		Assert.assertTrue(driverEngine.mainMethod("VerifyCSVForNewVersion"));
 
 	}
 
-	@Test(priority = 3, enabled = false)
+	@Test(priority = 3)
 	public void Verify_RealTimeEvent_API_Response_For_NewEvent() {
-		if (!driverEngine.mainMethod("VerifyEventAPI")) {
-
-			// TODO Auto-generated catch block
-			Assert.assertTrue(false);
-			Reporter.log("failed to find the testsheet");
-		}
+		Assert.assertTrue(driverEngine.mainMethod("VerifyEventAPI"));
 
 	}
 
