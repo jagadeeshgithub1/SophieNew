@@ -2,16 +2,16 @@
 <testng-results skipped="0" failed="1" ignored="3" total="4" passed="0">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="586626" started-at="2019-05-14T08:32:24Z" finished-at="2019-05-14T08:42:11Z">
+  <suite name="Default suite" duration-ms="916428" started-at="2019-05-14T10:15:17Z" finished-at="2019-05-14T10:30:34Z">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="586626" started-at="2019-05-14T08:32:24Z" finished-at="2019-05-14T08:42:11Z">
+    <test name="Default test" duration-ms="916428" started-at="2019-05-14T10:15:17Z" finished-at="2019-05-14T10:30:34Z">
       <class name="regressionTests.RegressionCases">
-        <test-method status="PASS" signature="setUp()[pri:0, instance:regressionTests.RegressionCases@543c6f6d]" name="setUp" is-config="true" duration-ms="61" started-at="2019-05-14T08:32:24Z" finished-at="2019-05-14T08:32:24Z">
+        <test-method status="PASS" signature="setUp()[pri:0, instance:regressionTests.RegressionCases@b2c9a9c]" name="setUp" is-config="true" duration-ms="122" started-at="2019-05-14T10:15:17Z" finished-at="2019-05-14T10:15:18Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method status="FAIL" signature="Verify_DownloadedCSV_For_Existing_Version()[pri:1, instance:regressionTests.RegressionCases@543c6f6d]" name="Verify_DownloadedCSV_For_Existing_Version" duration-ms="586542" started-at="2019-05-14T08:32:24Z" finished-at="2019-05-14T08:42:11Z">
+        <test-method status="FAIL" signature="Verify_DownloadedCSV_For_New_version()[pri:2, instance:regressionTests.RegressionCases@b2c9a9c]" name="Verify_DownloadedCSV_For_New_version" duration-ms="916180" started-at="2019-05-14T10:15:18Z" finished-at="2019-05-14T10:30:34Z">
           <exception class="java.lang.AssertionError">
             <message>
               <![CDATA[expected [true] but found [false]]]>
@@ -22,7 +22,7 @@ at org.testng.Assert.fail(Assert.java:96)
 at org.testng.Assert.failNotEquals(Assert.java:776)
 at org.testng.Assert.assertTrue(Assert.java:44)
 at org.testng.Assert.assertTrue(Assert.java:54)
-at regressionTests.RegressionCases.Verify_DownloadedCSV_For_Existing_Version(RegressionCases.java:76)
+at regressionTests.RegressionCases.Verify_DownloadedCSV_For_New_version(RegressionCases.java:94)
 at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -53,7 +53,7 @@ at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
           </exception> <!-- java.lang.AssertionError -->
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- Verify_DownloadedCSV_For_Existing_Version -->
+        </test-method> <!-- Verify_DownloadedCSV_For_New_version -->
       </class> <!-- regressionTests.RegressionCases -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->

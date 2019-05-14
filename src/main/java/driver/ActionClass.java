@@ -629,12 +629,14 @@ public class ActionClass extends TestBaseClass {
 		String osName = System.getProperty("os.name").trim();
 		String downloadFilepath = null;
 		long startTime = 0;
+		ChromeOptions options = new ChromeOptions();
 		try {
 
 			if (osName.equalsIgnoreCase("Linux")) {
 				System.setProperty("webdriver.chrome.driver", "/bin/chromedriver"); // added the new path for linux
 				// System.setProperty("webdriver.chrome.driver", "Drivers/chromedriver");
 				downloadFilepath = System.getProperty("user.dir") + "/Downloads";
+				options.addArguments("--headless");
 			} else {
 				System.setProperty("webdriver.chrome.driver", "Drivers\\chromedriver.exe");
 				downloadFilepath = System.getProperty("user.dir") + "\\Downloads";
@@ -647,7 +649,7 @@ public class ActionClass extends TestBaseClass {
 			HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
 			chromePrefs.put("profile.default_content_settings.popups", 0);
 			chromePrefs.put("download.default_directory", downloadFilepath);
-			ChromeOptions options = new ChromeOptions();
+			// ChromeOptions options = new ChromeOptions();
 
 			options.setExperimentalOption("prefs", chromePrefs);
 
@@ -655,7 +657,7 @@ public class ActionClass extends TestBaseClass {
 
 			// options.addArguments("--no-sandbox");
 			// options.addArguments("--disable-dev-shm-usage");
-			options.addArguments("--headless");
+			// options.addArguments("--headless");
 			// options.addArguments("window-size=1200x600");
 			// options.addArguments("--disable-gpu");
 
@@ -1169,10 +1171,13 @@ public class ActionClass extends TestBaseClass {
 		}
 		ExcelUtils ObjTestdataFile = null;
 		try {
-			ObjTestdataFile = new ExcelUtils("TestDataAndResults\\Run1\\SophieAutomation.xlsx");// for windows
 			if (osName.equalsIgnoreCase("Linux")) {
 				ObjTestdataFile = new ExcelUtils("TestDataAndResults/Run1/SophieAutomation.xlsx");
+			} else {
+
+				ObjTestdataFile = new ExcelUtils("TestDataAndResults\\Run1\\SophieAutomation.xlsx");// for windows
 			}
+
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -1281,9 +1286,10 @@ public class ActionClass extends TestBaseClass {
 
 				// here should do the code to move the file to Archive
 				File dest = null;
-				dest = new File("Downloads\\Archive\\");
 				if (osName.equalsIgnoreCase("Linux")) {
 					dest = new File("Downloads/Archive/");
+				} else {
+					dest = new File("Downloads\\Archive\\");
 				}
 
 				if (generalUtilities.CopyFile(file, dest)) {
