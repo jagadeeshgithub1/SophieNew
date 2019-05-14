@@ -17,10 +17,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.TimeoutException;
@@ -150,7 +148,7 @@ public class ActionClass extends TestBaseClass {
 
 			System.out.println("object name:" + object);
 
-			WebElement ele = new WebDriverWait(driver, 60)
+			WebElement ele = new WebDriverWait(driver, 90)
 					.until(ExpectedConditions.presenceOfElementLocated(By.xpath(prop.getProperty(object))));
 			// WebElement webElement =
 			// webDriver.findElement(By.xpath("//div[@id='mainPane']/form/table/tbody/tr[10]/td/a[2]"));
@@ -650,8 +648,7 @@ public class ActionClass extends TestBaseClass {
 			chromePrefs.put("profile.default_content_settings.popups", 0);
 			chromePrefs.put("download.default_directory", downloadFilepath);
 			ChromeOptions options = new ChromeOptions();
-			// options.setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR,
-			// UnexpectedAlertBehaviour.IGNORE);
+
 			options.setExperimentalOption("prefs", chromePrefs);
 
 			// added the below 2 lines on 5/2/19
@@ -665,32 +662,15 @@ public class ActionClass extends TestBaseClass {
 			try {
 				driver = new ChromeDriver(options);// some exception is coming hre
 
-				// new changes on 5/3/19
-				// DesiredCapabilities capabilities = DesiredCapabilities.chrome();
-				/*
-				 * options.setCapability(CapabilityType.BROWSER_NAME, "htmlunit");
-				 * options.setCapability(CapabilityType.BROWSER_VERSION, "chrome");
-				 */
-
-				// driver = new HtmlUnitDriver(BrowserVersion.CHROME);// for the headless mode
-				// driver = new HtmlUnitDriver(BrowserVersion.CHROME,true);
-				// driver.setJavascriptEnabled(true);
-				// driver = new ChromeDriver();
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				System.out.println("while driver = new ChromeDriver(options)");
 				e.printStackTrace();
 			}
-			driver.manage().window().setSize(new Dimension(1920, 1200));
+			// driver.manage().window().setSize(new Dimension(1920, 1200));
 			driver.manage().window().maximize();
-
 			driver.manage().deleteAllCookies();
-			System.out.println("url is " + prop.getProperty("url"));
-			System.out.println("Title of the page during openURL:" + driver.getTitle());
-			System.out.println("driver>> " + driver.toString());
-			driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
-			driver.manage().timeouts().pageLoadTimeout(50, TimeUnit.SECONDS);
-			startTime = System.currentTimeMillis();
+
 			driver.get(prop.getProperty("url"));
 
 			// System.out.println("getpageSource of Login>>" + driver.getPageSource());

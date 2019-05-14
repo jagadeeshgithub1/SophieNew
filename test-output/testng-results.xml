@@ -2,16 +2,16 @@
 <testng-results skipped="0" failed="1" ignored="3" total="4" passed="0">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="1148817" started-at="2019-05-14T06:55:53Z" finished-at="2019-05-14T07:15:02Z">
+  <suite name="Default suite" duration-ms="586626" started-at="2019-05-14T08:32:24Z" finished-at="2019-05-14T08:42:11Z">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="1148817" started-at="2019-05-14T06:55:53Z" finished-at="2019-05-14T07:15:02Z">
+    <test name="Default test" duration-ms="586626" started-at="2019-05-14T08:32:24Z" finished-at="2019-05-14T08:42:11Z">
       <class name="regressionTests.RegressionCases">
-        <test-method status="PASS" signature="setUp()[pri:0, instance:regressionTests.RegressionCases@b2c9a9c]" name="setUp" is-config="true" duration-ms="235" started-at="2019-05-14T06:55:53Z" finished-at="2019-05-14T06:55:53Z">
+        <test-method status="PASS" signature="setUp()[pri:0, instance:regressionTests.RegressionCases@543c6f6d]" name="setUp" is-config="true" duration-ms="61" started-at="2019-05-14T08:32:24Z" finished-at="2019-05-14T08:32:24Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method status="FAIL" signature="Verify_DownloadedCSV_For_Existing_Version()[pri:1, instance:regressionTests.RegressionCases@b2c9a9c]" name="Verify_DownloadedCSV_For_Existing_Version" duration-ms="1148437" started-at="2019-05-14T06:55:53Z" finished-at="2019-05-14T07:15:02Z">
+        <test-method status="FAIL" signature="Verify_DownloadedCSV_For_Existing_Version()[pri:1, instance:regressionTests.RegressionCases@543c6f6d]" name="Verify_DownloadedCSV_For_Existing_Version" duration-ms="586542" started-at="2019-05-14T08:32:24Z" finished-at="2019-05-14T08:42:11Z">
           <exception class="java.lang.AssertionError">
             <message>
               <![CDATA[expected [true] but found [false]]]>
