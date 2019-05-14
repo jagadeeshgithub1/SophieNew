@@ -57,9 +57,9 @@ function toggleAllBoxes() {
 <tr>
 <td>Tests passed/Failed/Skipped:</td><td>0/1/0</td>
 </tr><tr>
-<td>Started on:</td><td>Mon May 13 17:29:16 IST 2019</td>
+<td>Started on:</td><td>Tue May 14 12:25:53 IST 2019</td>
 </tr>
-<tr><td>Total time:</td><td>638 seconds (638974 ms)</td>
+<tr><td>Total time:</td><td>1148 seconds (1148817 ms)</td>
 </tr><tr>
 <td>Included groups:</td><td></td>
 </tr><tr>
@@ -76,9 +76,11 @@ function toggleAllBoxes() {
 </tr>
 <tr>
 <td title='regressionTests.RegressionCases.Verify_DownloadedCSV_For_Existing_Version()'><b>Verify_DownloadedCSV_For_Existing_Version</b><br>Test class: regressionTests.RegressionCases</td>
-<td><div><pre>java.lang.NullPointerException
-	at driver.ActionClass.checkboxSelect(ActionClass.java:919)
-	at driver.DriverEngine.mainMethod(DriverEngine.java:251)
+<td><div><pre>java.lang.AssertionError: expected [true] but found [false]
+	at org.testng.Assert.fail(Assert.java:96)
+	at org.testng.Assert.failNotEquals(Assert.java:776)
+	at org.testng.Assert.assertTrue(Assert.java:44)
+	at org.testng.Assert.assertTrue(Assert.java:54)
 	at regressionTests.RegressionCases.Verify_DownloadedCSV_For_Existing_Version(RegressionCases.java:76)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
@@ -105,10 +107,12 @@ function toggleAllBoxes() {
 	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:114)
 	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
 	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
-</pre></div><a href='#' onClick='toggleBox("stack-trace1220806149", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
-<div class='stack-trace' id='stack-trace1220806149'><pre>java.lang.NullPointerException
-	at driver.ActionClass.checkboxSelect(ActionClass.java:919)
-	at driver.DriverEngine.mainMethod(DriverEngine.java:251)
+</pre></div><a href='#' onClick='toggleBox("stack-trace669501311", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace669501311'><pre>java.lang.AssertionError: expected [true] but found [false]
+	at org.testng.Assert.fail(Assert.java:96)
+	at org.testng.Assert.failNotEquals(Assert.java:776)
+	at org.testng.Assert.assertTrue(Assert.java:44)
+	at org.testng.Assert.assertTrue(Assert.java:54)
 	at regressionTests.RegressionCases.Verify_DownloadedCSV_For_Existing_Version(RegressionCases.java:76)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
@@ -136,8 +140,8 @@ function toggleAllBoxes() {
 	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
 	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
 </pre></div></td>
-<td>638</td>
-<td>regressionTests.RegressionCases@543c6f6d</td></tr>
+<td>1148</td>
+<td>regressionTests.RegressionCases@b2c9a9c</td></tr>
 </table><p>
 </body>
 </html>

@@ -2,21 +2,26 @@
 <testng-results skipped="0" failed="1" ignored="3" total="4" passed="0">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="638974" started-at="2019-05-13T11:59:16Z" finished-at="2019-05-13T12:09:55Z">
+  <suite name="Default suite" duration-ms="1148817" started-at="2019-05-14T06:55:53Z" finished-at="2019-05-14T07:15:02Z">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="638974" started-at="2019-05-13T11:59:16Z" finished-at="2019-05-13T12:09:55Z">
+    <test name="Default test" duration-ms="1148817" started-at="2019-05-14T06:55:53Z" finished-at="2019-05-14T07:15:02Z">
       <class name="regressionTests.RegressionCases">
-        <test-method status="PASS" signature="setUp()[pri:0, instance:regressionTests.RegressionCases@543c6f6d]" name="setUp" is-config="true" duration-ms="85" started-at="2019-05-13T11:59:16Z" finished-at="2019-05-13T11:59:16Z">
+        <test-method status="PASS" signature="setUp()[pri:0, instance:regressionTests.RegressionCases@b2c9a9c]" name="setUp" is-config="true" duration-ms="235" started-at="2019-05-14T06:55:53Z" finished-at="2019-05-14T06:55:53Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method status="FAIL" signature="Verify_DownloadedCSV_For_Existing_Version()[pri:1, instance:regressionTests.RegressionCases@543c6f6d]" name="Verify_DownloadedCSV_For_Existing_Version" duration-ms="638835" started-at="2019-05-13T11:59:17Z" finished-at="2019-05-13T12:09:55Z">
-          <exception class="java.lang.NullPointerException">
+        <test-method status="FAIL" signature="Verify_DownloadedCSV_For_Existing_Version()[pri:1, instance:regressionTests.RegressionCases@b2c9a9c]" name="Verify_DownloadedCSV_For_Existing_Version" duration-ms="1148437" started-at="2019-05-14T06:55:53Z" finished-at="2019-05-14T07:15:02Z">
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[expected [true] but found [false]]]>
+            </message>
             <full-stacktrace>
-              <![CDATA[java.lang.NullPointerException
-at driver.ActionClass.checkboxSelect(ActionClass.java:919)
-at driver.DriverEngine.mainMethod(DriverEngine.java:251)
+              <![CDATA[java.lang.AssertionError: expected [true] but found [false]
+at org.testng.Assert.fail(Assert.java:96)
+at org.testng.Assert.failNotEquals(Assert.java:776)
+at org.testng.Assert.assertTrue(Assert.java:44)
+at org.testng.Assert.assertTrue(Assert.java:54)
 at regressionTests.RegressionCases.Verify_DownloadedCSV_For_Existing_Version(RegressionCases.java:76)
 at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
@@ -45,7 +50,7 @@ at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
 at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
 ]]>
             </full-stacktrace>
-          </exception> <!-- java.lang.NullPointerException -->
+          </exception> <!-- java.lang.AssertionError -->
           <reporter-output>
           </reporter-output>
         </test-method> <!-- Verify_DownloadedCSV_For_Existing_Version -->

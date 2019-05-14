@@ -416,7 +416,7 @@ public class ActionClass extends TestBaseClass {
 		 * @Parameter:Passing the web element xpath, and the data to be typed
 		 */
 		try {
-			WebElement ele = new WebDriverWait(driver, 40)
+			WebElement ele = new WebDriverWait(driver, 90)
 					.until(ExpectedConditions.presenceOfElementLocated(By.xpath(prop.getProperty(object))));
 			ele.clear();
 			ele.sendKeys(data.trim());
