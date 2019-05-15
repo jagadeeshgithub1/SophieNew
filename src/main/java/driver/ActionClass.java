@@ -148,8 +148,14 @@ public class ActionClass extends TestBaseClass {
 
 			System.out.println("object name:" + object);
 
+			/*
+			 * Weblement ele = new WebDriverWait(driver, 90)
+			 * .until((ExpectedConditions.presenceOfElementLocated(By.xpath(prop.getProperty
+			 * (object)))));
+			 */
+
 			WebElement ele = new WebDriverWait(driver, 90)
-					.until(ExpectedConditions.presenceOfElementLocated(By.xpath(prop.getProperty(object))));
+					.until(ExpectedConditions.elementToBeClickable(By.xpath(prop.getProperty(object))));
 			// WebElement webElement =
 			// webDriver.findElement(By.xpath("//div[@id='mainPane']/form/table/tbody/tr[10]/td/a[2]"));
 
