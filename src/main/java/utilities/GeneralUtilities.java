@@ -161,15 +161,23 @@ public class GeneralUtilities extends ActionClass {
 			e.printStackTrace();
 		}
 
-		File lastModifiedFile = files[0];
-		for (int i = 1; i < files.length; i++) {
-			if (lastModifiedFile.lastModified() < files[i].lastModified()) {
-				lastModifiedFile = files[i];
+		try {
+			File lastModifiedFile = files[0];
+			System.out.println("first assigned lastmodified file" + lastModifiedFile);
+			for (int i = 1; i < files.length; i++) {
+				if (lastModifiedFile.lastModified() < files[i].lastModified()) {
+					lastModifiedFile = files[i];
 
-				System.out.println(lastModifiedFile);
+					System.out.println(lastModifiedFile);
+				}
 			}
+			return lastModifiedFile;
+		} catch (Exception e) {
+
+			System.out.println("Failed to find the last modified file");
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		return lastModifiedFile;
 
 	}
 
