@@ -160,9 +160,10 @@ public class GeneralUtilities extends ActionClass {
 			System.out.println("Failed to find the file with the pattern");
 			e.printStackTrace();
 		}
+		File lastModifiedFile = null;
 
 		try {
-			File lastModifiedFile = files[0];
+			lastModifiedFile = files[0];
 			System.out.println("first assigned lastmodified file" + lastModifiedFile);
 			for (int i = 1; i < files.length; i++) {
 				if (lastModifiedFile.lastModified() < files[i].lastModified()) {
@@ -171,13 +172,14 @@ public class GeneralUtilities extends ActionClass {
 					System.out.println(lastModifiedFile);
 				}
 			}
-			return lastModifiedFile;
+			// return lastModifiedFile;
 		} catch (Exception e) {
 
 			System.out.println("Failed to find the last modified file");
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return lastModifiedFile;
 
 	}
 
