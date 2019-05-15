@@ -49,7 +49,7 @@ import utilities.GeneralUtilities;
 public class ActionClass extends TestBaseClass {
 
 	public static WebDriver driver = null;
-	public String osName = null;
+	public String osName = System.getProperty("os.name");
 	// public static HtmlUnitDriver driver;
 
 	public ActionClass() throws Exception {

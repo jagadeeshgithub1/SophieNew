@@ -117,7 +117,7 @@ public class GeneralUtilities extends ActionClass {
 	public File getLatestFileFromDir(String dirPath, String pattern) {
 
 		File dir = null;
-
+		System.out.println("Current os>>" + osName);
 		try {
 			if (osName.equalsIgnoreCase("Linux")) {
 				String parent = System.getProperty("user.home");
