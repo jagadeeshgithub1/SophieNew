@@ -187,6 +187,7 @@ public class ActionClass extends TestBaseClass {
 		} catch (Exception e) {
 			System.out.println("element is not present");
 			flag = false;
+			e.printStackTrace();
 			// TODO: handle exception
 		}
 
