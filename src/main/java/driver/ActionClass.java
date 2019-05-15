@@ -21,6 +21,7 @@ import java.util.Set;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -138,38 +139,24 @@ public class ActionClass extends TestBaseClass {
 		boolean flag = false;
 		try {
 
-			/*
-			 * boolean ele = new WebDriverWait(driver, 60).until(ExpectedConditions.and(
-			 * ExpectedConditions.visibilityOfElementLocated(By.xpath(prop.getProperty(
-			 * object))),
-			 * ExpectedConditions.elementToBeClickable(By.xpath(prop.getProperty(object)))))
-			 * ;
-			 */
-
 			System.out.println("object name:" + object);
 
-			/*
-			 * Weblement ele = new WebDriverWait(driver, 90)
-			 * .until((ExpectedConditions.presenceOfElementLocated(By.xpath(prop.getProperty
-			 * (object)))));
-			 */
+			// WebElement ele = new WebDriverWait(driver, 90)
+			// .until(ExpectedConditions.elementToBeClickable(By.xpath(prop.getProperty(object))));
+			boolean ele = new WebDriverWait(driver, 90).until(ExpectedConditions.and(
+					ExpectedConditions.visibilityOfElementLocated(By.xpath(prop.getProperty(object))),
+					ExpectedConditions.elementToBeClickable(By.xpath(prop.getProperty(object)))));
 
-			WebElement ele = new WebDriverWait(driver, 90)
-					.until(ExpectedConditions.elementToBeClickable(By.xpath(prop.getProperty(object))));
-			// WebElement webElement =
-			// webDriver.findElement(By.xpath("//div[@id='mainPane']/form/table/tbody/tr[10]/td/a[2]"));
+			if (ele == true) {
 
-			// HtmlAnchor anchor= new
-			if (ele != null) {
+				WebElement element = driver.findElement(By.xpath(prop.getProperty(object)));
 
-				// WebElement element = driver.findElement(By.xpath(prop.getProperty(object)));
-
-				// Actions action = new Actions(driver);
+				Actions action = new Actions(driver);
 				System.out.println("is this the element???>>" + ele);
-				// action.moveToElement(element).click(element).build().perform();
+				action.moveToElement(element).click(element).build().perform();
 				// Thread.sleep(5000);
 				// action.moveToElement(element).sendKeys(Keys.RETURN);
-				ele.click();
+				// element.click();
 
 				// System.out.println(driver.getPageSource());
 
@@ -184,10 +171,10 @@ public class ActionClass extends TestBaseClass {
 			System.out.println("Are you sure the element is present");
 			flag = false;
 			// TODO: handle exception
-		} catch (Exception e) {
-			System.out.println("element is not present");
+		} catch (StaleElementReferenceException e) {
+			System.out.println("Stale element exception");
 			flag = false;
-			e.printStackTrace();
+
 			// TODO: handle exception
 		}
 
