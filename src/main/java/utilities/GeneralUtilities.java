@@ -120,7 +120,7 @@ public class GeneralUtilities extends ActionClass {
 		System.out.println("Current os>>" + osName);
 		try {
 			if (osName.equalsIgnoreCase("Linux")) {
-				String parent = System.getProperty("user.home");
+				String parent = System.getProperty("user.dir");
 				dir = new File(parent, dirPath);
 
 			} else {
