@@ -49,6 +49,7 @@ import utilities.GeneralUtilities;
 public class ActionClass extends TestBaseClass {
 
 	public static WebDriver driver = null;
+	public String osName = null;
 	// public static HtmlUnitDriver driver;
 
 	public ActionClass() throws Exception {
@@ -534,7 +535,7 @@ public class ActionClass extends TestBaseClass {
 		 */
 		// initialization();
 		boolean flag = false;
-		String osName = System.getProperty("os.name");
+		osName = System.getProperty("os.name");
 		System.out.println(osName);
 		if (osName.equalsIgnoreCase("Linux")) {
 			String downloadFilepath = null;
@@ -711,6 +712,7 @@ public class ActionClass extends TestBaseClass {
 		 */
 		try {
 			driver.quit();
+			System.out.println("Driver quit");
 			flag = true;
 		} catch (Exception e) {
 			flag = false;

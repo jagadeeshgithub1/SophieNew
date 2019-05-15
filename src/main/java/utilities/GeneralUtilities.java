@@ -15,7 +15,6 @@ import javax.imageio.ImageIO;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
 import com.opencsv.CSVReader;
@@ -112,27 +111,54 @@ public class GeneralUtilities extends ActionClass {
 		chromePrefs.put("download.default_directory", downloadFilepath);
 		ChromeOptions options = new ChromeOptions();
 		options.setExperimentalOption("prefs", chromePrefs);
-		//driver = new ChromeDriver(options);
+		// driver = new ChromeDriver(options);
 	}
 
 	public File getLatestFileFromDir(String dirPath, String pattern) {
-		File dir = new File(dirPath);
+
+		File dir = null;
+
+		try {
+			if (osName.equalsIgnoreCase("Linux")) {
+				String parent = System.getProperty("user.home");
+				dir = new File(parent, dirPath);
+
+			} else {
+
+				dir = new File(dirPath);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+
+			System.out.println("Failed in finding the directory downloads????");
+			e.printStackTrace();
+		}
+
+		System.out.println("dir is >>" + dir);
 
 		// File[] files = dir.listFiles();
-		File[] files = dir.listFiles(new FilenameFilter() {
+		File[] files = null;
+		try {
+			files = dir.listFiles(new FilenameFilter() {
 
-			@Override
-			public boolean accept(File dir, String name) {
-				if (name.startsWith(pattern)) {
-					return true;
+				@Override
+				public boolean accept(File dir, String name) {
+					if (name.startsWith(pattern)) {
+						return true;
+					}
+					// TODO Auto-generated method stub
+					return false;
 				}
-				// TODO Auto-generated method stub
-				return false;
-			}
-		});
+			});
 
-		if (files == null || files.length == 0) {
-			return null;
+			if (files == null || files.length == 0) {
+				return null;
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+
+			System.out.println("Failed to find the file with the pattern");
+			e.printStackTrace();
 		}
 
 		File lastModifiedFile = files[0];

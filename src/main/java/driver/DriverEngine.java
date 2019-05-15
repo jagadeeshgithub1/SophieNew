@@ -293,6 +293,13 @@ public class DriverEngine extends TestBaseClass {
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
 						}
 						break;
+					case "selectRadioButton":
+						if (classAction.selectRadioButton(TestData)) {
+							excelUtils.setCellData(sheetName, "Results", Irow, "Pass");
+						} else {
+							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+						}
+						break;
 					case "VerifyEngineStatus":
 						if (classAction.elementPropertyCheck(PageObject, TestData)) {
 							excelUtils.setCellData(sheetName, "Results", Irow, "Pass");

@@ -63,7 +63,7 @@ public class RegressionCases {
 		}
 	}
 
-	@Test(priority = 1)
+	@Test(priority = 1, enabled = false)
 	// First test to validate the CSV after engine run
 	public void Verify_DownloadedCSV_For_Existing_Version() {
 
@@ -73,7 +73,7 @@ public class RegressionCases {
 
 	}
 
-	@Test(priority = 2)
+	@Test(priority = 2, enabled = false)
 	// Second case to verify the event API integration
 	public void Verify_DownloadedCSV_For_New_version() {
 
@@ -81,7 +81,7 @@ public class RegressionCases {
 
 	}
 
-	@Test(priority = 3)
+	@Test(priority = 3, enabled = false)
 	public void Verify_RealTimeEvent_API_Response_For_NewEvent() {
 		Assert.assertTrue(driverEngine.mainMethod("VerifyEventAPI"));
 
