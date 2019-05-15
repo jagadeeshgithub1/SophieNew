@@ -87,7 +87,7 @@ public class RegressionCases {
 
 	}
 
-	@Test(priority = 4, enabled = false)
+	@Test(priority = 4)
 	public void Verify_Deleted_Offer_Is_Not_Present_In_CSV() {
 		Assert.assertTrue(driverEngine.mainMethod("VerifyDeleteOffer"));
 

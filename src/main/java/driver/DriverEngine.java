@@ -416,7 +416,7 @@ public class DriverEngine extends TestBaseClass {
 						// excelUtils.saveFile("TestDataAndResults\\SophieAutomationResults.xlsx");
 
 						break;
-					case "hidden_click":
+					case "hiddenClick":
 						if (classAction.hiddenClick(TestData)) {
 							excelUtils.setCellData(sheetName, "Results", Irow, "Pass");
 						}
