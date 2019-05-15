@@ -21,7 +21,6 @@ import java.util.Set;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -151,15 +150,15 @@ public class ActionClass extends TestBaseClass {
 
 				WebElement element = driver.findElement(By.xpath(prop.getProperty(object)));
 
-				Actions action = new Actions(driver);
+				// Actions action = new Actions(driver);
 				System.out.println("is this the element???>>" + ele);
-				action.moveToElement(element).click(element).build().perform();
+				// action.moveToElement(element).click(element).build().perform();
 				/*
 				 * try { Thread.sleep(5000); } catch (InterruptedException e) { // TODO
 				 * Auto-generated catch block e.printStackTrace(); }
 				 */
 				// action.moveToElement(element).sendKeys(Keys.RETURN);
-				// element.click();
+				element.click();
 
 				// System.out.println(driver.getPageSource());
 
@@ -174,9 +173,10 @@ public class ActionClass extends TestBaseClass {
 			System.out.println("Are you sure the element is present");
 			flag = false;
 			// TODO: handle exception
-		} catch (StaleElementReferenceException e) {
+		} catch (Exception e) {
 			System.out.println("Stale element exception");
 			flag = false;
+			e.printStackTrace();
 
 			// TODO: handle exception
 		}
