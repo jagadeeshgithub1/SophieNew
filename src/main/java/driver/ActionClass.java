@@ -154,7 +154,10 @@ public class ActionClass extends TestBaseClass {
 				Actions action = new Actions(driver);
 				System.out.println("is this the element???>>" + ele);
 				action.moveToElement(element).click(element).build().perform();
-				// Thread.sleep(5000);
+				/*
+				 * try { Thread.sleep(5000); } catch (InterruptedException e) { // TODO
+				 * Auto-generated catch block e.printStackTrace(); }
+				 */
 				// action.moveToElement(element).sendKeys(Keys.RETURN);
 				// element.click();
 
