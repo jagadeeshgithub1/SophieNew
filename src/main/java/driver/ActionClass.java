@@ -627,17 +627,19 @@ public class ActionClass extends TestBaseClass {
 		String osName = System.getProperty("os.name").trim();
 		String downloadFilepath = null;
 		long startTime = 0;
-		ChromeOptions options = new ChromeOptions();
+		ChromeOptions options = null;
 		try {
 
 			if (osName.equalsIgnoreCase("Linux")) {
 				System.setProperty("webdriver.chrome.driver", "/bin/chromedriver"); // added the new path for linux
 				// System.setProperty("webdriver.chrome.driver", "Drivers/chromedriver");
 				downloadFilepath = System.getProperty("user.dir") + "/Downloads";
+				options = new ChromeOptions();
 				options.addArguments("--headless");
 			} else {
 				System.setProperty("webdriver.chrome.driver", "Drivers\\chromedriver.exe");
 				downloadFilepath = System.getProperty("user.dir") + "\\Downloads";
+				options = new ChromeOptions();
 
 			}
 			System.out.println("download path " + downloadFilepath);
