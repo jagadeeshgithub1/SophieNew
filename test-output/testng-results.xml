@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testng-results skipped="0" failed="1" ignored="3" total="4" passed="0">
   <reporter-output>
+    <line>
+      <![CDATA[Failed in csvDownloadclick in lnkClickToCheckData]]>
+    </line>
   </reporter-output>
-  <suite name="Default suite" duration-ms="1104010" started-at="2019-05-15T13:07:13Z" finished-at="2019-05-15T13:25:37Z">
+  <suite name="Default suite" duration-ms="841685" started-at="2019-05-16T07:36:14Z" finished-at="2019-05-16T07:50:15Z">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="1104010" started-at="2019-05-15T13:07:13Z" finished-at="2019-05-15T13:25:37Z">
+    <test name="Default test" duration-ms="841685" started-at="2019-05-16T07:36:14Z" finished-at="2019-05-16T07:50:15Z">
       <class name="regressionTests.RegressionCases">
-        <test-method status="PASS" signature="setUp()[pri:0, instance:regressionTests.RegressionCases@b2c9a9c]" name="setUp" is-config="true" duration-ms="158" started-at="2019-05-15T13:07:13Z" finished-at="2019-05-15T13:07:14Z">
+        <test-method status="PASS" signature="setUp()[pri:0, instance:regressionTests.RegressionCases@1fc2b765]" name="setUp" is-config="true" duration-ms="112" started-at="2019-05-16T07:36:14Z" finished-at="2019-05-16T07:36:14Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method status="FAIL" signature="Verify_Deleted_Offer_Is_Not_Present_In_CSV()[pri:4, instance:regressionTests.RegressionCases@b2c9a9c]" name="Verify_Deleted_Offer_Is_Not_Present_In_CSV" duration-ms="1103739" started-at="2019-05-15T13:07:14Z" finished-at="2019-05-15T13:25:37Z">
+        <test-method status="FAIL" signature="Verify_DownloadedCSV_For_New_version()[pri:2, instance:regressionTests.RegressionCases@1fc2b765]" name="Verify_DownloadedCSV_For_New_version" duration-ms="841500" started-at="2019-05-16T07:36:14Z" finished-at="2019-05-16T07:50:15Z">
           <exception class="java.lang.AssertionError">
             <message>
               <![CDATA[expected [true] but found [false]]]>
@@ -22,7 +25,7 @@ at org.testng.Assert.fail(Assert.java:96)
 at org.testng.Assert.failNotEquals(Assert.java:776)
 at org.testng.Assert.assertTrue(Assert.java:44)
 at org.testng.Assert.assertTrue(Assert.java:54)
-at regressionTests.RegressionCases.Verify_Deleted_Offer_Is_Not_Present_In_CSV(RegressionCases.java:92)
+at regressionTests.RegressionCases.Verify_DownloadedCSV_For_New_version(RegressionCases.java:80)
 at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -52,8 +55,11 @@ at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
             </full-stacktrace>
           </exception> <!-- java.lang.AssertionError -->
           <reporter-output>
+            <line>
+              <![CDATA[Failed in csvDownloadclick in lnkClickToCheckData]]>
+            </line>
           </reporter-output>
-        </test-method> <!-- Verify_Deleted_Offer_Is_Not_Present_In_CSV -->
+        </test-method> <!-- Verify_DownloadedCSV_For_New_version -->
       </class> <!-- regressionTests.RegressionCases -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->

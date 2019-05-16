@@ -6,6 +6,8 @@ package driver;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+import org.testng.Reporter;
+
 import base.TestBaseClass;
 import utilities.ExcelUtils;
 
@@ -172,6 +174,7 @@ public class DriverEngine extends TestBaseClass {
 						if (classAction.openURL()) {
 							excelUtils.setCellData(sheetName, "Results", Irow, "Pass");
 						} else {
+							Reporter.log("Opening the URL failed");
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
 						}
 						break;
@@ -179,6 +182,7 @@ public class DriverEngine extends TestBaseClass {
 						if (classAction.login()) {
 							excelUtils.setCellData(sheetName, "Results", Irow, "Pass");
 						} else {
+							Reporter.log("login failed");
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
 						}
 						break;
@@ -186,6 +190,7 @@ public class DriverEngine extends TestBaseClass {
 						if (classAction.enterText(PageObject, TestData)) {
 							excelUtils.setCellData(sheetName, "Results", Irow, "Pass");
 						} else {
+							Reporter.log("Failed to Enter" + TestData + " in" + PageObject);
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
 						}
 						break;
@@ -193,6 +198,7 @@ public class DriverEngine extends TestBaseClass {
 						if (classAction.click(PageObject)) {
 							excelUtils.setCellData(sheetName, "Results", Irow, "Pass");
 						} else {
+							Reporter.log("Failed to Click in " + PageObject);
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
 						}
 						break;
@@ -201,6 +207,7 @@ public class DriverEngine extends TestBaseClass {
 						if (classAction.csvDownloadclick(PageObject)) {
 							excelUtils.setCellData(sheetName, "Results", Irow, "Pass");
 						} else {
+							Reporter.log("Failed in csvDownloadclick in " + PageObject);
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
 						}
 						break;
@@ -208,6 +215,7 @@ public class DriverEngine extends TestBaseClass {
 						if (classAction.RunOrResumeEngineclick(PageObject)) {
 							excelUtils.setCellData(sheetName, "Results", Irow, "Pass");
 						} else {
+							Reporter.log("Failed in RunOrResumeEngineclick in " + PageObject);
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
 						}
 						break;
@@ -294,7 +302,7 @@ public class DriverEngine extends TestBaseClass {
 						}
 						break;
 					case "selectRadioButton":
-						if (classAction.selectRadioButton(TestData)) {
+						if (classAction.selectRadioButton(PageObject)) {
 							excelUtils.setCellData(sheetName, "Results", Irow, "Pass");
 						} else {
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");

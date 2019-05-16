@@ -18,6 +18,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.HttpClientBuilder;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
@@ -25,6 +29,7 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -32,6 +37,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Reporter;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.opencsv.CSVReader;
 
 import base.TestBaseClass;
@@ -626,30 +632,66 @@ public class ActionClass extends TestBaseClass {
 		boolean flag = false;
 		String osName = System.getProperty("os.name").trim();
 		String downloadFilepath = null;
-		long startTime = 0;
-		ChromeOptions options = new ChromeOptions();
+
+		ChromeOptions options = null;
 		try {
 
 			if (osName.equalsIgnoreCase("Linux")) {
+
 				System.setProperty("webdriver.chrome.driver", "/bin/chromedriver"); // added the new path for linux
 				// System.setProperty("webdriver.chrome.driver", "Drivers/chromedriver");
 				downloadFilepath = System.getProperty("user.dir") + "/Downloads";
+				options = new ChromeOptions();
 				options.addArguments("--headless");
+				ChromeDriverService driverService = ChromeDriverService.createDefaultService();
+
+				ChromeDriver driver = new ChromeDriver(driverService, options);
+
+				HashMap<String, Object> commandParams = new HashMap<>();
+				commandParams.put("cmd", "Page.setDownloadBehavior");
+
+				HashMap<String, String> params = new HashMap<>();
+				params.put("behavior", "allow");
+				params.put("downloadPath", downloadFilepath);
+				commandParams.put("params", params);
+
+				ObjectMapper objectMapper = new ObjectMapper();
+				HttpClient httpClient = HttpClientBuilder.create().build();
+
+				String command = objectMapper.writeValueAsString(commandParams);
+
+				String u = driverService.getUrl().toString() + "/session/" + driver.getSessionId()
+						+ "/chromium/send_command";
+				System.out.println("post string >>>" + u);
+
+				HttpPost request = new HttpPost(u);
+				request.addHeader("content-type", "application/json");
+				request.setEntity(new StringEntity(command));
+				httpClient.execute(request);
+
 			} else {
+
 				System.setProperty("webdriver.chrome.driver", "Drivers\\chromedriver.exe");
 				downloadFilepath = System.getProperty("user.dir") + "\\Downloads";
+				options = new ChromeOptions();
+				// driver = new ChromeDriver(options);
+				HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
+				chromePrefs.put("profile.default_content_settings.popups", 0);
+				chromePrefs.put("download.default_directory", downloadFilepath);
+				options.setExperimentalOption("prefs", chromePrefs);
+				driver = new ChromeDriver(options);
 
 			}
 			System.out.println("download path " + downloadFilepath);
 
 			// String downloadFilepath = prop.getProperty("DOWNLOADPATH");
 
-			HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
-			chromePrefs.put("profile.default_content_settings.popups", 0);
-			chromePrefs.put("download.default_directory", downloadFilepath);
-			// ChromeOptions options = new ChromeOptions();
+			// below change 5/16 to make the download on liux server
 
-			options.setExperimentalOption("prefs", chromePrefs);
+			// HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
+			// chromePrefs.put("profile.default_content_settings.popups", 0);
+			// chromePrefs.put("download.default_directory", downloadFilepath);
+			// options.setExperimentalOption("prefs", chromePrefs);
 
 			// added the below 2 lines on 5/2/19
 
@@ -659,14 +701,16 @@ public class ActionClass extends TestBaseClass {
 			// options.addArguments("window-size=1200x600");
 			// options.addArguments("--disable-gpu");
 
-			try {
-				driver = new ChromeDriver(options);// some exception is coming hre
+			// below block comment on 5/16
 
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				System.out.println("while driver = new ChromeDriver(options)");
-				e.printStackTrace();
-			}
+			// try {
+			// driver = new ChromeDriver(options);// some exception is coming hre
+			//
+			// } catch (Exception e) {
+			// // TODO Auto-generated catch block
+			// System.out.println("while driver = new ChromeDriver(options)");
+			// e.printStackTrace();
+			// }
 			// driver.manage().window().setSize(new Dimension(1920, 1200));
 			driver.manage().window().maximize();
 			driver.manage().deleteAllCookies();
@@ -958,11 +1002,12 @@ public class ActionClass extends TestBaseClass {
 		WebElement ele;
 		boolean flag = false;
 		try {
-			ele = new WebDriverWait(driver, 50)
+			ele = new WebDriverWait(driver, 200)
 					.until(ExpectedConditions.presenceOfElementLocated(By.xpath(prop.getProperty(object))));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			flag = false;
+			Reporter.log("Element" + object + "is not present");
 			return false;
 		}
 

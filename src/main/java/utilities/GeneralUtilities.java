@@ -139,6 +139,7 @@ public class GeneralUtilities extends ActionClass {
 		// File[] files = dir.listFiles();
 		File[] files = null;
 		try {
+
 			files = dir.listFiles(new FilenameFilter() {
 
 				@Override

@@ -5,7 +5,7 @@
     <classes>
       <class name="regressionTests.RegressionCases">
         <methods>
-          <include name="Verify_Deleted_Offer_Is_Not_Present_In_CSV"/>
+          <include name="Verify_DownloadedCSV_For_New_version"/>
           <include name="setUp"/>
         </methods>
       </class> <!-- regressionTests.RegressionCases -->
