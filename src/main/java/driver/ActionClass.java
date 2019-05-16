@@ -18,6 +18,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.HttpClientBuilder;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
@@ -25,13 +29,16 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Reporter;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.opencsv.CSVReader;
 
 import base.TestBaseClass;
@@ -516,96 +523,7 @@ public class ActionClass extends TestBaseClass {
 
 	}
 
-	public boolean openURLWindows() {
-		/*
-		 * @author:Deepa Panikkaeetil
-		 * 
-		 * @date:3/20/2019
-		 * 
-		 * @modified by:
-		 * 
-		 * @modified date:
-		 * 
-		 * @USED_FOR:Method used for launching the web url , the url has be specified in
-		 * the properties file
-		 * 
-		 * @Parameter:NA
-		 * 
-		 * 
-		 */
-		// initialization();
-		boolean flag = false;
-		osName = System.getProperty("os.name");
-		System.out.println(osName);
-		if (osName.equalsIgnoreCase("Linux")) {
-			String downloadFilepath = null;
-			try {
-				// System.setProperty("webdriver.chrome.driver", "Drivers/chromedriver);
-				// downloadFilepath = System.getProperty("user.dir") + "\\Downloads";
-				// System.setProperty("webdriver.chrome.driver", "Drivers/chromedriver");
-				// downloadFilepath = System.getProperty("user.dir") + "/Downloads";
-				System.setProperty("webdriver.chrome.driver", "Drivers/chromedriver");
-				downloadFilepath = System.getProperty("user.dir") + "/Downloads";
-
-				System.out.println("download path " + downloadFilepath);
-
-				// String downloadFilepath = prop.getProperty("DOWNLOADPATH");
-
-				HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
-				chromePrefs.put("profile.default_content_settings.popups", 0);
-				chromePrefs.put("download.default_directory", downloadFilepath);
-				ChromeOptions options = new ChromeOptions();
-				options.setExperimentalOption("prefs", chromePrefs);
-				// driver = new ChromeDriver(options);
-
-				driver.manage().window().maximize();
-
-				driver.manage().deleteAllCookies();
-				driver.get(prop.getProperty("url"));
-				flag = true;
-			} catch (Exception e) {
-				flag = false;
-				e.printStackTrace();
-				return flag;
-				// TODO: handle exception
-			}
-
-		}
-
-		else {
-			String downloadFilepath = null;
-
-			try {
-				System.setProperty("webdriver.chrome.driver", "Drivers\\chromedriver.exe");
-				downloadFilepath = System.getProperty("user.dir") + "\\Downloads";
-
-				System.out.println("download path " + downloadFilepath);
-
-				// String downloadFilepath = prop.getProperty("DOWNLOADPATH");
-
-				HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
-				chromePrefs.put("profile.default_content_settings.popups", 0);
-				chromePrefs.put("download.default_directory", downloadFilepath);
-				ChromeOptions options = new ChromeOptions();
-				options.setExperimentalOption("prefs", chromePrefs);
-				// driver = new ChromeDriver(options);
-
-				driver.manage().window().maximize();
-
-				driver.manage().deleteAllCookies();
-				driver.get(prop.getProperty("url"));
-				flag = true;
-			} catch (Exception e) {
-				flag = false;
-				return flag;
-				// TODO: handle exception
-			}
-
-		}
-		return flag;
-	}
-
-	public boolean openURL() {
+	public boolean openURLWorking() {
 		/*
 		 * @author:Deepa Panikkaeetil
 		 * 
@@ -669,6 +587,109 @@ public class ActionClass extends TestBaseClass {
 				System.out.println("while driver = new ChromeDriver(options)");
 				e.printStackTrace();
 			}
+			// driver.manage().window().setSize(new Dimension(1920, 1200));
+			driver.manage().window().maximize();
+			driver.manage().deleteAllCookies();
+
+			driver.get(prop.getProperty("url"));
+
+			// System.out.println("getpageSource of Login>>" + driver.getPageSource());
+
+			flag = true;
+		} catch (TimeoutException te) {
+
+			flag = false;
+			Reporter.log("Failed in openURL");
+			return flag;
+
+		} catch (Exception e) {
+			flag = false;
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return flag;
+	}
+
+	public boolean openURL() {
+		/*
+		 * @author:Deepa Panikkaeetil
+		 * 
+		 * @date:3/20/2019
+		 * 
+		 * @modified by:
+		 * 
+		 * @modified date:
+		 * 
+		 * @USED_FOR:Method used for launching the web url , the url has be specified in
+		 * the properties file
+		 * 
+		 * @Parameter:NA
+		 * 
+		 * 
+		 */
+		// initialization();
+		boolean flag = false;
+		String osName = System.getProperty("os.name").trim();
+		String downloadFilepath = null;
+
+		ChromeOptions options = null;
+		try {
+
+			if (osName.equalsIgnoreCase("Linux")) {
+				System.setProperty("webdriver.chrome.driver", "/bin/chromedriver"); // added the new path for linux
+				// System.setProperty("webdriver.chrome.driver", "Drivers/chromedriver");
+				downloadFilepath = System.getProperty("user.dir") + "/Downloads";
+				options = new ChromeOptions();
+				options.addArguments("--headless");
+				ChromeDriverService driverService = ChromeDriverService.createDefaultService();
+
+				driver = new ChromeDriver(driverService, options);
+
+				HashMap<String, Object> commandParams = new HashMap<>();
+				commandParams.put("cmd", "Page.setDownloadBehavior");
+
+				HashMap<String, String> params = new HashMap<>();
+				params.put("behavior", "allow");
+				params.put("downloadPath", downloadFilepath);
+				commandParams.put("params", params);
+
+				ObjectMapper objectMapper = new ObjectMapper();
+				HttpClient httpClient = HttpClientBuilder.create().build();
+
+				String command = objectMapper.writeValueAsString(commandParams);
+
+				String u = driverService.getUrl().toString() + "/session/" + ((RemoteWebDriver) driver).getSessionId()
+						+ "/chromium/send_command";
+
+				HttpPost request = new HttpPost(u);
+				request.addHeader("content-type", "application/json");
+				request.setEntity(new StringEntity(command));
+				httpClient.execute(request);
+			} else {
+				System.setProperty("webdriver.chrome.driver", "Drivers\\chromedriver.exe");
+				downloadFilepath = System.getProperty("user.dir") + "\\Downloads";
+				options = new ChromeOptions();
+				HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
+				chromePrefs.put("profile.default_content_settings.popups", 0);
+				chromePrefs.put("download.default_directory", downloadFilepath);
+				// ChromeOptions options = new ChromeOptions();
+
+				options.setExperimentalOption("prefs", chromePrefs);
+
+				try {
+					driver = new ChromeDriver(options);// some exception is coming hre
+
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					System.out.println("while driver = new ChromeDriver(options)");
+					e.printStackTrace();
+				}
+
+			}
+			System.out.println("download path " + downloadFilepath);
+
+			// String downloadFilepath = prop.getProperty("DOWNLOADPATH");
+
 			// driver.manage().window().setSize(new Dimension(1920, 1200));
 			driver.manage().window().maximize();
 			driver.manage().deleteAllCookies();
