@@ -5,16 +5,16 @@
       <![CDATA[Failed in csvDownloadclick in lnkClickToCheckData]]>
     </line>
   </reporter-output>
-  <suite name="Default suite" duration-ms="841685" started-at="2019-05-16T07:36:14Z" finished-at="2019-05-16T07:50:15Z">
+  <suite name="Default suite" duration-ms="1080272" started-at="2019-05-16T09:55:12Z" finished-at="2019-05-16T10:13:12Z">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="841685" started-at="2019-05-16T07:36:14Z" finished-at="2019-05-16T07:50:15Z">
+    <test name="Default test" duration-ms="1080272" started-at="2019-05-16T09:55:12Z" finished-at="2019-05-16T10:13:12Z">
       <class name="regressionTests.RegressionCases">
-        <test-method status="PASS" signature="setUp()[pri:0, instance:regressionTests.RegressionCases@1fc2b765]" name="setUp" is-config="true" duration-ms="112" started-at="2019-05-16T07:36:14Z" finished-at="2019-05-16T07:36:14Z">
+        <test-method status="PASS" signature="setUp()[pri:0, instance:regressionTests.RegressionCases@1fc2b765]" name="setUp" is-config="true" duration-ms="201" started-at="2019-05-16T09:55:12Z" finished-at="2019-05-16T09:55:12Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method status="FAIL" signature="Verify_DownloadedCSV_For_New_version()[pri:2, instance:regressionTests.RegressionCases@1fc2b765]" name="Verify_DownloadedCSV_For_New_version" duration-ms="841500" started-at="2019-05-16T07:36:14Z" finished-at="2019-05-16T07:50:15Z">
+        <test-method status="FAIL" signature="Verify_DownloadedCSV_For_New_version()[pri:2, instance:regressionTests.RegressionCases@1fc2b765]" name="Verify_DownloadedCSV_For_New_version" duration-ms="1079997" started-at="2019-05-16T09:55:12Z" finished-at="2019-05-16T10:13:12Z">
           <exception class="java.lang.AssertionError">
             <message>
               <![CDATA[expected [true] but found [false]]]>

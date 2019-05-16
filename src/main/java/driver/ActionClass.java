@@ -978,7 +978,7 @@ public class ActionClass extends TestBaseClass {
 		 * @Parameter:Passing the xpath of the web elements
 		 */
 
-		WebElement ele;
+		WebElement ele = null;
 		boolean flag = false;
 		try {
 			ele = new WebDriverWait(driver, 200)
@@ -987,6 +987,8 @@ public class ActionClass extends TestBaseClass {
 			// TODO Auto-generated catch block
 			flag = false;
 			Reporter.log("Element" + object + "is not present");
+			System.out.println("Element" + object + "is not present");
+			e.printStackTrace();
 			return false;
 		}
 
