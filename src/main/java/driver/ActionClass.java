@@ -668,6 +668,10 @@ public class ActionClass extends TestBaseClass {
 				request.addHeader("content-type", "application/json");
 				request.setEntity(new StringEntity(command));
 				httpClient.execute(request);
+				driver.manage().window().maximize();
+				driver.manage().deleteAllCookies();
+
+				driver.get(prop.getProperty("url"));
 
 			} else {
 
@@ -680,6 +684,10 @@ public class ActionClass extends TestBaseClass {
 				chromePrefs.put("download.default_directory", downloadFilepath);
 				options.setExperimentalOption("prefs", chromePrefs);
 				driver = new ChromeDriver(options);
+				driver.manage().window().maximize();
+				driver.manage().deleteAllCookies();
+
+				driver.get(prop.getProperty("url"));
 
 			}
 			System.out.println("download path " + downloadFilepath);
@@ -712,10 +720,11 @@ public class ActionClass extends TestBaseClass {
 			// e.printStackTrace();
 			// }
 			// driver.manage().window().setSize(new Dimension(1920, 1200));
-			driver.manage().window().maximize();
-			driver.manage().deleteAllCookies();
-
-			driver.get(prop.getProperty("url"));
+			/*
+			 * driver.manage().window().maximize(); driver.manage().deleteAllCookies();
+			 * 
+			 * driver.get(prop.getProperty("url"));
+			 */
 
 			// System.out.println("getpageSource of Login>>" + driver.getPageSource());
 
