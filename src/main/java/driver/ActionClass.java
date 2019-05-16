@@ -676,8 +676,6 @@ public class ActionClass extends TestBaseClass {
 				options.addArguments("--headless");
 				ChromeDriverService driverService = ChromeDriverService.createDefaultService();
 
-				driver = new ChromeDriver(driverService, options);
-
 				HashMap<String, Object> commandParams = new HashMap<>();
 				commandParams.put("cmd", "Page.setDownloadBehavior");
 
@@ -685,7 +683,7 @@ public class ActionClass extends TestBaseClass {
 				params.put("behavior", "allow");
 				params.put("downloadPath", downloadFilepath);
 				commandParams.put("params", params);
-
+				driver = new ChromeDriver(driverService, options);
 				ObjectMapper objectMapper = new ObjectMapper();
 				HttpClient httpClient = HttpClientBuilder.create().build();
 
@@ -693,7 +691,7 @@ public class ActionClass extends TestBaseClass {
 
 				String u = driverService.getUrl().toString() + "/session/" + ((RemoteWebDriver) driver).getSessionId()
 						+ "/chromium/send_command";
-
+				System.out.println("post url>>" + u);
 				HttpPost request = new HttpPost(u);
 				request.addHeader("content-type", "application/json");
 				request.setEntity(new StringEntity(command));
@@ -1013,16 +1011,19 @@ public class ActionClass extends TestBaseClass {
 
 		WebElement ele = null;
 		boolean flag = false;
-		try {
-			ele = new WebDriverWait(driver, 200)
-					.until(ExpectedConditions.presenceOfElementLocated(By.xpath(prop.getProperty(object))));
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			flag = false;
-			Reporter.log("Element" + object + "is not present");
-			System.out.println("Element" + object + "is not present");
-			e.printStackTrace();
-			return false;
+
+		for (int i = 0; i < 2; i++) {
+			try {
+				ele = new WebDriverWait(driver, 200)
+						.until(ExpectedConditions.presenceOfElementLocated(By.xpath(prop.getProperty(object))));
+
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+
+				Reporter.log("Element" + object + "is not present");
+				System.out.println("Element" + object + "is not present");
+
+			}
 		}
 
 		if (ele != null) {
@@ -1032,6 +1033,9 @@ public class ActionClass extends TestBaseClass {
 				flag = true;
 
 			}
+		} else {
+			flag = false;
+			return flag;
 		}
 		return flag;
 	}
