@@ -26,13 +26,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -55,7 +53,8 @@ import utilities.GeneralUtilities;
  */
 public class ActionClass extends TestBaseClass {
 
-	public static WebDriver driver = null;
+	// public static WebDriver driver = null;
+	public static ChromeDriver driver = null;
 	public String osName = System.getProperty("os.name");
 	// public static HtmlUnitDriver driver;
 
@@ -679,7 +678,7 @@ public class ActionClass extends TestBaseClass {
 				HashMap<String, Object> commandParams = new HashMap<>();
 				commandParams.put("cmd", "Page.setDownloadBehavior");
 
-				HashMap<String, String> params = new HashMap<>();
+				HashMap<String, Object> params = new HashMap<String, Object>();
 				params.put("behavior", "allow");
 				params.put("downloadPath", downloadFilepath);
 				commandParams.put("params", params);
@@ -689,7 +688,7 @@ public class ActionClass extends TestBaseClass {
 
 				String command = objectMapper.writeValueAsString(commandParams);
 
-				String u = driverService.getUrl().toString() + "/session/" + ((RemoteWebDriver) driver).getSessionId()
+				String u = driverService.getUrl().toString() + "/session/" + driver.getSessionId()
 						+ "/chromium/send_command";
 				System.out.println("post url>>" + u);
 				HttpPost request = new HttpPost(u);
@@ -1009,13 +1008,13 @@ public class ActionClass extends TestBaseClass {
 		 * @Parameter:Passing the xpath of the web elements
 		 */
 
-		WebElement ele = null;
+		Boolean ele = false;
 		boolean flag = false;
 
 		for (int i = 0; i < 2; i++) {
 			try {
-				ele = new WebDriverWait(driver, 200)
-						.until(ExpectedConditions.presenceOfElementLocated(By.xpath(prop.getProperty(object))));
+				ele = new WebDriverWait(driver, 200).until(ExpectedConditions
+						.and(ExpectedConditions.elementToBeClickable(By.xpath(prop.getProperty(object)))));
 
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
@@ -1026,10 +1025,11 @@ public class ActionClass extends TestBaseClass {
 			}
 		}
 
-		if (ele != null) {
-			if (!ele.isSelected()) {
+		if (ele == true) {
 
-				ele.click();
+			if (!driver.findElement(By.xpath(prop.getProperty(object))).isSelected()) {
+
+				driver.findElement(By.xpath(prop.getProperty(object))).click();
 				flag = true;
 
 			}
