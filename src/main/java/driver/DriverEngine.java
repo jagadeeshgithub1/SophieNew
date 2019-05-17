@@ -211,6 +211,14 @@ public class DriverEngine extends TestBaseClass {
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
 						}
 						break;
+					case "Downloadclick":
+						if (classAction.Downloadclick(PageObject)) {
+							excelUtils.setCellData(sheetName, "Results", Irow, "Pass");
+						} else {
+							Reporter.log("Failed in csvDownloadclick in " + PageObject);
+							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+						}
+						break;
 					case "RunOrResumeEngineclick":
 						if (classAction.RunOrResumeEngineclick(PageObject)) {
 							excelUtils.setCellData(sheetName, "Results", Irow, "Pass");

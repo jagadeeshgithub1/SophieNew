@@ -13,11 +13,14 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
+import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
@@ -36,6 +39,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Reporter;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.opencsv.CSVReader;
 
@@ -54,6 +58,8 @@ import utilities.GeneralUtilities;
 public class ActionClass extends TestBaseClass {
 
 	// public static WebDriver driver = null;
+	public static String downloadFilepath = null;
+	public static ChromeDriverService driverService = null;
 	public static ChromeDriver driver = null;
 	public String osName = System.getProperty("os.name");
 	// public static HtmlUnitDriver driver;
@@ -211,6 +217,109 @@ public class ActionClass extends TestBaseClass {
 		 * 
 		 */
 		boolean flag = false;
+		try {
+
+			boolean ele = new WebDriverWait(driver, 600).until(ExpectedConditions.and(
+					ExpectedConditions.visibilityOfElementLocated(By.xpath(prop.getProperty(object))),
+					ExpectedConditions.elementToBeClickable(By.xpath(prop.getProperty(object)))));
+			if (ele == true) {
+
+				WebElement element = driver.findElement(By.xpath(prop.getProperty(object)));
+
+				// Actions action = new Actions(driver);
+				System.out.println("is this the element???>>" + element);
+				element.click();
+				// action.moveToElement(element).click(element).build().perform();
+
+				Thread.sleep(5000);
+
+				// action.moveToElement(element).sendKeys(Keys.RETURN);
+				// driver.findElement(By.xpath(prop.getProperty(object))).click();
+				if (driver.getPageSource().equalsIgnoreCase("Data Set BatchDecisionOutput is empty")) {
+					flag = false;
+					System.out.println("Dataset is empty");
+					return flag;
+				}
+				flag = true;
+			} else {
+				System.out.println("run engine is not clicked..");
+				flag = false;
+				return flag;
+			}
+
+		} catch (TimeoutException e) {
+
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("Time out..Are you sure the element is present");
+			flag = false;
+			return flag;
+
+			// TODO: handle exception
+		} catch (Exception e) {
+			System.out.println("element is not clicked" + " " + e.getMessage());
+			flag = false;
+			return flag;
+			// TODO: handle exception
+		}
+
+		// TODO: handle exception
+		return flag;
+	}
+
+	public boolean Downloadclick(String object) {
+		/*
+		 * @author :Deepa Panikkaveetil
+		 *
+		 * 
+		 * @date :3/19/2019
+		 * 
+		 * @modified by:
+		 * 
+		 * @modified date:
+		 * 
+		 * @USEFOR :The method is to clik on any web element
+		 * 
+		 * @Parameters:Passing the xpath locator from the properties file
+		 * 
+		 * 
+		 * 
+		 */
+		boolean flag = false;
+		Map<String, Object> commandParams = new HashMap<>();
+		commandParams.put("cmd", "Page.setDownloadBehavior");
+		Map<String, String> params = new HashMap<>();
+		params.put("behavior", "allow");
+		// params.put("downloadPath", "//home//vaibhav//Desktop");
+		params.put("downloadPath", downloadFilepath);
+		commandParams.put("params", params);
+		ObjectMapper objectMapper = new ObjectMapper();
+		HttpClient httpClient = HttpClientBuilder.create().build();
+		String command = null;
+		try {
+			command = objectMapper.writeValueAsString(commandParams);
+		} catch (JsonProcessingException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		String u = driverService.getUrl().toString() + "/session/" + driver.getSessionId() + "/chromium/send_command";
+		HttpPost request = new HttpPost(u);
+		request.addHeader("content-type", "application/json");
+		try {
+			request.setEntity(new StringEntity(command));
+		} catch (UnsupportedEncodingException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		try {
+			httpClient.execute(request);
+		} catch (ClientProtocolException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		try {
 
 			boolean ele = new WebDriverWait(driver, 600).until(ExpectedConditions.and(
@@ -642,25 +751,25 @@ public class ActionClass extends TestBaseClass {
 				// System.setProperty("webdriver.chrome.driver", "Drivers/chromedriver");
 				downloadFilepath = System.getProperty("user.dir") + "/Downloads";
 				options = new ChromeOptions();
+
+				options.addArguments("--test-type");
 				options.addArguments("--headless");
-				ChromeDriverService driverService = ChromeDriverService.createDefaultService();
+				options.addArguments("--disable-extensions"); // to disable browser extension popup
 
-				HashMap<String, Object> commandParams = new HashMap<>();
-				commandParams.put("cmd", "Page.setDownloadBehavior");
-
-				HashMap<String, Object> params = new HashMap<String, Object>();
-				params.put("behavior", "allow");
-				params.put("downloadPath", downloadFilepath);
-				commandParams.put("params", params);
+				driverService = ChromeDriverService.createDefaultService();
 				driver = new ChromeDriver(driverService, options);
+
+				Map<String, Object> commandParams = new HashMap<>();
+				commandParams.put("cmd", "Page.setDownloadBehavior");
+				Map<String, String> params = new HashMap<>();
+				params.put("behavior", "allow");
+				params.put("downloadPath", "//home//vaibhav//Desktop");
+				commandParams.put("params", params);
 				ObjectMapper objectMapper = new ObjectMapper();
 				HttpClient httpClient = HttpClientBuilder.create().build();
-
 				String command = objectMapper.writeValueAsString(commandParams);
-
 				String u = driverService.getUrl().toString() + "/session/" + driver.getSessionId()
 						+ "/chromium/send_command";
-				System.out.println("post url>>" + u);
 				HttpPost request = new HttpPost(u);
 				request.addHeader("content-type", "application/json");
 				request.setEntity(new StringEntity(command));
@@ -669,21 +778,48 @@ public class ActionClass extends TestBaseClass {
 				System.setProperty("webdriver.chrome.driver", "Drivers\\chromedriver.exe");
 				downloadFilepath = System.getProperty("user.dir") + "\\Downloads";
 				options = new ChromeOptions();
-				HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
-				chromePrefs.put("profile.default_content_settings.popups", 0);
-				chromePrefs.put("download.default_directory", downloadFilepath);
+				// options.addArguments("--headless");
+				// HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
+				// chromePrefs.put("profile.default_content_settings.popups", 0);
+				// chromePrefs.put("download.default_directory", downloadFilepath);
 				// ChromeOptions options = new ChromeOptions();
 
-				options.setExperimentalOption("prefs", chromePrefs);
+				// options.setExperimentalOption("prefs", chromePrefs);
+				options = new ChromeOptions();
 
-				try {
-					driver = new ChromeDriver(options);// some exception is coming hre
+				options.addArguments("--test-type");
+				options.addArguments("--headless");
+				options.addArguments("--disable-extensions"); // to disable browser extension popup
 
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					System.out.println("while driver = new ChromeDriver(options)");
-					e.printStackTrace();
-				}
+				driverService = ChromeDriverService.createDefaultService();
+				driver = new ChromeDriver(driverService, options);
+
+				Map<String, Object> commandParams = new HashMap<>();
+				commandParams.put("cmd", "Page.setDownloadBehavior");
+				Map<String, String> params = new HashMap<>();
+				params.put("behavior", "allow");
+				// params.put("downloadPath", "//home//vaibhav//Desktop");
+				params.put("downloadPath", downloadFilepath);
+				commandParams.put("params", params);
+				// ObjectMapper objectMapper = new ObjectMapper();
+				// HttpClient httpClient = HttpClientBuilder.create().build();
+				// String command = objectMapper.writeValueAsString(commandParams);
+				// String u = driverService.getUrl().toString() + "/session/" +
+				// driver.getSessionId()
+				// + "/chromium/send_command";
+				// HttpPost request = new HttpPost(u);
+				// request.addHeader("content-type", "application/json");
+				// request.setEntity(new StringEntity(command));
+				// httpClient.execute(request);
+
+				// try {
+				// driver = new ChromeDriver(options);// some exception is coming hre
+				//
+				// } catch (Exception e) {
+				// // TODO Auto-generated catch block
+				// System.out.println("while driver = new ChromeDriver(options)");
+				// e.printStackTrace();
+				// }
 
 			}
 			System.out.println("download path " + downloadFilepath);
