@@ -29,6 +29,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
@@ -57,10 +58,10 @@ import utilities.GeneralUtilities;
  */
 public class ActionClass extends TestBaseClass {
 
-	// public static WebDriver driver = null;
+	public static WebDriver driver = null;
 	public static String downloadFilepath = null;
-	public static ChromeDriverService driverService = null;
-	public static ChromeDriver driver = null;
+	// public static ChromeDriverService driverService = null;
+	// public static ChromeDriver driver = null;
 	public String osName = System.getProperty("os.name");
 	// public GeneralUtilities generalUtilities = new GeneralUtilities();
 	// public static HtmlUnitDriver driver;
