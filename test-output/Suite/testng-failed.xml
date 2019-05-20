@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Failed suite [Suite]">
+<suite guice-stage="DEVELOPMENT" name="Failed suite [Suite]">
   <test thread-count="5" name="Test(failed)">
     <classes>
       <class name="regressionTests.RegressionCases">
         <methods>
-          <include name="DefineBrainTests"/>
+          <include name="Verify_Deleted_Offer_Is_Not_Present_In_CSV"/>
+          <include name="Verify_DownloadedCSV_For_New_version"/>
+          <include name="setUp"/>
+          <include name="Verify_DownloadedCSV_For_Existing_Version"/>
+          <include name="Verify_RealTimeEvent_API_Response_For_NewEvent"/>
         </methods>
       </class> <!-- regressionTests.RegressionCases -->
     </classes>

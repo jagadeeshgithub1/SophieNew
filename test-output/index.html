@@ -49,7 +49,7 @@
               <ul>
                 <li>
                   <a href="#" class="navigator-link " panel-name="test-xml-Default_suite">
-                    <span>C:\Users\deepa\AppData\Local\Temp\testng-eclipse-1743911694\testng-customsuite.xml</span>
+                    <span>C:\Users\deepa\AppData\Local\Temp\testng-eclipse--808710635\testng-customsuite.xml</span>
                   </a> <!-- navigator-link  -->
                 </li>
                 <li>
@@ -102,7 +102,7 @@
                     <div class="method-list-content failed suite-Default_suite">
                       <span>
                         <img width="3%" src="failed.png"/>
-                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="regressionTests.RegressionCases" hash-for-method="Verify_DownloadedCSV_For_New_version">Verify_DownloadedCSV_For_New_version</a> <!-- method navigator-link -->
+                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="regressionTests.RegressionCases" hash-for-method="Verify_RealtimeSpine_Api">Verify_RealtimeSpine_Api</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                     </div> <!-- method-list-content failed suite-Default_suite -->
@@ -125,13 +125,13 @@
             <div class="main-panel-content rounded-window-bottom">
               <div class="method">
                 <div class="method-content">
-                  <a name="Verify_DownloadedCSV_For_New_version">
-                  </a> <!-- Verify_DownloadedCSV_For_New_version -->
-                  <span class="method-name">Verify_DownloadedCSV_For_New_version</span>
+                  <a name="Verify_RealtimeSpine_Api">
+                  </a> <!-- Verify_RealtimeSpine_Api -->
+                  <span class="method-name">Verify_RealtimeSpine_Api</span>
                   <div class="stack-trace">java.lang.NullPointerException
-	at driver.ActionClass.Downloadclick(ActionClass.java:305)
-	at driver.DriverEngine.mainMethod(DriverEngine.java:215)
-	at regressionTests.RegressionCases.Verify_DownloadedCSV_For_New_version(RegressionCases.java:80)
+	at utilities.ExcelUtils.getCellData(ExcelUtils.java:73)
+	at driver.DriverEngine.mainMethod(DriverEngine.java:158)
+	at regressionTests.RegressionCases.Verify_RealtimeSpine_Api(RegressionCases.java:98)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -166,7 +166,7 @@
         </div> <!-- panel Default_suite -->
         <div panel-name="test-xml-Default_suite" class="panel">
           <div class="main-panel-header rounded-window-top">
-            <span class="header-content">C:\Users\deepa\AppData\Local\Temp\testng-eclipse-1743911694\testng-customsuite.xml</span>
+            <span class="header-content">C:\Users\deepa\AppData\Local\Temp\testng-eclipse--808710635\testng-customsuite.xml</span>
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <pre>
@@ -217,14 +217,14 @@ data.addColumn('string', 'Class');
 data.addColumn('number', 'Time (ms)');
 data.addRows(1);
 data.setCell(0, 0, 0)
-data.setCell(0, 1, 'Verify_DownloadedCSV_For_New_version')
+data.setCell(0, 1, 'Verify_RealtimeSpine_Api')
 data.setCell(0, 2, 'regressionTests.RegressionCases')
-data.setCell(0, 3, 3082600);
+data.setCell(0, 3, 308341);
 window.suiteTableData['Default_suite']= { tableData: data, tableDiv: 'times-div-Default_suite'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 51 minutes</span>
+              <span class="suite-total-time">Total running time: 5 minutes</span>
               <div id="times-div-Default_suite">
               </div> <!-- times-div-Default_suite -->
             </div> <!-- times-div -->
@@ -236,22 +236,28 @@ return data;
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <div class="reporter-method-div">
-              <span class="reporter-method-name">Verify_DownloadedCSV_For_New_version</span>
+              <span class="reporter-method-name">Verify_RealtimeSpine_Api</span>
               <div class="reporter-method-output-div">
-                <span class="reporter-method-output">Failed in csvDownloadclick in lnkClickToCheckData</span>
+                <span class="reporter-method-output">ElementradBtnProcessRTSpineDataMasteris not present</span>
+                <span class="reporter-method-output">ElementradBtnProcessRTSpineDataMasteris not present</span>
+                <span class="reporter-method-output">Failed to Click in btnStart</span>
+                <span class="reporter-method-output">ElementradBtnUpdateRTSpineDataChildis not present</span>
+                <span class="reporter-method-output">ElementradBtnUpdateRTSpineDataChildis not present</span>
               </div> <!-- reporter-method-output-div -->
             </div> <!-- reporter-method-div -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->
         <div panel-name="ignored-methods-Default_suite" class="panel">
           <div class="main-panel-header rounded-window-top">
-            <span class="header-content">3 ignored methods</span>
+            <span class="header-content">4 ignored methods</span>
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <div class="ignored-class-div">
               <span class="ignored-class-name">regressionTests.RegressionCases</span>
               <div class="ignored-methods-div">
                 <span class="ignored-method-name">Verify_Deleted_Offer_Is_Not_Present_In_CSV</span>
+                <br/>
+                <span class="ignored-method-name">Verify_DownloadedCSV_For_New_version</span>
                 <br/>
                 <span class="ignored-method-name">Verify_DownloadedCSV_For_Existing_Version</span>
                 <br/>
@@ -275,8 +281,8 @@ return data;
               <div class="test-method">
                 <img src="failed.png">
                 </img>
-                <span class="method-name">Verify_DownloadedCSV_For_New_version</span>
-                <span class="method-start">475 ms</span>
+                <span class="method-name">Verify_RealtimeSpine_Api</span>
+                <span class="method-start">84 ms</span>
               </div> <!-- test-method -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->

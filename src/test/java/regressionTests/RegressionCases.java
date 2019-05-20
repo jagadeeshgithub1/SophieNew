@@ -63,7 +63,7 @@ public class RegressionCases {
 		}
 	}
 
-	@Test(priority = 1, enabled = false)
+	@Test(priority = 1)
 	// First test to validate the CSV after engine run
 	public void Verify_DownloadedCSV_For_Existing_Version() {
 
@@ -81,16 +81,21 @@ public class RegressionCases {
 
 	}
 
-	@Test(priority = 3, enabled = false)
+	@Test(priority = 3)
 	public void Verify_RealTimeEvent_API_Response_For_NewEvent() {
 		Assert.assertTrue(driverEngine.mainMethod("VerifyEventAPI"));
 
 	}
 
-	@Test(priority = 4, enabled = false)
+	@Test(priority = 4)
 	public void Verify_Deleted_Offer_Is_Not_Present_In_CSV() {
 		Assert.assertTrue(driverEngine.mainMethod("VerifyDeleteOffer"));
 
 	}
 
+	@Test(priority = 5, enabled = false)
+	public void Verify_RealtimeSpine_Api() {
+		Assert.assertTrue(driverEngine.mainMethod("Cases_RealTimeSpine"));
+
+	}
 }

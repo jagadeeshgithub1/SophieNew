@@ -55,11 +55,11 @@ function toggleAllBoxes() {
 <body>
 <h2 align='center'>Test</h2><table border='1' align="center">
 <tr>
-<td>Tests passed/Failed/Skipped:</td><td>0/1/0</td>
+<td>Tests passed/Failed/Skipped:</td><td>0/4/0</td>
 </tr><tr>
-<td>Started on:</td><td>Wed Apr 03 17:33:48 IST 2019</td>
+<td>Started on:</td><td>Mon May 20 12:49:53 IST 2019</td>
 </tr>
-<tr><td>Total time:</td><td>908 seconds (908383 ms)</td>
+<tr><td>Total time:</td><td>3210 seconds (3210747 ms)</td>
 </tr><tr>
 <td>Included groups:</td><td></td>
 </tr><tr>
@@ -75,20 +75,25 @@ function toggleAllBoxes() {
 <td><b>Instance</b></td>
 </tr>
 <tr>
-<td title='regressionTests.RegressionCases.DefineBrainTests()'><b>DefineBrainTests</b><br>Test class: regressionTests.RegressionCases</td>
-<td><div><pre>java.lang.IllegalArgumentException: Cell index must be &gt;= 0
-	at org.apache.poi.xssf.usermodel.XSSFRow.getCell(XSSFRow.java:270)
-	at org.apache.poi.xssf.usermodel.XSSFRow.getCell(XSSFRow.java:259)
-	at utilities.ExcelUtils.getCellData(ExcelUtils.java:80)
-	at driver.DriverEngine.mainMethod(DriverEngine.java:104)
-	at regressionTests.RegressionCases.DefineBrainTests(RegressionCases.java:21)
-... Removed 25 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace359132682", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
-<div class='stack-trace' id='stack-trace359132682'><pre>java.lang.IllegalArgumentException: Cell index must be &gt;= 0
-	at org.apache.poi.xssf.usermodel.XSSFRow.getCell(XSSFRow.java:270)
-	at org.apache.poi.xssf.usermodel.XSSFRow.getCell(XSSFRow.java:259)
-	at utilities.ExcelUtils.getCellData(ExcelUtils.java:80)
-	at driver.DriverEngine.mainMethod(DriverEngine.java:104)
-	at regressionTests.RegressionCases.DefineBrainTests(RegressionCases.java:21)
+<td title='regressionTests.RegressionCases.Verify_Deleted_Offer_Is_Not_Present_In_CSV()'><b>Verify_Deleted_Offer_Is_Not_Present_In_CSV</b><br>Test class: regressionTests.RegressionCases<br/>
+<a href="#Output-1313637857" onClick='toggleBox("Output-1313637857", this, "Show output", "Hide output");'>Show output</a>
+
+<a href="#Output-1313637857" onClick="toggleAllBoxes();">Show all outputs</a>
+<div class='log' id="Output-1313637857">
+Failed to EnterDelete_offer intxtShortDesc<br/>
+Failed to EnterCreated as part of automation intxtVersionNotes<br/>
+Failed to Click in imgBtnNext<br/>
+</div>
+</td>
+<td><div><pre>java.lang.NullPointerException
+	at driver.ActionClass.checkboxSelect(ActionClass.java:1059)
+	at driver.DriverEngine.mainMethod(DriverEngine.java:267)
+	at regressionTests.RegressionCases.Verify_Deleted_Offer_Is_Not_Present_In_CSV(RegressionCases.java:92)
+... Removed 25 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace1313637857", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace1313637857'><pre>java.lang.NullPointerException
+	at driver.ActionClass.checkboxSelect(ActionClass.java:1059)
+	at driver.DriverEngine.mainMethod(DriverEngine.java:267)
+	at regressionTests.RegressionCases.Verify_Deleted_Offer_Is_Not_Present_In_CSV(RegressionCases.java:92)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -115,8 +120,135 @@ function toggleAllBoxes() {
 	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
 	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
 </pre></div></td>
-<td>908</td>
-<td>regressionTests.RegressionCases@5c30a9b0</td></tr>
+<td>398</td>
+<td>regressionTests.RegressionCases@1fc2b765</td></tr>
+<tr>
+<td title='regressionTests.RegressionCases.Verify_DownloadedCSV_For_Existing_Version()'><b>Verify_DownloadedCSV_For_Existing_Version</b><br>Test class: regressionTests.RegressionCases</td>
+<td><div><pre>java.lang.AssertionError: expected [true] but found [false]
+	at regressionTests.RegressionCases.Verify_DownloadedCSV_For_Existing_Version(RegressionCases.java:70)
+... Removed 29 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace1193744863", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace1193744863'><pre>java.lang.AssertionError: expected [true] but found [false]
+	at org.testng.Assert.fail(Assert.java:96)
+	at org.testng.Assert.failNotEquals(Assert.java:776)
+	at org.testng.Assert.assertTrue(Assert.java:44)
+	at org.testng.Assert.assertTrue(Assert.java:54)
+	at regressionTests.RegressionCases.Verify_DownloadedCSV_For_Existing_Version(RegressionCases.java:70)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:583)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:719)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:989)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+	at org.testng.TestRunner.privateRun(TestRunner.java:648)
+	at org.testng.TestRunner.run(TestRunner.java:505)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:455)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:450)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:415)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:364)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:84)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1208)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1137)
+	at org.testng.TestNG.runSuites(TestNG.java:1049)
+	at org.testng.TestNG.run(TestNG.java:1017)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:114)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+</pre></div></td>
+<td>756</td>
+<td>regressionTests.RegressionCases@1fc2b765</td></tr>
+<tr>
+<td title='regressionTests.RegressionCases.Verify_DownloadedCSV_For_New_version()'><b>Verify_DownloadedCSV_For_New_version</b><br>Test class: regressionTests.RegressionCases</td>
+<td><div><pre>java.lang.AssertionError: expected [true] but found [false]
+	at regressionTests.RegressionCases.Verify_DownloadedCSV_For_New_version(RegressionCases.java:80)
+... Removed 29 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace1608628434", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace1608628434'><pre>java.lang.AssertionError: expected [true] but found [false]
+	at org.testng.Assert.fail(Assert.java:96)
+	at org.testng.Assert.failNotEquals(Assert.java:776)
+	at org.testng.Assert.assertTrue(Assert.java:44)
+	at org.testng.Assert.assertTrue(Assert.java:54)
+	at regressionTests.RegressionCases.Verify_DownloadedCSV_For_New_version(RegressionCases.java:80)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:583)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:719)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:989)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+	at org.testng.TestRunner.privateRun(TestRunner.java:648)
+	at org.testng.TestRunner.run(TestRunner.java:505)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:455)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:450)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:415)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:364)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:84)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1208)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1137)
+	at org.testng.TestNG.runSuites(TestNG.java:1049)
+	at org.testng.TestNG.run(TestNG.java:1017)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:114)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+</pre></div></td>
+<td>804</td>
+<td>regressionTests.RegressionCases@1fc2b765</td></tr>
+<tr>
+<td title='regressionTests.RegressionCases.Verify_RealTimeEvent_API_Response_For_NewEvent()'><b>Verify_RealTimeEvent_API_Response_For_NewEvent</b><br>Test class: regressionTests.RegressionCases<br/>
+<a href="#Output-1362580074" onClick='toggleBox("Output-1362580074", this, "Show output", "Hide output");'>Show output</a>
+
+<a href="#Output-1362580074" onClick="toggleAllBoxes();">Show all outputs</a>
+<div class='log' id="Output-1362580074">
+Failed to Click in btnClearIH<br/>
+Failed to Click in btnResetEngStat<br/>
+Failed in RunOrResumeEngineclick in btnResumeRun<br/>
+Response has message{"Message":"NoOffer","IsFailed":false}<br/>
+</div>
+</td>
+<td><div><pre>java.lang.AssertionError: expected [true] but found [false]
+	at regressionTests.RegressionCases.Verify_RealTimeEvent_API_Response_For_NewEvent(RegressionCases.java:86)
+... Removed 29 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace1362580074", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace1362580074'><pre>java.lang.AssertionError: expected [true] but found [false]
+	at org.testng.Assert.fail(Assert.java:96)
+	at org.testng.Assert.failNotEquals(Assert.java:776)
+	at org.testng.Assert.assertTrue(Assert.java:44)
+	at org.testng.Assert.assertTrue(Assert.java:54)
+	at regressionTests.RegressionCases.Verify_RealTimeEvent_API_Response_For_NewEvent(RegressionCases.java:86)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:583)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:719)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:989)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+	at org.testng.TestRunner.privateRun(TestRunner.java:648)
+	at org.testng.TestRunner.run(TestRunner.java:505)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:455)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:450)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:415)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:364)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:84)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1208)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1137)
+	at org.testng.TestNG.runSuites(TestNG.java:1049)
+	at org.testng.TestNG.run(TestNG.java:1017)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:114)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+</pre></div></td>
+<td>1251</td>
+<td>regressionTests.RegressionCases@1fc2b765</td></tr>
 </table><p>
 </body>
 </html>
