@@ -575,7 +575,7 @@ public class ActionClass extends TestBaseClass {
 			options.setExperimentalOption("prefs", chromePrefs);
 
 			// added the below 2 lines on 5/2/19
-
+			options.addArguments("--remote-debugging-port=9222");
 			options.addArguments("--no-sandbox");
 			options.addArguments("--disable-dev-shm-usage");
 			// options.addArguments("--headless");
