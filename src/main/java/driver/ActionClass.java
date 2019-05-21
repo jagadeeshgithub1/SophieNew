@@ -555,6 +555,7 @@ public class ActionClass extends TestBaseClass {
 				System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver"); //
 				// added the new path for linux
 				// System.setProperty("webdriver.chrome.driver", "Drivers/chromedriver");
+				// WebDriverManager.chromedriver()
 				downloadFilepath = System.getProperty("user.dir") + "/Downloads";
 				options = new ChromeOptions();
 				// options.addArguments("--headless");
@@ -577,7 +578,7 @@ public class ActionClass extends TestBaseClass {
 
 			// added the below 2 lines on 5/2/19
 			options.addArguments("--remote-debugging-port=9222");
-			// options.addArguments("--no-sandbox");
+			options.addArguments("--no-sandbox");
 			// options.addArguments("--disable-dev-shm-usage");
 			// options.addArguments("--headless");
 			// options.addArguments("window-size=1200x600");
