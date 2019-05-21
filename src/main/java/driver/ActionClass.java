@@ -576,11 +576,11 @@ public class ActionClass extends TestBaseClass {
 
 			// added the below 2 lines on 5/2/19
 			options.addArguments("--remote-debugging-port=9222");
-			options.addArguments("--no-sandbox");
-			options.addArguments("--disable-dev-shm-usage");
+			// options.addArguments("--no-sandbox");
+			// options.addArguments("--disable-dev-shm-usage");
 			// options.addArguments("--headless");
 			// options.addArguments("window-size=1200x600");
-			options.addArguments("--disable-gpu");
+			// options.addArguments("--disable-gpu");
 
 			try {
 				driver = new ChromeDriver(options);// some exception is coming hre
