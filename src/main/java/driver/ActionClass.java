@@ -50,6 +50,7 @@ public class ActionClass extends TestBaseClass {
 
 	public static WebDriver driver = null;
 	public static String downloadFilepath = null;
+	public ChromeOptions options = null;
 	// public static ChromeDriverService driverService = null;
 	// public static ChromeDriver driver = null;
 	public String osName = System.getProperty("os.name");
@@ -547,7 +548,7 @@ public class ActionClass extends TestBaseClass {
 		String osName = System.getProperty("os.name").trim();
 		String downloadFilepath = null;
 
-		ChromeOptions options = null;
+		// ChromeOptions options = null;
 		try {
 
 			if (osName.equalsIgnoreCase("Linux")) {
