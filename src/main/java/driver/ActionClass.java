@@ -579,10 +579,10 @@ public class ActionClass extends TestBaseClass {
 			// added the below 2 lines on 5/2/19
 			options.addArguments("--remote-debugging-port=9222");
 			options.addArguments("--no-sandbox");
-			// options.addArguments("--disable-dev-shm-usage");
+			options.addArguments("--disable-dev-shm-usage");
 			// options.addArguments("--headless");
 			// options.addArguments("window-size=1200x600");
-			// options.addArguments("--disable-gpu");
+			options.addArguments("--disable-gpu");
 
 			try {
 				driver = new ChromeDriver(options);// some exception is coming hre
@@ -883,18 +883,16 @@ public class ActionClass extends TestBaseClass {
 		Boolean ele = false;
 		boolean flag = false;
 
-		for (int i = 0; i < 2; i++) {
-			try {
-				ele = new WebDriverWait(driver, 200).until(ExpectedConditions
-						.and(ExpectedConditions.elementToBeClickable(By.xpath(prop.getProperty(object)))));
+		try {
+			ele = new WebDriverWait(driver, 200).until(ExpectedConditions
+					.and(ExpectedConditions.elementToBeClickable(By.xpath(prop.getProperty(object)))));
 
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
 
-				Reporter.log("Element" + object + "is not present");
-				System.out.println("Element" + object + "is not present");
+			Reporter.log("Element" + object + "is not present");
+			System.out.println("Element" + object + "is not present");
 
-			}
 		}
 
 		if (ele == true) {
@@ -902,12 +900,9 @@ public class ActionClass extends TestBaseClass {
 			if (!driver.findElement(By.xpath(prop.getProperty(object))).isSelected()) {
 
 				driver.findElement(By.xpath(prop.getProperty(object))).click();
-				flag = true;
 
 			}
-		} else {
-			flag = false;
-			return flag;
+			flag = true;
 		}
 		return flag;
 	}
