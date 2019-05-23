@@ -100,17 +100,8 @@ public class ActionClass extends TestBaseClass {
 				driver.findElement(By.xpath(prop.getProperty("txtPassword"))).sendKeys(prop.getProperty("password"));
 			driver.findElement(By.xpath(prop.getProperty("btnLogin"))).click();// here we get the type error for
 																				// getExtension
-			// if(driver.findElement(By.id("error")).isDisplayed()) {
-			// System.out.println(driver.findElement(By.id("error")).getText());
 
 			System.out.println("title of the page:" + driver.getTitle());
-
-			// PrintStream printStream= new PrintStream("./PageSource.txt");
-			// System.setOut(printStream);
-
-			// System.out.println("PageSource of DesinerStudio>>>>"+driver.getPageSource());
-
-			// System.out.println("---------------end-----------------");
 
 			flag = true;
 
@@ -424,6 +415,7 @@ public class ActionClass extends TestBaseClass {
 		try {
 			WebElement ele = new WebDriverWait(driver, 90)
 					.until(ExpectedConditions.presenceOfElementLocated(By.xpath(prop.getProperty(object))));
+
 			ele.clear();
 			Thread.sleep(5000);
 			ele.sendKeys(data.trim());
