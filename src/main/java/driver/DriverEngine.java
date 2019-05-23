@@ -386,6 +386,16 @@ public class DriverEngine extends TestBaseClass {
 						}
 
 						break;
+					case "switchToFrameByIndex":
+						if (classAction.switchToFrameByIndex((int) Float.parseFloat(TestData))) {
+
+							excelUtils.setCellData(sheetName, "Results", Irow, "Pass");
+
+						} else {
+							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+						}
+
+						break;
 					case "switchToNewWindow":
 						if (classAction.switchToNewWindow((int) Float.parseFloat(TestData))) {
 

@@ -1349,6 +1349,41 @@ public class ActionClass extends TestBaseClass {
 		try {
 			Thread.sleep(5000);
 			driver.switchTo().frame(frameID);
+
+			flag = true;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			flag = false;
+			return flag;
+		}
+
+		return flag;
+	}
+
+	public boolean switchToFrameByIndex(int frameIdx) {
+		/*
+		 * @author :Deepa Panikkaveetil
+		 * 
+		 * @date :4/25/2019
+		 * 
+		 * @modified by:
+		 * 
+		 * @modified date:
+		 * 
+		 * @USEFOR :The method is to switch to the frame if the element is in different
+		 * frame
+		 * 
+		 * @Parameters:Passing the frameId/name
+		 * 
+		 * 
+		 * 
+		 */
+		boolean flag = false;
+
+		try {
+			Thread.sleep(5000);
+			driver.switchTo().frame(frameIdx);
+
 			flag = true;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

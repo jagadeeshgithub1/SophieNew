@@ -55,11 +55,11 @@ function toggleAllBoxes() {
 <body>
 <h2 align='center'>Default test</h2><table border='1' align="center">
 <tr>
-<td>Tests passed/Failed/Skipped:</td><td>0/1/0</td>
+<td>Tests passed/Failed/Skipped:</td><td>1/1/0</td>
 </tr><tr>
-<td>Started on:</td><td>Mon May 20 16:55:04 IST 2019</td>
+<td>Started on:</td><td>Thu May 23 12:59:32 IST 2019</td>
 </tr>
-<tr><td>Total time:</td><td>308 seconds (308451 ms)</td>
+<tr><td>Total time:</td><td>1490 seconds (1490771 ms)</td>
 </tr><tr>
 <td>Included groups:</td><td></td>
 </tr><tr>
@@ -76,20 +76,20 @@ function toggleAllBoxes() {
 </tr>
 <tr>
 <td title='regressionTests.RegressionCases.Verify_RealtimeSpine_Api()'><b>Verify_RealtimeSpine_Api</b><br>Test class: regressionTests.RegressionCases<br/>
-<a href="#Output-1741684397" onClick='toggleBox("Output-1741684397", this, "Show output", "Hide output");'>Show output</a>
+<a href="#Output-1416013849" onClick='toggleBox("Output-1416013849", this, "Show output", "Hide output");'>Show output</a>
 
-<a href="#Output-1741684397" onClick="toggleAllBoxes();">Show all outputs</a>
-<div class='log' id="Output-1741684397">
-ElementradBtnProcessRTSpineDataMasteris not present<br/>
-ElementradBtnProcessRTSpineDataMasteris not present<br/>
+<a href="#Output-1416013849" onClick="toggleAllBoxes();">Show all outputs</a>
+<div class='log' id="Output-1416013849">
 Failed to Click in btnStart<br/>
 ElementradBtnUpdateRTSpineDataChildis not present<br/>
-ElementradBtnUpdateRTSpineDataChildis not present<br/>
+Failed to Click in btnStart<br/>
 </div>
 </td>
-<td><div><pre>java.lang.NullPointerException
-	at utilities.ExcelUtils.getCellData(ExcelUtils.java:73)
-	at driver.DriverEngine.mainMethod(DriverEngine.java:158)
+<td><div><pre>java.lang.AssertionError: expected [true] but found [false]
+	at org.testng.Assert.fail(Assert.java:96)
+	at org.testng.Assert.failNotEquals(Assert.java:776)
+	at org.testng.Assert.assertTrue(Assert.java:44)
+	at org.testng.Assert.assertTrue(Assert.java:54)
 	at regressionTests.RegressionCases.Verify_RealtimeSpine_Api(RegressionCases.java:98)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
@@ -116,10 +116,12 @@ ElementradBtnUpdateRTSpineDataChildis not present<br/>
 	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:114)
 	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
 	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
-</pre></div><a href='#' onClick='toggleBox("stack-trace1741684397", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
-<div class='stack-trace' id='stack-trace1741684397'><pre>java.lang.NullPointerException
-	at utilities.ExcelUtils.getCellData(ExcelUtils.java:73)
-	at driver.DriverEngine.mainMethod(DriverEngine.java:158)
+</pre></div><a href='#' onClick='toggleBox("stack-trace1416013849", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace1416013849'><pre>java.lang.AssertionError: expected [true] but found [false]
+	at org.testng.Assert.fail(Assert.java:96)
+	at org.testng.Assert.failNotEquals(Assert.java:776)
+	at org.testng.Assert.assertTrue(Assert.java:44)
+	at org.testng.Assert.assertTrue(Assert.java:54)
 	at regressionTests.RegressionCases.Verify_RealtimeSpine_Api(RegressionCases.java:98)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
@@ -147,8 +149,21 @@ ElementradBtnUpdateRTSpineDataChildis not present<br/>
 	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
 	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
 </pre></div></td>
-<td>308</td>
-<td>regressionTests.RegressionCases@1fc2b765</td></tr>
+<td>489</td>
+<td>regressionTests.RegressionCases@a74868d</td></tr>
+</table><p>
+<table width='100%' border='1' class='invocation-passed'>
+<tr><td colspan='4' align='center'><b>PASSED TESTS</b></td></tr>
+<tr><td><b>Test method</b></td>
+<td width="30%"><b>Exception</b></td>
+<td width="10%"><b>Time (seconds)</b></td>
+<td><b>Instance</b></td>
+</tr>
+<tr>
+<td title='regressionTests.RegressionCases.Verify_DownloadedCSV_For_New_version()'><b>Verify_DownloadedCSV_For_New_version</b><br>Test class: regressionTests.RegressionCases</td>
+<td></td>
+<td>1001</td>
+<td>regressionTests.RegressionCases@a74868d</td></tr>
 </table><p>
 </body>
 </html>
