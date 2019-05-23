@@ -425,6 +425,7 @@ public class ActionClass extends TestBaseClass {
 			WebElement ele = new WebDriverWait(driver, 90)
 					.until(ExpectedConditions.presenceOfElementLocated(By.xpath(prop.getProperty(object))));
 			ele.clear();
+			Thread.sleep(5000);
 			ele.sendKeys(data.trim());
 			flag = true;
 		} catch (Exception e) {
