@@ -63,7 +63,7 @@ public class RegressionCases {
 		}
 	}
 
-	@Test(priority = 1, enabled = false)
+	@Test(priority = 1)
 	// First test to validate the CSV after engine run
 	public void Verify_DownloadedCSV_For_Existing_Version() {
 
