@@ -1,30 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="1" ignored="3" total="5" passed="1">
+<testng-results skipped="0" failed="1" ignored="4" total="5" passed="0">
   <reporter-output>
     <line>
-      <![CDATA[Failed to Click in btnStart]]>
+      <![CDATA[Closing tab failed]]>
     </line>
     <line>
-      <![CDATA[ElementradBtnUpdateRTSpineDataChildis not present]]>
+      <![CDATA[Failed to Click in lnkEngineDesignerPortal]]>
     </line>
     <line>
-      <![CDATA[Failed to Click in btnStart]]>
+      <![CDATA[Failed to Click in lnkTechAdmin]]>
+    </line>
+    <line>
+      <![CDATA[Toggle button on failed]]>
+    </line>
+    <line>
+      <![CDATA[Toggle button on failed]]>
     </line>
   </reporter-output>
-  <suite name="Default suite" duration-ms="1490771" started-at="2019-05-23T07:29:32Z" finished-at="2019-05-23T07:54:23Z">
+  <suite name="Default suite" duration-ms="610117" started-at="2019-05-28T07:00:42Z" finished-at="2019-05-28T07:10:52Z">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="1490771" started-at="2019-05-23T07:29:32Z" finished-at="2019-05-23T07:54:23Z">
+    <test name="Default test" duration-ms="610117" started-at="2019-05-28T07:00:42Z" finished-at="2019-05-28T07:10:52Z">
       <class name="regressionTests.RegressionCases">
-        <test-method status="PASS" signature="setUp()[pri:0, instance:regressionTests.RegressionCases@a74868d]" name="setUp" is-config="true" duration-ms="63" started-at="2019-05-23T07:29:32Z" finished-at="2019-05-23T07:29:32Z">
+        <test-method status="PASS" signature="setUp()[pri:0, instance:regressionTests.RegressionCases@1fc2b765]" name="setUp" is-config="true" duration-ms="67" started-at="2019-05-28T07:00:42Z" finished-at="2019-05-28T07:00:42Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method status="PASS" signature="Verify_DownloadedCSV_For_New_version()[pri:2, instance:regressionTests.RegressionCases@a74868d]" name="Verify_DownloadedCSV_For_New_version" duration-ms="1001484" started-at="2019-05-23T07:29:32Z" finished-at="2019-05-23T07:46:13Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- Verify_DownloadedCSV_For_New_version -->
-        <test-method status="FAIL" signature="Verify_RealtimeSpine_Api()[pri:5, instance:regressionTests.RegressionCases@a74868d]" name="Verify_RealtimeSpine_Api" duration-ms="489164" started-at="2019-05-23T07:46:13Z" finished-at="2019-05-23T07:54:23Z">
+        <test-method status="FAIL" signature="Verify_RealtimeSpine_Api()[pri:5, instance:regressionTests.RegressionCases@1fc2b765]" name="Verify_RealtimeSpine_Api" duration-ms="610014" started-at="2019-05-28T07:00:42Z" finished-at="2019-05-28T07:10:52Z">
           <exception class="java.lang.AssertionError">
             <message>
               <![CDATA[expected [true] but found [false]]]>
@@ -66,13 +68,19 @@ at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
           </exception> <!-- java.lang.AssertionError -->
           <reporter-output>
             <line>
-              <![CDATA[Failed to Click in btnStart]]>
+              <![CDATA[Closing tab failed]]>
             </line>
             <line>
-              <![CDATA[ElementradBtnUpdateRTSpineDataChildis not present]]>
+              <![CDATA[Failed to Click in lnkEngineDesignerPortal]]>
             </line>
             <line>
-              <![CDATA[Failed to Click in btnStart]]>
+              <![CDATA[Failed to Click in lnkTechAdmin]]>
+            </line>
+            <line>
+              <![CDATA[Toggle button on failed]]>
+            </line>
+            <line>
+              <![CDATA[Toggle button on failed]]>
             </line>
           </reporter-output>
         </test-method> <!-- Verify_RealtimeSpine_Api -->

@@ -450,7 +450,35 @@ public class DriverEngine extends TestBaseClass {
 						else {
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
 						}
+						break;
 
+					case "ensureDataflowIsInProgress":
+						if (classAction.ensureDataflowIsInProgress(TestData)) {
+							excelUtils.setCellData(sheetName, "Results", Irow, "Pass");
+						}
+
+						else {
+							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+						}
+						break;
+					case "switchOnToggleButton":
+						if (classAction.switchOnToggleButton(PageObject)) {
+							excelUtils.setCellData(sheetName, "Results", Irow, "Pass");
+						}
+
+						else {
+							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+						}
+						break;
+					case "closeTab":
+						if (classAction.closeTab(TestData)) {
+							excelUtils.setCellData(sheetName, "Results", Irow, "Pass");
+						}
+
+						else {
+							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+						}
+						break;
 					default:
 						break;
 					}

@@ -51,11 +51,8 @@ public class ActionClass extends TestBaseClass {
 	public static WebDriver driver = null;
 	public static String downloadFilepath = null;
 	public ChromeOptions options = null;
-	// public static ChromeDriverService driverService = null;
-	// public static ChromeDriver driver = null;
 	public String osName = System.getProperty("os.name");
-	// public GeneralUtilities generalUtilities = new GeneralUtilities();
-	// public static HtmlUnitDriver driver;
+	Actions actions = null;
 
 	public ActionClass() throws Exception {
 
@@ -1376,6 +1373,9 @@ public class ActionClass extends TestBaseClass {
 			Thread.sleep(5000);
 			driver.switchTo().frame(frameIdx);
 
+			int numOfbuttons = driver.findElements(By.tagName("button")).size();
+			System.out.println("number of buttons in framebyindex :" + numOfbuttons);
+
 			flag = true;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -1437,7 +1437,14 @@ public class ActionClass extends TestBaseClass {
 		 */
 		boolean flag = false;
 		try {
-			driver.switchTo().defaultContent();
+			Thread.sleep(5000);
+			// driver.switchTo().defaultContent();
+			driver.switchTo().parentFrame();
+			System.out.println("switched to parent>>>");
+
+			// int numOfbuttons = driver.findElements(By.tagName("button")).size();
+			// System.out.println("number of buttons in parent :" + numOfbuttons);
+
 			flag = true;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -1595,6 +1602,254 @@ public class ActionClass extends TestBaseClass {
 		}
 
 		return flag;
+	}
+
+	public boolean ensureDataflowIsInProgress(String dataflowName) {
+
+		/*
+		 * @author :Deepa Panikkavetil
+		 * 
+		 * @date :5/27/2019
+		 * 
+		 * @modified by:
+		 * 
+		 * @modified date:
+		 * 
+		 * @USEFOR :The method is to ensure the df is inprogress
+		 * 
+		 * @Parameters:Passing the data flow name
+		 * 
+		 * 
+		 * 
+		 */
+		boolean flag = false;
+		WebElement dfStatus = null;
+
+		try {
+			dfStatus = new WebDriverWait(driver, 50)
+					.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[contains(text()," + dataflowName
+							+ ")]//ancestor::td[@data-attribute-name='Data flow']//following-sibling::td[@data-attribute-name='Status']//a")));
+
+			if (dfStatus != null) {
+
+				// check the status of the dfStatus
+				if (dfStatus.getText().trim().equalsIgnoreCase("Paused")
+						|| dfStatus.getText().trim().equalsIgnoreCase("Stopped")) {
+					Reporter.log("Df status is Paused");
+					System.out.println("Df status is Paused");
+
+					boolean Action = new WebDriverWait(driver, 20).until(ExpectedConditions.and(
+							ExpectedConditions.presenceOfElementLocated(By.xpath("//a[contains(text()," + dataflowName
+									+ ")]//ancestor::td[@data-attribute-name='Data flow']//following-sibling::td[@data-attribute-name='Action']//a")),
+							ExpectedConditions.elementToBeClickable(By.xpath("//a[contains(text()," + dataflowName
+									+ ")]//ancestor::td[@data-attribute-name='Data flow']//following-sibling::td[@data-attribute-name='Action']//a"))));
+
+					if (Action == true) {
+
+						driver.findElement(By.xpath("//a[contains(text()," + dataflowName
+								+ ")]//ancestor::td[@data-attribute-name='Data flow']//following-sibling::td[@data-attribute-name='Action']//a"))
+								.click();
+
+						Thread.sleep(5000);
+
+						WebElement spanResume = new WebDriverWait(driver, 20)
+								.until(ExpectedConditions.presenceOfElementLocated(
+										By.xpath("//span[@class='menu-item-title' and  text()='Resume']")));
+
+						spanResume.click();// choosing resume
+						Thread.sleep(30000);
+
+						WebElement btnRefresh = new WebDriverWait(driver, 30).until(ExpectedConditions
+								.elementToBeClickable(By.xpath("//Button[@type='button' and text()='Refresh']")));
+
+						btnRefresh.click();// clicking refresh button
+
+						Thread.sleep(20000);
+
+						dfStatus = new WebDriverWait(driver, 20).until(ExpectedConditions
+								.presenceOfElementLocated(By.xpath("//a[contains(text()," + dataflowName
+										+ ")]//ancestor::td[@data-attribute-name='Data flow']//following-sibling::td[@data-attribute-name='Status']//a")));
+
+						System.out.print("current status>>" + dfStatus.getText());
+
+						if (dfStatus.getText().trim().equalsIgnoreCase("In progress")) {
+
+							System.out.println("Data flow is in progress");
+
+							Reporter.log("Data flow is in progress");
+
+							flag = true;
+
+						} else {
+							System.out.println("Data flow is not in progress");
+
+							Reporter.log("Data flow is not in progress");
+
+							flag = false;
+							return flag;
+
+						}
+
+					}
+
+				} else {
+					flag = true;
+				}
+
+			} else {
+				Reporter.log(dfStatus + " is not present");
+				flag = false;
+				return flag;
+			}
+		} catch (Exception e) {
+
+			System.out.println("Dataflow status change failed");
+
+			Reporter.log("Dataflow status change failed");
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+
+			flag = false;
+		}
+
+		return flag;
+
+	}
+
+	public boolean closeTab(String tabName) {
+
+		/*
+		 * @author :Deepa Panikkavetil
+		 * 
+		 * @date :5/27/2019
+		 * 
+		 * @modified by:
+		 * 
+		 * @modified date:
+		 * 
+		 * @USEFOR :The method is to close the open tab
+		 * 
+		 * @Parameters:Passing the tab name
+		 * 
+		 * 
+		 * 
+		 */
+
+		boolean flag = false;
+
+		try {
+			WebElement eleTab = new WebDriverWait(driver, 50).until(ExpectedConditions
+					.presenceOfElementLocated(By.xpath("//table[@role='presentation'] //span[contains(text(),'"
+							+ tabName + "')]/parent::td/following-sibling::td/span")));
+
+			if (eleTab != null) {
+				actions = new Actions(driver);
+
+				actions.moveToElement(eleTab).build().perform();
+
+				eleTab.click();
+
+				flag = true;
+
+			} else {
+				flag = false;
+				return flag;
+
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			Reporter.log("Closing tab failed");
+
+			System.out.println("Closing tab failed");
+			e.printStackTrace();
+			flag = false;
+		}
+
+		return flag;
+
+	}
+
+	public boolean switchOnToggleButton(String object) {
+
+		/*
+		 * @author :Deepa Panikkavetil
+		 * 
+		 * @date :5/27/2019
+		 * 
+		 * @modified by:
+		 * 
+		 * @modified date:
+		 * 
+		 * @USEFOR :The method is to switch on the toggle button if not
+		 * 
+		 * @Parameters:Passing the objectName
+		 * 
+		 * 
+		 * 
+		 */
+
+		boolean flag = false;
+
+		try {
+			WebElement ele = new WebDriverWait(driver, 50)
+					.until(ExpectedConditions.presenceOfElementLocated(By.xpath(prop.getProperty(object))));
+
+			if (ele.getAttribute("aria-pressed").equalsIgnoreCase("false")) {
+
+				ele.click();
+				flag = true;
+
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			flag = false;
+			Reporter.log("Toggle button on failed");
+			e.printStackTrace();
+		}
+
+		return flag;
+
+	}
+
+	public boolean switchOffToggleButton(String object) {
+
+		/*
+		 * @author :Deepa Panikkavetil
+		 * 
+		 * @date :5/27/2019
+		 * 
+		 * @modified by:
+		 * 
+		 * @modified date:
+		 * 
+		 * @USEFOR :The method is to switch off the toggle button if not
+		 * 
+		 * @Parameters:Passing the objectName
+		 * 
+		 * 
+		 * 
+		 */
+		boolean flag = false;
+
+		try {
+			WebElement ele = new WebDriverWait(driver, 50)
+					.until(ExpectedConditions.presenceOfElementLocated(By.xpath(prop.getProperty(object))));
+
+			if (ele.getAttribute("aria-pressed").equalsIgnoreCase("true")) {
+
+				ele.click();
+				flag = true;
+
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			flag = false;
+			Reporter.log("Toggle button off failed");
+			e.printStackTrace();
+		}
+
+		return flag;
+
 	}
 
 }
