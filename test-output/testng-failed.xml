@@ -5,8 +5,8 @@
     <classes>
       <class name="regressionTests.RegressionCases">
         <methods>
-          <include name="Verify_RealtimeSpine_Api"/>
           <include name="setUp"/>
+          <include name="Verify_DownloadedCSV_For_Existing_Version"/>
         </methods>
       </class> <!-- regressionTests.RegressionCases -->
     </classes>
