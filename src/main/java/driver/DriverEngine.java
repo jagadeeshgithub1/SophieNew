@@ -470,6 +470,16 @@ public class DriverEngine extends TestBaseClass {
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
 						}
 						break;
+
+					case "verifyLoadType":
+						if (classAction.verifyLoadType(PageObject, TestData)) {
+							excelUtils.setCellData(sheetName, "Results", Irow, "Pass");
+						}
+
+						else {
+							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+						}
+						break;
 					case "closeTab":
 						if (classAction.closeTab(TestData)) {
 							excelUtils.setCellData(sheetName, "Results", Irow, "Pass");
@@ -479,6 +489,16 @@ public class DriverEngine extends TestBaseClass {
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
 						}
 						break;
+					case "realtimeSpineAPIPostRequest":
+						if (classAction.realtimeSpineAPIPostRequest()) {
+							excelUtils.setCellData(sheetName, "Results", Irow, "Pass");
+						}
+
+						else {
+							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+						}
+						break;
+
 					default:
 						break;
 					}

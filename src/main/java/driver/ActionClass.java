@@ -13,11 +13,13 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import org.json.simple.JSONObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
@@ -39,6 +41,7 @@ import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.response.ResponseBody;
+import io.restassured.specification.RequestSpecification;
 import utilities.ExcelUtils;
 import utilities.GeneralUtilities;
 
@@ -1794,12 +1797,18 @@ public class ActionClass extends TestBaseClass {
 			WebElement ele = new WebDriverWait(driver, 50)
 					.until(ExpectedConditions.presenceOfElementLocated(By.xpath(prop.getProperty(object))));
 
-			if (ele.getAttribute("aria-pressed").equalsIgnoreCase("false")) {
+			if (ele.getAttribute("class").equalsIgnoreCase("btn btn-toggle btn-lg")) {
 
 				ele.click();
+
+			}
+
+			if (ele.getAttribute("class").equalsIgnoreCase("btn btn-toggle btn-lg active")) {
+
 				flag = true;
 
 			}
+
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			flag = false;
@@ -1835,9 +1844,14 @@ public class ActionClass extends TestBaseClass {
 			WebElement ele = new WebDriverWait(driver, 50)
 					.until(ExpectedConditions.presenceOfElementLocated(By.xpath(prop.getProperty(object))));
 
-			if (ele.getAttribute("aria-pressed").equalsIgnoreCase("true")) {
+			if (ele.getAttribute("class").equalsIgnoreCase("btn btn-toggle btn-lg active")) {
 
 				ele.click();
+
+			}
+
+			if (ele.getAttribute("class").equalsIgnoreCase("btn btn-toggle btn-lg")) {
+
 				flag = true;
 
 			}
@@ -1845,6 +1859,129 @@ public class ActionClass extends TestBaseClass {
 			// TODO Auto-generated catch block
 			flag = false;
 			Reporter.log("Toggle button off failed");
+			e.printStackTrace();
+		}
+
+		return flag;
+
+	}
+
+	public boolean verifyLoadType(String object, String data) {
+
+		boolean flag = false;
+
+		try {
+			WebElement ele = new WebDriverWait(driver, 60)
+					.until(ExpectedConditions.presenceOfElementLocated(By.xpath(prop.getProperty(object))));
+
+			if (ele.getAttribute("value").equalsIgnoreCase(data)) {
+
+			} else {
+				ele.clear();
+				ele.sendKeys(data);
+
+				WebElement btnUpdate = new WebDriverWait(driver, 60)
+						.until(ExpectedConditions.elementToBeClickable(By.xpath(prop.getProperty("btnUpdate"))));
+
+				btnUpdate.click();
+			}
+
+			flag = true;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+
+			flag = false;
+
+			Reporter.log("Loadtype verification failed");
+			System.out.println("Loadtype verification failed");
+			e.printStackTrace();
+		}
+
+		return flag;
+
+	}
+
+	public boolean realtimeSpineAPIPostRequest() {
+
+		boolean flag = false;
+
+		try {
+			ExcelUtils excelUtil = null;
+
+			String SpineType = null;
+			String SpineDataset = null;
+			String SpineData = null;
+
+			if (osName.equalsIgnoreCase("Linux")) {
+				excelUtil = new ExcelUtils("TestDataAndResults/TestData/RealTimeAutoAPI.xlsx");
+
+			}
+
+			else {
+				excelUtil = new ExcelUtils("TestDataAndResults\\TestData\\RealTimeAutoAPI.xlsx");
+
+			}
+
+			excelUtil = new ExcelUtils("TestDataAndResults\\TestData\\RealTimeAutoAPI.xlsx");
+
+			// File excelFile = new
+			// File("TestDataAndResults\\TestData\\RealTimeAutoAPI.xlsx");
+			// FileInputStream fis = new FileInputStream(excelFile);
+			// XSSFWorkbook workbook = new XSSFWorkbook(fis);
+			// XSSFSheet sheet = workbook.getSheetAt(0);
+			// Iterator<Row> rowIt = sheet.iterator();
+			// Row row = rowIt.next();
+			// row = sheet.getRow(0);
+
+			int colCount = excelUtil.getColumnCount("RealtimeSpineData");
+
+			int rowCount = excelUtil.getRowCount("RealtimeSpineData");
+
+			for (int i = 1; i <= rowCount; i++) {
+				JSONObject jsobj = new JSONObject();
+				System.out.println(jsobj.toJSONString());
+				// Row headerRow = sheet.getRow(0);
+
+				// Row dataRow = sheet.getRow(i);
+				for (int k = 0; k < colCount; k++) {
+					System.out.println(excelUtil.getCellData(i, k, "RealtimeSpineData"));
+					if (k == 2) {
+						String abc = excelUtil.getCellData(i, k, "RealtimeSpineData");
+						System.out.println("String value" + abc);
+						Base64.Encoder encoder = Base64.getEncoder();
+						String str = encoder.encodeToString(abc.getBytes());
+						System.out.println("Encoded value" + str);
+
+						jsobj.put(excelUtil.getCellData(0, k, "RealtimeSpineData"), str);
+
+					} else {
+						jsobj.put(excelUtil.getCellData(0, k, "RealtimeSpineData"),
+								excelUtil.getCellData(i, k, "RealtimeSpineData"));
+					}
+				}
+				RestAssured.authentication = RestAssured.preemptive().basic(prop.getProperty("apiUser"),
+						prop.getProperty("apiPasswd"));
+				RequestSpecification request = RestAssured.given();
+				request.headers("Content-Type", "application/json");
+				RequestSpecification before = request.body(jsobj.toJSONString());
+				// System.out.println(before);
+
+				Response res = request.post("http://auto-test-mavis74.adqura.com:7003/stream/RTStreamDataSet");
+
+				if (res.getStatusCode() == 202) {
+
+					flag = true;
+					System.out.println("Post sucessfully complted and status code is" + res.getStatusCode());
+
+				} else {
+					System.out.println("Failed due and status code is  " + res.getStatusCode());
+				}
+
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+
+			flag = false;
 			e.printStackTrace();
 		}
 

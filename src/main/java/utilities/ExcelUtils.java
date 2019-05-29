@@ -180,6 +180,29 @@ public class ExcelUtils {
 		return RowCount;
 	}
 
+	public int getColumnCount(String SheetName) {
+		int colCount = 0;
+		sh = wbk.getSheet(SheetName);
+		colCount = sh.getRow(0).getLastCellNum();
+
+		return colCount;
+
+	}
+
+	public String getCellData(int RowNum, int ColNum, String SheetName) throws Exception {
+		try {
+
+			sh = wbk.getSheet(SheetName);
+			Cell = sh.getRow(RowNum).getCell(ColNum);
+			String CellData = Cell.getStringCellValue();
+			return CellData;
+		} catch (Exception e) {
+			System.out.println("Class Utils | Method getCellData | Exception desc : " + e.getMessage());
+
+			return "";
+		}
+	}
+
 	// This method is to get the Row number of the test case
 	// This methods takes three arguments(Test Case name , Column Number & Sheet
 	// name)
