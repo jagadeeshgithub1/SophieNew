@@ -205,7 +205,7 @@ public class ActionClass extends TestBaseClass {
 		boolean flag = false;
 		try {
 
-			boolean ele = new WebDriverWait(driver, 600).until(ExpectedConditions.and(
+			boolean ele = new WebDriverWait(driver, 1800).until(ExpectedConditions.and(
 					ExpectedConditions.visibilityOfElementLocated(By.xpath(prop.getProperty(object))),
 					ExpectedConditions.elementToBeClickable(By.xpath(prop.getProperty(object)))));
 			if (ele == true) {
@@ -274,7 +274,7 @@ public class ActionClass extends TestBaseClass {
 		boolean flag = false;
 		try {
 
-			boolean ele = new WebDriverWait(driver, 800).until(ExpectedConditions.and(
+			boolean ele = new WebDriverWait(driver, 1800).until(ExpectedConditions.and(
 					ExpectedConditions.visibilityOfElementLocated(By.xpath(prop.getProperty(object))),
 					ExpectedConditions.elementToBeClickable(By.xpath(prop.getProperty(object)))));
 			if (ele == true) {
