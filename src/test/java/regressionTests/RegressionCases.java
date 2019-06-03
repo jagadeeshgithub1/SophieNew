@@ -81,13 +81,13 @@ public class RegressionCases {
 
 	}
 
-	@Test(priority = 3)
+	@Test(priority = 4)
 	public void Verify_RealTimeEvent_API_Response_For_NewEvent() {
 		Assert.assertTrue(driverEngine.mainMethod("VerifyEventAPI"));
 
 	}
 
-	@Test(priority = 4)
+	@Test(priority = 3)
 	public void Verify_Deleted_Offer_Is_Not_Present_In_CSV() {
 		Assert.assertTrue(driverEngine.mainMethod("VerifyDeleteOffer"));
 

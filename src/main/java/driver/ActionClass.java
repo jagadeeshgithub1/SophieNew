@@ -140,7 +140,7 @@ public class ActionClass extends TestBaseClass {
 
 			// WebElement ele = new WebDriverWait(driver, 90)
 			// .until(ExpectedConditions.elementToBeClickable(By.xpath(prop.getProperty(object))));
-			boolean ele = new WebDriverWait(driver, 90).until(ExpectedConditions.and(
+			boolean ele = new WebDriverWait(driver, 300).until(ExpectedConditions.and(
 					ExpectedConditions.visibilityOfElementLocated(By.xpath(prop.getProperty(object))),
 					ExpectedConditions.elementToBeClickable(By.xpath(prop.getProperty(object)))));
 
@@ -997,6 +997,7 @@ public class ActionClass extends TestBaseClass {
 		}
 		if (btnArbitration.getAttribute("autocomplete").equals("off")) {
 			btnArbitration.click();
+
 			flag = true;
 		}
 
@@ -1018,6 +1019,7 @@ public class ActionClass extends TestBaseClass {
 		// below code select the event name
 
 		try {
+			Thread.sleep(7000);
 			txtEvent.sendKeys(eventName);
 			txtEvent.sendKeys(Keys.ENTER);
 			flag = true;
@@ -1248,7 +1250,7 @@ public class ActionClass extends TestBaseClass {
 
 	}
 
-	public boolean RealtimeEventGetAPi(int partyID, String eventName) {
+	public boolean RealtimeEventGetAPiold(int partyID, String eventName) {
 
 		/*
 		 * @author:Jagadish Reddy
@@ -1268,6 +1270,76 @@ public class ActionClass extends TestBaseClass {
 		// String URL = null;
 
 		String PartyID = Integer.toString(partyID);
+		// String PartyID = "123461";
+		// String eventName1 = "regression_event";
+
+		RestAssured.authentication = RestAssured.preemptive().basic(prop.getProperty("apiUser"),
+				prop.getProperty("apiPasswd"));
+
+		String URL = prop.getProperty("eventAPIURL") + PartyID + "&context=event=" + eventName;
+
+		// String URL
+		// ="http://auto-test-mavis74.adqura.com:80/prweb/PRRestService/AdquraNBAServices/1/triggerevent?partyid="+PartyID+"&context=event="+Event_name;
+
+		RestAssured.baseURI = URL;
+
+		Response response = get(baseURI);
+
+		JsonPath jsonPathEvaluator = response.jsonPath();
+		if (response.getStatusCode() == 200) {
+
+			String Data_reponse = response.asString();
+
+			System.out.println(Data_reponse);
+			ResponseBody body = response.getBody();
+			String responseBody = body.asString();
+			// JsonPath jsonPathEvaluator1 = response.jsonPath();
+			if (jsonPathEvaluator.get("Message") == null) {
+				System.out.println(
+						"Trigger event sucess with Message with  IsFailed is " + jsonPathEvaluator.get("IsFailed"));
+
+			}
+
+			else {
+				flag = false;
+
+				System.out.println(
+						"Trigger event Fail with  Message with IsFailed is " + jsonPathEvaluator.get("IsFailed"));
+				Reporter.log("Response has message" + responseBody);
+				return flag;
+
+			}
+			flag = true;
+
+		} else {
+			flag = false;
+			System.out.println("Get request fail due to  status code " + response.getStatusCode());
+			return flag;
+		}
+		return flag;
+
+	}
+
+	public boolean RealtimeEventGetAPi(String offerName, String eventName) {
+
+		/*
+		 * @author:Jagadish Reddy
+		 * 
+		 * @date:4/23/2019
+		 * 
+		 * @modified by:
+		 * 
+		 * @modified date:
+		 * 
+		 * @USED_FOR:Method used for calling the event API
+		 * 
+		 * @Parameter:Passing the partyID and eventName
+		 */
+
+		boolean flag = false;
+		// String URL = null;
+
+		String PartyID = pickEligiblePartyFromGrid(offerName);
 		// String PartyID = "123461";
 		// String eventName1 = "regression_event";
 
@@ -1986,6 +2058,38 @@ public class ActionClass extends TestBaseClass {
 		}
 
 		return flag;
+
+	}
+
+	public String pickEligiblePartyFromGrid(String offerName) {
+
+		String partyId = null;
+
+		WebElement eleOffer = new WebDriverWait(driver, 90).until(
+				ExpectedConditions.presenceOfElementLocated(By.xpath("//td[@data-attribute-name='Offer Name']//span")));
+
+		if (eleOffer != null) {
+			if (eleOffer.getText().equalsIgnoreCase(offerName + "_Email")) {
+
+				WebElement eleParty = new WebDriverWait(driver, 90)
+						.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='" + offerName
+								+ "_Email']//ancestor::td[@data-attribute-name='Offer Name']//preceding-sibling::td[@data-attribute-name='CustomerID']//span")));
+				if (eleParty != null) {
+
+					partyId = eleParty.getText().trim();
+					Reporter.log("Eligible Party for the offer" + offerName + "is " + partyId);
+					System.out.println("Eligible Party for the offer" + offerName + "is " + partyId);
+
+				}
+
+			} else {
+				partyId = null;
+				Reporter.log("No parties eligible for " + offerName);
+				System.out.println("No parties eligible for " + offerName);
+				return partyId;
+			}
+		}
+		return partyId;
 
 	}
 

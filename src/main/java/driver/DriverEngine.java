@@ -477,7 +477,7 @@ public class DriverEngine extends TestBaseClass {
 
 						break;
 					case "rollBackToBaselineVersion":
-						if (classAction.rollBackToBaselineVersion(TestData)) {
+						if (classAction.rollBackToBaselineVersion(String.valueOf((int) Float.parseFloat(TestData)))) {
 							excelUtils.setCellData(sheetName, "Results", Irow, "Pass");
 						} else {
 							try {
@@ -643,7 +643,7 @@ public class DriverEngine extends TestBaseClass {
 
 						break;
 					case "RealtimeEventGetAPi":
-						if (classAction.RealtimeEventGetAPi(((int) (Float.parseFloat(TestData))), Argument1)) {
+						if (classAction.RealtimeEventGetAPi(TestData, Argument1)) {
 
 							excelUtils.setCellData(sheetName, "Results", Irow, "Pass");
 

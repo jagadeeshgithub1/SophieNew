@@ -2,31 +2,39 @@
 <testng-results skipped="0" failed="1" ignored="4" total="5" passed="0">
   <reporter-output>
     <line>
-      <![CDATA[Failed to EnterSophie_Auto_328 intxtShortDesc]]>
+      <![CDATA[Failed in byPassArbitrationSelection]]>
     </line>
     <line>
-      <![CDATA[Failed to EnterCreated as part of automation intxtVersionNotes]]>
+      <![CDATA[Eligible Party for the offerOfferWithEventis 123612]]>
     </line>
     <line>
-      <![CDATA[Failed to Click in imgBtnNext]]>
+      <![CDATA[Response has message{"Message":"NoOffer","IsFailed":false}]]>
+    </line>
+    <line>
+      <![CDATA[Failed in RealtimeEventGetAPi]]>
     </line>
   </reporter-output>
-  <suite name="Default suite" duration-ms="445096" started-at="2019-05-29T13:23:46Z" finished-at="2019-05-29T13:31:11Z">
+  <suite name="Default suite" duration-ms="1452462" started-at="2019-06-03T11:29:41Z" finished-at="2019-06-03T11:53:53Z">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="445096" started-at="2019-05-29T13:23:46Z" finished-at="2019-05-29T13:31:11Z">
+    <test name="Default test" duration-ms="1452462" started-at="2019-06-03T11:29:41Z" finished-at="2019-06-03T11:53:53Z">
       <class name="regressionTests.RegressionCases">
-        <test-method status="PASS" signature="setUp()[pri:0, instance:regressionTests.RegressionCases@1fc2b765]" name="setUp" is-config="true" duration-ms="83" started-at="2019-05-29T13:23:46Z" finished-at="2019-05-29T13:23:46Z">
+        <test-method status="PASS" signature="setUp()[pri:0, instance:regressionTests.RegressionCases@1fc2b765]" name="setUp" is-config="true" duration-ms="70" started-at="2019-06-03T11:29:41Z" finished-at="2019-06-03T11:29:41Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method status="FAIL" signature="Verify_DownloadedCSV_For_Existing_Version()[pri:1, instance:regressionTests.RegressionCases@1fc2b765]" name="Verify_DownloadedCSV_For_Existing_Version" duration-ms="444961" started-at="2019-05-29T13:23:46Z" finished-at="2019-05-29T13:31:11Z">
-          <exception class="java.lang.NullPointerException">
+        <test-method status="FAIL" signature="Verify_RealTimeEvent_API_Response_For_NewEvent()[pri:3, instance:regressionTests.RegressionCases@1fc2b765]" name="Verify_RealTimeEvent_API_Response_For_NewEvent" duration-ms="1452349" started-at="2019-06-03T11:29:41Z" finished-at="2019-06-03T11:53:53Z">
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[expected [true] but found [false]]]>
+            </message>
             <full-stacktrace>
-              <![CDATA[java.lang.NullPointerException
-at driver.ActionClass.checkboxSelect(ActionClass.java:818)
-at driver.DriverEngine.mainMethod(DriverEngine.java:339)
-at regressionTests.RegressionCases.Verify_DownloadedCSV_For_Existing_Version(RegressionCases.java:70)
+              <![CDATA[java.lang.AssertionError: expected [true] but found [false]
+at org.testng.Assert.fail(Assert.java:96)
+at org.testng.Assert.failNotEquals(Assert.java:776)
+at org.testng.Assert.assertTrue(Assert.java:44)
+at org.testng.Assert.assertTrue(Assert.java:54)
+at regressionTests.RegressionCases.Verify_RealTimeEvent_API_Response_For_NewEvent(RegressionCases.java:86)
 at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -54,19 +62,22 @@ at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
 at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
 ]]>
             </full-stacktrace>
-          </exception> <!-- java.lang.NullPointerException -->
+          </exception> <!-- java.lang.AssertionError -->
           <reporter-output>
             <line>
-              <![CDATA[Failed to EnterSophie_Auto_328 intxtShortDesc]]>
+              <![CDATA[Failed in byPassArbitrationSelection]]>
             </line>
             <line>
-              <![CDATA[Failed to EnterCreated as part of automation intxtVersionNotes]]>
+              <![CDATA[Eligible Party for the offerOfferWithEventis 123612]]>
             </line>
             <line>
-              <![CDATA[Failed to Click in imgBtnNext]]>
+              <![CDATA[Response has message{"Message":"NoOffer","IsFailed":false}]]>
+            </line>
+            <line>
+              <![CDATA[Failed in RealtimeEventGetAPi]]>
             </line>
           </reporter-output>
-        </test-method> <!-- Verify_DownloadedCSV_For_Existing_Version -->
+        </test-method> <!-- Verify_RealTimeEvent_API_Response_For_NewEvent -->
       </class> <!-- regressionTests.RegressionCases -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
