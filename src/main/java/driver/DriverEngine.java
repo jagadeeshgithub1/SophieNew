@@ -592,8 +592,8 @@ public class DriverEngine extends TestBaseClass {
 						}
 
 						break;
-					case "checkTriggerEvent":
-						if (classAction.checkTriggerEvent(TestData)) {
+					case "checkEntitiesOfEvent":
+						if (classAction.checkEntitiesOfEvent(TestData, (int) Float.parseFloat(Argument1))) {
 
 							excelUtils.setCellData(sheetName, "Results", Irow, "Pass");
 
@@ -755,6 +755,54 @@ public class DriverEngine extends TestBaseClass {
 
 					case "ensureDataflowIsInProgress":
 						if (classAction.ensureDataflowIsInProgress(TestData)) {
+							excelUtils.setCellData(sheetName, "Results", Irow, "Pass");
+						}
+
+						else {
+							try {
+								Thread.sleep(10000);
+								if (osName.equalsIgnoreCase("Linux")) {
+									FullPageScreenShot("ScreenShots/", TestCaseID + "_" + ActionKeyWord + "_" + ".png");
+
+								} else {
+
+									FullPageScreenShot("ScreenShots\\",
+											TestCaseID + "_" + ActionKeyWord + "_" + ".png");
+								}
+							} catch (Exception e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							Reporter.log("Failed in " + ActionKeyWord);
+							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+						}
+						break;
+					case "verifyLabelText":
+						if (classAction.verifyLabelText(TestData)) {
+							excelUtils.setCellData(sheetName, "Results", Irow, "Pass");
+						}
+
+						else {
+							try {
+								Thread.sleep(10000);
+								if (osName.equalsIgnoreCase("Linux")) {
+									FullPageScreenShot("ScreenShots/", TestCaseID + "_" + ActionKeyWord + "_" + ".png");
+
+								} else {
+
+									FullPageScreenShot("ScreenShots\\",
+											TestCaseID + "_" + ActionKeyWord + "_" + ".png");
+								}
+							} catch (Exception e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							Reporter.log("Failed in " + ActionKeyWord);
+							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+						}
+						break;
+					case "verfyInputTextValue":
+						if (classAction.verfyInputTextValue(TestData)) {
 							excelUtils.setCellData(sheetName, "Results", Irow, "Pass");
 						}
 

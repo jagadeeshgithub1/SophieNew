@@ -140,7 +140,7 @@ public class ActionClass extends TestBaseClass {
 
 			// WebElement ele = new WebDriverWait(driver, 90)
 			// .until(ExpectedConditions.elementToBeClickable(By.xpath(prop.getProperty(object))));
-			boolean ele = new WebDriverWait(driver, 300).until(ExpectedConditions.and(
+			boolean ele = new WebDriverWait(driver, 600).until(ExpectedConditions.and(
 					ExpectedConditions.visibilityOfElementLocated(By.xpath(prop.getProperty(object))),
 					ExpectedConditions.elementToBeClickable(By.xpath(prop.getProperty(object)))));
 
@@ -507,7 +507,7 @@ public class ActionClass extends TestBaseClass {
 
 		try {
 			btnRollback.click();
-			Thread.sleep(5000);
+			Thread.sleep(10000);
 			flag = true;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -902,7 +902,7 @@ public class ActionClass extends TestBaseClass {
 
 	// Below code dynamically creates the xpath for the trigger check box during the
 	// event creation
-	public boolean checkTriggerEvent(String titleOftheEvent) {
+	public boolean checkEntitiesOfEvent(String titleOftheEvent, int index) {
 		/*
 		 * @author:Deepa Panikkaveetil
 		 * 
@@ -919,8 +919,8 @@ public class ActionClass extends TestBaseClass {
 		boolean flag = false;
 		WebElement chkTrigger = null;
 		try {
-			chkTrigger = new WebDriverWait(driver, 40).until(ExpectedConditions.presenceOfElementLocated(
-					By.xpath("(//tr/td/div[@title='" + titleOftheEvent.trim() + "']/following::td/input)[1]")));
+			chkTrigger = new WebDriverWait(driver, 40).until(ExpectedConditions.presenceOfElementLocated(By.xpath(
+					"(//tr/td/div[@title='" + titleOftheEvent.trim() + "']/following::td/input)[" + index + "]")));
 			flag = true;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -1152,6 +1152,7 @@ public class ActionClass extends TestBaseClass {
 
 			// try {
 			int iTestStart = 0;
+
 			int iTestEnd = 0;
 
 			// for (int it = 4; it <=
@@ -1340,6 +1341,24 @@ public class ActionClass extends TestBaseClass {
 		// String URL = null;
 
 		String PartyID = pickEligiblePartyFromGrid(offerName);
+
+		// clearing the ih
+
+		try {
+			switchToParent();
+			click("toggleNavigation");
+			Thread.sleep(3000);
+			click("lnkTechAdmin");
+			switchToFrameByIndex(2);
+			selectRadioButton("radBtnAllForIH");
+			Thread.sleep(5000);
+			click("btnClearIH");
+			click("btnResetEngStat");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			System.out.println("clearing the ih failed before calling the eventAPI");
+		}
+
 		// String PartyID = "123461";
 		// String eventName1 = "regression_event";
 
@@ -1362,6 +1381,7 @@ public class ActionClass extends TestBaseClass {
 
 			System.out.println(Data_reponse);
 			ResponseBody body = response.getBody();
+
 			String responseBody = body.asString();
 			// JsonPath jsonPathEvaluator1 = response.jsonPath();
 			if (jsonPathEvaluator.get("Message") == null) {
@@ -1940,6 +1960,23 @@ public class ActionClass extends TestBaseClass {
 
 	public boolean verifyLoadType(String object, String data) {
 
+		/*
+		 * @author :Deepa Panikkavetil
+		 * 
+		 * @date :5/27/2019
+		 * 
+		 * @modified by:
+		 * 
+		 * @modified date:
+		 * 
+		 * @USEFOR :The method is to verify the loadType with the 'data' passed
+		 * 
+		 * @Parameters:Passing the objectName
+		 * 
+		 * 
+		 * 
+		 */
+
 		boolean flag = false;
 
 		try {
@@ -1974,6 +2011,22 @@ public class ActionClass extends TestBaseClass {
 	}
 
 	public boolean realtimeSpineAPIPostRequest() {
+		/*
+		 * jagadish Gopireddy
+		 * 
+		 * @date :5/27/2019
+		 * 
+		 * @modified by:
+		 * 
+		 * @modified date:
+		 * 
+		 * @USEFOR :The method is to do post api call for the spine records
+		 * 
+		 * @Parameters:NA
+		 * 
+		 * 
+		 * 
+		 */
 
 		boolean flag = false;
 
@@ -1995,15 +2048,6 @@ public class ActionClass extends TestBaseClass {
 			}
 
 			excelUtil = new ExcelUtils("TestDataAndResults\\TestData\\RealTimeAutoAPI.xlsx");
-
-			// File excelFile = new
-			// File("TestDataAndResults\\TestData\\RealTimeAutoAPI.xlsx");
-			// FileInputStream fis = new FileInputStream(excelFile);
-			// XSSFWorkbook workbook = new XSSFWorkbook(fis);
-			// XSSFSheet sheet = workbook.getSheetAt(0);
-			// Iterator<Row> rowIt = sheet.iterator();
-			// Row row = rowIt.next();
-			// row = sheet.getRow(0);
 
 			int colCount = excelUtil.getColumnCount("RealtimeSpineData");
 
@@ -2063,6 +2107,23 @@ public class ActionClass extends TestBaseClass {
 
 	public String pickEligiblePartyFromGrid(String offerName) {
 
+		/*
+		 * @author :Deepa Panikkavetil
+		 * 
+		 * @date :5/27/2019
+		 * 
+		 * @modified by:
+		 * 
+		 * @modified date:
+		 * 
+		 * @USEFOR :The method is to pick the eligible party for the offer
+		 * 
+		 * @Parameters:Passing the offer name
+		 * 
+		 * 
+		 * 
+		 */
+
 		String partyId = null;
 
 		WebElement eleOffer = new WebDriverWait(driver, 90).until(
@@ -2091,6 +2152,97 @@ public class ActionClass extends TestBaseClass {
 		}
 		return partyId;
 
+	}
+
+	public boolean verifyLabelText(String expectedText) {
+
+		/*
+		 * @author :Deepa Panikkavetil
+		 * 
+		 * @date :6/07/2019
+		 * 
+		 * @modified by:
+		 * 
+		 * @modified date:
+		 * 
+		 * @USEFOR :The method is to verify the label text
+		 * 
+		 * @Parameters:Passing the expected text in the element
+		 * 
+		 * 
+		 * 
+		 */
+
+		boolean flag = false;
+
+		try {
+			// WebElement element =
+			// driver.findElement(By.xpath("//div[@class='col-md-6']//label[text()='"+expectedText+"']"));
+			WebElement element = new WebDriverWait(driver, 100).until(ExpectedConditions.presenceOfElementLocated(
+					By.xpath("//div[@class='col-md-6']//label[text()='" + expectedText + "']")));
+
+			if (element != null) {
+				flag = true;
+				System.out.println("New attribute " + expectedText + " is added in the template");
+			} else {
+				System.out.println("New attribute " + expectedText + " is not added in the template");
+
+				Reporter.log("New attribute " + expectedText + " is not added in the template");
+				flag = false;
+				return flag;
+
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			flag = false;
+
+			System.out.println("Exception while verifyLabelText " + e.getMessage());
+			Reporter.log("Exception while verifyLabelText " + e.getMessage());
+			// e.printStackTrace();
+			return flag;
+		}
+		return flag;
+	}
+
+	public boolean verfyInputTextValue(String expectedValue) {
+
+		/*
+		 * @author :Deepa Panikkavetil
+		 * 
+		 * @date :6/07/2019
+		 * 
+		 * @modified by:
+		 * 
+		 * @modified date:
+		 * 
+		 * @USEFOR :The method is to verify the input text value
+		 * 
+		 * @Parameters:Passing the expected text in the element
+		 * 
+		 * 
+		 * 
+		 */
+
+		boolean flag = false;
+
+		WebElement element = new WebDriverWait(driver, 100).until(ExpectedConditions
+				.presenceOfElementLocated(By.xpath("//div[@class='col-md-6']//input[@value='" + expectedValue + "']")));
+
+		if (element != null) {
+
+			flag = true;
+			System.out.println("New attribute has " + expectedValue + " in the template");
+
+		} else {
+			System.out.println("New attribute doesn't have  " + expectedValue + " in the template");
+
+			Reporter.log("New attribute " + expectedValue + " is not added in the template");
+			flag = false;
+			return flag;
+
+		}
+
+		return flag;
 	}
 
 }

@@ -6,7 +6,7 @@
       <class name="regressionTests.RegressionCases">
         <methods>
           <include name="setUp"/>
-          <include name="Verify_RealTimeEvent_API_Response_For_NewEvent"/>
+          <include name="Verify_NewEmailTemp_ByCloning"/>
         </methods>
       </class> <!-- regressionTests.RegressionCases -->
     </classes>

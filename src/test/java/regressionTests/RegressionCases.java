@@ -63,7 +63,7 @@ public class RegressionCases {
 		}
 	}
 
-	@Test(priority = 1)
+	@Test()
 	// First test to validate the CSV after engine run
 	public void Verify_DownloadedCSV_For_Existing_Version() {
 
@@ -73,7 +73,7 @@ public class RegressionCases {
 
 	}
 
-	@Test(priority = 2)
+	@Test()
 	// Second case to verify the event API integration
 	public void Verify_DownloadedCSV_For_New_version() {
 
@@ -81,21 +81,27 @@ public class RegressionCases {
 
 	}
 
-	@Test(priority = 4)
+	@Test()
 	public void Verify_RealTimeEvent_API_Response_For_NewEvent() {
 		Assert.assertTrue(driverEngine.mainMethod("VerifyEventAPI"));
 
 	}
 
-	@Test(priority = 3)
+	@Test(dependsOnMethods = { "Verify_DownloadedCSV_For_New_version" }, enabled = false)
 	public void Verify_Deleted_Offer_Is_Not_Present_In_CSV() {
 		Assert.assertTrue(driverEngine.mainMethod("VerifyDeleteOffer"));
 
 	}
 
-	@Test(priority = 5)
+	@Test(enabled = false)
 	public void Verify_RealtimeSpine_Api() {
-		Assert.assertTrue(driverEngine.mainMethod("Cases_RealTimeSpine"));
+		Assert.assertTrue(driverEngine.mainMethod("VerifyRealtimeSpineAPI"));
+
+	}
+
+	@Test(priority = 6)
+	public void Verify_NewEmailTemp_ByCloning() {
+		Assert.assertTrue(driverEngine.mainMethod("EmailTempWithNewAttribute"));
 
 	}
 }
