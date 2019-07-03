@@ -1,20 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="0" ignored="5" total="6" passed="1">
+<testng-results skipped="0" failed="0" ignored="10" total="11" passed="1">
   <reporter-output>
+    <line>
+      <![CDATA[NewPropEvent exists in the db]]>
+    </line>
+    <line>
+      <![CDATA[NewPropEvent doesn't exist in the db]]>
+    </line>
+    <line>
+      <![CDATA[NewPropEvent exists in the db]]>
+    </line>
   </reporter-output>
-  <suite name="Default suite" duration-ms="1835618" started-at="2019-06-13T10:28:48Z" finished-at="2019-06-13T10:59:24Z">
+  <suite name="Default suite" duration-ms="1349867" started-at="2019-07-03T12:07:39Z" finished-at="2019-07-03T12:30:09Z">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="1835618" started-at="2019-06-13T10:28:48Z" finished-at="2019-06-13T10:59:24Z">
+    <test name="Default test" duration-ms="1349867" started-at="2019-07-03T12:07:39Z" finished-at="2019-07-03T12:30:09Z">
       <class name="regressionTests.RegressionCases">
-        <test-method status="PASS" signature="setUp()[pri:0, instance:regressionTests.RegressionCases@d35dea7]" name="setUp" is-config="true" duration-ms="62" started-at="2019-06-13T10:28:48Z" finished-at="2019-06-13T10:28:48Z">
+        <test-method status="PASS" signature="setUp()[pri:0, instance:regressionTests.RegressionCases@289d1c02]" name="setUp" is-config="true" duration-ms="78" started-at="2019-07-03T12:07:39Z" finished-at="2019-07-03T12:07:39Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method status="PASS" signature="Verify_NewEmailTemp_ByCloning()[pri:6, instance:regressionTests.RegressionCases@d35dea7]" name="Verify_NewEmailTemp_ByCloning" duration-ms="1835489" started-at="2019-06-13T10:28:48Z" finished-at="2019-06-13T10:59:24Z">
+        <test-method status="PASS" signature="Verify_Rollback_Is_Working_As_Expected()[pri:0, instance:regressionTests.RegressionCases@289d1c02]" name="Verify_Rollback_Is_Working_As_Expected" duration-ms="1349752" started-at="2019-07-03T12:07:39Z" finished-at="2019-07-03T12:30:09Z">
           <reporter-output>
+            <line>
+              <![CDATA[NewPropEvent exists in the db]]>
+            </line>
+            <line>
+              <![CDATA[NewPropEvent doesn't exist in the db]]>
+            </line>
+            <line>
+              <![CDATA[NewPropEvent exists in the db]]>
+            </line>
           </reporter-output>
-        </test-method> <!-- Verify_NewEmailTemp_ByCloning -->
+        </test-method> <!-- Verify_Rollback_Is_Working_As_Expected -->
       </class> <!-- regressionTests.RegressionCases -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->

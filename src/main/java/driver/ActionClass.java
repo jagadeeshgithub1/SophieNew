@@ -13,6 +13,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
 import java.util.Base64;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -159,6 +162,69 @@ public class ActionClass extends TestBaseClass {
 				element.click();
 
 				// System.out.println(driver.getPageSource());
+
+				flag = true;
+			} else {
+				System.out.println("Element" + object + "is not present");
+				flag = false;
+
+			}
+
+		} catch (TimeoutException e) {
+
+			System.out.println("Are you sure the element is present");
+			flag = false;
+			// TODO: handle exception
+		} catch (Exception e) {
+			System.out.println("exception" + e.getMessage());
+			flag = false;
+			e.printStackTrace();
+
+			// TODO: handle exception
+		}
+
+		// TODO: handle exception
+		return flag;
+	}
+
+	public boolean clickUsingJScript(String object) {
+		/*
+		 * @author :Deepa Panikkaveetil
+		 *
+		 * 
+		 * @date :3/19/2019
+		 * 
+		 * @modified by:
+		 * 
+		 * @modified date:
+		 * 
+		 * @USEFOR :The method is to clik on any web element
+		 * 
+		 * @Parameters:Passing the xpath locator from the properties file
+		 * 
+		 * 
+		 * 
+		 */
+		boolean flag = false;
+		try {
+
+			System.out.println("object name:" + object);
+
+			// WebElement ele = new WebDriverWait(driver, 90)
+			// .until(ExpectedConditions.elementToBeClickable(By.xpath(prop.getProperty(object))));
+			boolean ele = new WebDriverWait(driver, 600).until(ExpectedConditions.and(
+					ExpectedConditions.visibilityOfElementLocated(By.xpath(prop.getProperty(object))),
+					ExpectedConditions.elementToBeClickable(By.xpath(prop.getProperty(object)))));
+
+			if (ele == true) {
+
+				WebElement element = driver.findElement(By.xpath(prop.getProperty(object)));
+
+				// Actions action = new Actions(driver);
+				System.out.println("is this the element???>>" + ele);
+
+				JavascriptExecutor js = (JavascriptExecutor) driver;
+				js.executeScript("arguments[0].click();", element);
 
 				flag = true;
 			} else {
@@ -419,6 +485,8 @@ public class ActionClass extends TestBaseClass {
 			ele.clear();
 			Thread.sleep(5000);
 			ele.sendKeys(data.trim());
+
+			ele.sendKeys(Keys.TAB);
 			flag = true;
 		} catch (Exception e) {
 			flag = false;
@@ -451,6 +519,20 @@ public class ActionClass extends TestBaseClass {
 
 	public boolean rollBackToBaselineVersion(String versionId) {
 
+		/*
+		 * @author:Deepa Panikkaeetil
+		 * 
+		 * @date:3/20/2019
+		 * 
+		 * @modified by:
+		 * 
+		 * @modified date:
+		 * 
+		 * @USED_FOR:Method used for typing the data in the web element/input text
+		 * 
+		 * @Parameter:Passing the web element xpath, and the data to be typed
+		 */
+
 		boolean flag = false;
 
 		// below code switch to the frame
@@ -475,7 +557,7 @@ public class ActionClass extends TestBaseClass {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			flag = false;
-			System.out.println("Rollback button is not present");
+			System.out.println("Rollback version is not located");
 			return flag;
 		}
 		// code to the button of the baseline version tab
@@ -485,7 +567,7 @@ public class ActionClass extends TestBaseClass {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			flag = false;
-			System.out.println("Rollback button didnt click");
+			System.out.println("Rollback tab didnt click");
 			return flag;
 		}
 
@@ -513,6 +595,28 @@ public class ActionClass extends TestBaseClass {
 			// TODO Auto-generated catch block
 			flag = false;
 			System.out.println("Rollback button is not clicked" + btnRollback);
+		}
+
+		WebElement rollbackExceptionele = null;
+		try {
+			rollbackExceptionele = new WebDriverWait(driver, 50).until(
+					ExpectedConditions.presenceOfElementLocated(By.xpath(prop.getProperty("spanRollbackException"))));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			System.out.println("Element is not present");
+		}
+
+		if (rollbackExceptionele != null) {
+
+			if (rollbackExceptionele.isDisplayed()) {
+
+				System.out.println("Rollback failed!! with the error message as " + rollbackExceptionele.getText());
+
+				Reporter.log("Rollback failed!! with the error message as " + rollbackExceptionele.getText());
+				flag = false;
+
+			}
+
 		}
 
 		return flag;
@@ -585,7 +689,7 @@ public class ActionClass extends TestBaseClass {
 				System.out.println("while driver = new ChromeDriver(options)");
 				e.printStackTrace();
 			}
-			// driver.manage().window().setSize(new Dimension(1920, 1200));
+			// driver.manage().window().setSize(new Dimension(1920, 1080));
 			driver.manage().window().maximize();
 			driver.manage().deleteAllCookies();
 
@@ -2238,6 +2342,394 @@ public class ActionClass extends TestBaseClass {
 
 			Reporter.log("New attribute " + expectedValue + " is not added in the template");
 			flag = false;
+			return flag;
+
+		}
+
+		return flag;
+	}
+
+	public boolean pageScrollDownToView() {
+
+		/*
+		 * @author :Deepa Panikkavetil
+		 * 
+		 * @date :6/19/2019
+		 * 
+		 * @modified by:
+		 * 
+		 * @modified date:
+		 * 
+		 * @USEFOR :scroll down the page if require to see the element
+		 * 
+		 * @Parameters:NA
+		 * 
+		 * 
+		 * 
+		 */
+		boolean flag = false;
+
+		try {
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+
+			js.executeScript("window.scrollBy(0,1000)");
+
+			flag = true;
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			flag = false;
+			e.printStackTrace();
+		}
+		return flag;
+	}
+
+	public boolean pageScrollUpToView() {
+
+		/*
+		 * @author :Deepa Panikkavetil
+		 * 
+		 * @date :6/25/2019
+		 * 
+		 * @modified by:
+		 * 
+		 * @modified date:
+		 * 
+		 * @USEFOR :scroll Up the page if require to see the element
+		 * 
+		 * @Parameters:NA
+		 * 
+		 * 
+		 * 
+		 */
+		boolean flag = false;
+
+		try {
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+
+			js.executeScript("window.scrollBy(0,-7000)"); // positve on ynum will scroll down , -ve will scroll up
+
+			flag = true;
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			flag = false;
+			e.printStackTrace();
+		}
+		return flag;
+	}
+
+	public boolean verifyDBSpecificColumnExistsOrNot(String sql, String colName) {
+
+		/*
+		 * @author :Deepa Panikkavetil
+		 * 
+		 * @date :6/20/2019
+		 * 
+		 * @modified by:
+		 * 
+		 * @modified date:
+		 * 
+		 * @USEFOR :to perform the db validation to check specific column added
+		 * 
+		 * @Parameters:passing the sqlstring and column to be verified
+		 * 
+		 * 
+		 * 
+		 */
+
+		// String SQLstr = sql;
+
+		ResultSet resultSet = null;
+		ResultSetMetaData metaData = null;
+		boolean exist = false, flag = false;
+		int numCol = 0;
+		try {
+			DBConnectivity();
+			resultSet = statement.executeQuery(sql);
+			metaData = resultSet.getMetaData();
+			numCol = metaData.getColumnCount();
+			for (int i = 1; i <= numCol; i++) {
+
+				if (metaData.getColumnName(i).equalsIgnoreCase(colName)) {
+					exist = true;
+					break;
+
+				}
+
+			}
+			if (exist == true) {
+				System.out.println(colName + " exists in the db");
+				Reporter.log(colName + " exists in the db");
+				flag = true;
+			} else {
+				System.out.println(colName + " doesn't exist in the db");
+				Reporter.log(colName + " doesn't exist in the db");
+				flag = false;
+				return flag;
+
+			}
+		} catch (SQLException e) {
+
+			System.out.println("Failed in db validation" + e.getMessage());
+			// TODO Auto-generated catch block
+			Reporter.log("Failed in db validation" + e.getMessage());
+			flag = false;
+		}
+		return flag;
+
+	}
+
+	public boolean verifyColumnRemovedFromDB(String sql, String colName) {
+
+		/*
+		 * @author :DeepaPanikkavetil
+		 * 
+		 * @date :6/27/2019
+		 * 
+		 * @modified by:
+		 * 
+		 * @modified date:
+		 * 
+		 * @USEFOR :to perform the validation to check the db doesn't specified column
+		 * 
+		 * @Parameters:sql and specific column name
+		 * 
+		 */
+
+		ResultSet resultSet = null;
+		ResultSetMetaData metaData = null;
+		boolean exist = false, flag = false;
+		int numCol = 0;
+		try {
+			DBConnectivity();
+			resultSet = statement.executeQuery(sql);
+			metaData = resultSet.getMetaData();
+			numCol = metaData.getColumnCount();
+			for (int i = 1; i <= numCol; i++) {
+
+				if (metaData.getColumnName(i).equalsIgnoreCase(colName)) {
+					exist = true;
+					break;
+
+				}
+
+			}
+			if (exist == true) {
+				System.out.println(colName + " exists in the db");
+				Reporter.log(colName + " exists in the db");
+				flag = false;
+				return flag;
+			} else {
+				System.out.println(colName + " doesn't exist in the db");
+				Reporter.log(colName + " doesn't exist in the db");
+				flag = true;
+
+			}
+		} catch (SQLException e) {
+
+			System.out.println("Failed in db validation" + e.getMessage());
+			// TODO Auto-generated catch block
+			Reporter.log("Failed in db validation" + e.getMessage());
+			flag = false;
+		}
+		return flag;
+
+	}
+
+	public boolean verifyColumnInPegaClass(String colName) {
+
+		/*
+		 * @author :Deepa Panikkavetil
+		 * 
+		 * @date :6/24/2019
+		 * 
+		 * @modified by:
+		 * 
+		 * @modified date:
+		 * 
+		 * @USEFOR :to perform the validation to check the pegaClass has new column
+		 * added enabled
+		 * 
+		 * @Parameters:NA
+		 * 
+		 * 
+		 * 
+		 */
+
+		boolean flag = false;
+
+		WebElement ele = null;
+		try {
+			ele = new WebDriverWait(driver, 200)
+					.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@value='" + colName + "']")));
+		} catch (Exception e) {
+			flag = false;
+			// TODO Auto-generated catch block
+			Reporter.log("New column " + colName + " is added to the class" + e.getMessage());
+			System.out.println("New column " + colName + " is added to the class");
+			return flag;
+		}
+
+		if (ele != null) {
+			flag = true;
+			System.out.println("New column " + colName + " is added to the class");
+		}
+		return flag;
+
+	}
+
+	public boolean discardCurrentVersionIfCheckedOut() {
+
+		/*
+		 * @author :Deepa Panikkavetil
+		 * 
+		 * @date :6/26/2019
+		 * 
+		 * @modified by:
+		 * 
+		 * @modified date:
+		 * 
+		 * @USEFOR :to perform the validation to check the 'Discard' button is not
+		 * enabled, if, discard
+		 * 
+		 * @Parameters:NA
+		 * 
+		 * 
+		 * 
+		 */
+
+		boolean flag = false;
+		WebElement ele = null;
+
+		try {
+			ele = new WebDriverWait(driver, 40)
+					.until(ExpectedConditions.presenceOfElementLocated(By.xpath(prop.getProperty("btnDiscard"))));
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			// System.out.println("No version is checked out");
+			flag = true;
+			System.out.println("No verison is checked out");
+		}
+
+		if (ele != null) {
+			System.out.println("Version is checked out!! lets discard");
+			ele.click();
+			flag = true;
+
+		} else {
+			System.out.println("Version is not  checked out!! Good to go");
+			flag = true;
+
+		}
+		return flag;
+
+	}
+
+	public boolean verifyOfferisNotPresentInCurrentVersion(String offerName, String expectedResult)
+
+	{
+		/*
+		 * @author :Deepa Panikkavetil
+		 * 
+		 * @date :6/26/2019
+		 * 
+		 * @modified by:
+		 * 
+		 * @modified date:
+		 * 
+		 * @USEFOR :verify the offer is not present
+		 * 
+		 * @Parameters:NA
+		 * 
+		 * 
+		 * 
+		 */
+
+		boolean flag = false;
+
+		WebElement ele = null;
+		try {
+			ele = new WebDriverWait(driver, 50)
+					.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//li[@title='" + offerName + "']")));
+
+			if (expectedResult.equalsIgnoreCase("Yes")) {
+				flag = true;
+			} else {
+				flag = false;
+				System.out.println("Offer" + offerName + " is not present");
+				Reporter.log("Offer" + offerName + " is not present");
+			}
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			if (expectedResult.equalsIgnoreCase("No")) {
+				flag = true;
+			}
+
+		}
+
+		return flag;
+
+	}
+
+	public boolean verifyGenerateEngineCompleted() {
+
+		boolean flag = false;
+
+		try {
+			WebElement ele = new WebDriverWait(driver, 600)
+					.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//p[text()='Load/Read From:']")));
+			flag = true;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			flag = false;
+
+			System.out.println("Engine generation didnt complete!!" + e.getMessage());
+			return flag;
+		}
+		return flag;
+
+	}
+
+	public boolean verifyExceptionIsNotThrown(String object) {
+		boolean flag = true;
+
+		try {
+			WebElement exception = new WebDriverWait(driver, 60).until(
+					ExpectedConditions.presenceOfElementLocated(By.xpath(prop.getProperty("spanNewversionException"))));
+			flag = false;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			flag = true;
+		}
+
+		return flag;
+
+	}
+
+	public boolean rollbackToVersionByName(String versionName) {
+
+		boolean flag = false;
+		WebElement rollbackVersionTab = null;
+		WebElement btnRollback = null;
+
+		try {
+			rollbackVersionTab = new WebDriverWait(driver, 60).until(ExpectedConditions
+					.presenceOfElementLocated(By.xpath("(//button[contains(text(),'" + versionName + "')])[1]")));
+			rollbackVersionTab.click();
+			btnRollback = new WebDriverWait(driver, 60)
+					.until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//a[text()=' Rollback To '])[1]")));
+			btnRollback.click();
+
+			flag = true;
+
+		} catch (Exception e) {
+			flag = false;
+			// TODO Auto-generated catch block
+			System.out.println("Rollback version didnt locate" + e.getMessage());
+			Reporter.log("Rollback version didnt locate" + e.getMessage());
 			return flag;
 
 		}

@@ -63,7 +63,7 @@ public class RegressionCases {
 		}
 	}
 
-	@Test()
+	@Test(priority = 1, enabled = false)
 	// First test to validate the CSV after engine run
 	public void Verify_DownloadedCSV_For_Existing_Version() {
 
@@ -73,7 +73,7 @@ public class RegressionCases {
 
 	}
 
-	@Test()
+	@Test(priority = 2, enabled = false)
 	// Second case to verify the event API integration
 	public void Verify_DownloadedCSV_For_New_version() {
 
@@ -81,13 +81,13 @@ public class RegressionCases {
 
 	}
 
-	@Test()
+	@Test(priority = 4, enabled = false)
 	public void Verify_RealTimeEvent_API_Response_For_NewEvent() {
 		Assert.assertTrue(driverEngine.mainMethod("VerifyEventAPI"));
 
 	}
 
-	@Test(dependsOnMethods = { "Verify_DownloadedCSV_For_New_version" }, enabled = false)
+	@Test(priority = 3, enabled = false)
 	public void Verify_Deleted_Offer_Is_Not_Present_In_CSV() {
 		Assert.assertTrue(driverEngine.mainMethod("VerifyDeleteOffer"));
 
@@ -99,9 +99,39 @@ public class RegressionCases {
 
 	}
 
-	@Test(priority = 6)
+	@Test(priority = 5, enabled = false)
 	public void Verify_NewEmailTemp_ByCloning() {
 		Assert.assertTrue(driverEngine.mainMethod("EmailTempWithNewAttribute"));
 
+	}
+
+	@Test(priority = 6, enabled = false)
+	public void Verify_Creating_NewMicrositeTemp_ByAdding_Existing_Attribute() {
+		Assert.assertTrue(driverEngine.mainMethod("MicrositeTempWithExistingAttrib"));
+
+	}
+
+	@Test(priority = 7)
+	public void Verify_NewProperty_Added_Is_Available_in_DB() {
+		Assert.assertTrue(driverEngine.mainMethod("VerifyDBForNewAgreementModel"));
+
+	}
+
+	@Test(priority = 8)
+	public void Verify_NewProperty_Added_Is_Available_in_PegaClass() {
+		Assert.assertTrue(driverEngine.mainMethod("VerifyAgreementClassFornewProp"));
+
+	}
+
+	@Test(priority = 9)
+	public void Verify_Discard_Version_Is_Successful() {
+		Assert.assertTrue(driverEngine.mainMethod("VerifyDiscardVersioIsSuccessful"));
+
+	}
+
+	@Test(priority = 10)
+	public void Verify_Rollback_Is_Working_As_Expected() {
+
+		Assert.assertTrue(driverEngine.mainMethod("EnsureRollbackIsSuccessful"));
 	}
 }

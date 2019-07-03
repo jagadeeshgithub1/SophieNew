@@ -1,6 +1,10 @@
 package base;
 
 import java.io.FileInputStream;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Properties;
 
 public class TestBaseClass {
@@ -8,6 +12,8 @@ public class TestBaseClass {
 	// public static WebDriver driver;
 	public static Properties prop;
 	public String osName = null;
+	public static Connection connection = null;
+	public static Statement statement = null;
 	FileInputStream ip = null;
 
 	public TestBaseClass() throws Exception {
@@ -29,7 +35,7 @@ public class TestBaseClass {
 			else {
 				ip = new FileInputStream("Properties\\config.properties");
 			} // for the windows
-			// ip = new FileInputStream("Properties/config.properties");// for linux
+				// ip = new FileInputStream("Properties/config.properties");// for linux
 
 			prop.load(ip);
 		} catch (Exception e) {
@@ -39,6 +45,49 @@ public class TestBaseClass {
 
 		// System.out.println(ip);
 
+	}
+
+	public static void DBConnectivity() {
+
+		try {
+			Class.forName("org.postgresql.Driver");
+		} catch (ClassNotFoundException e) {
+
+			System.out.println("Where is your PostgreSQL JDBC Driver? " + "Include in your library path!");
+			e.printStackTrace();
+			return;
+			// TODO Auto-generated catch block
+
+		}
+
+		System.out.println("PostgreSQL JDBC Driver Registered!");
+
+		try {
+			connection = DriverManager.getConnection(prop.getProperty("dbURL"), prop.getProperty("dbUser"),
+					prop.getProperty("dbPwd"));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println("Connection Failed! Check output console");
+			e.printStackTrace();
+			return;
+		}
+
+		if (connection != null) {
+			System.out.println("You made it, take control your database now!");
+
+		} else {
+			System.out.println("Failed to make connection!");
+		}
+
+		try {
+			statement = connection.createStatement();
+		} catch (SQLException e) {
+
+			System.out.println("Failed create the connection statement");
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return;
+		}
 	}
 
 	/*

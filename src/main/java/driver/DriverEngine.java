@@ -264,6 +264,28 @@ public class DriverEngine extends TestBaseClass {
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
 						}
 						break;
+					case "clickUsingJScript":
+						if (classAction.clickUsingJScript(PageObject)) {
+							excelUtils.setCellData(sheetName, "Results", Irow, "Pass");
+						} else {
+							try {
+								Thread.sleep(10000);
+								if (osName.equalsIgnoreCase("Linux")) {
+									FullPageScreenShot("ScreenShots/", TestCaseID + "_" + ActionKeyWord + "_" + ".png");
+
+								} else {
+
+									FullPageScreenShot("ScreenShots\\",
+											TestCaseID + "_" + ActionKeyWord + "_" + ".png");
+								}
+							} catch (Exception e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							Reporter.log("Failed in " + ActionKeyWord);
+							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+						}
+						break;
 
 					case "csvDownloadclick":
 						if (classAction.csvDownloadclick(PageObject)) {
@@ -907,7 +929,147 @@ public class DriverEngine extends TestBaseClass {
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
 						}
 						break;
+					case "pageScrollDownToView":
+						if (classAction.pageScrollDownToView()) {
+							excelUtils.setCellData(sheetName, "Results", Irow, "Pass");
+						}
 
+						else {
+							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+						}
+						break;
+					case "pageScrollUpToView":
+						if (classAction.pageScrollUpToView()) {
+							excelUtils.setCellData(sheetName, "Results", Irow, "Pass");
+						}
+
+						else {
+							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+						}
+						break;
+					case "verifyDBSpecificColumnExistsOrNot":
+						if (classAction.verifyDBSpecificColumnExistsOrNot(TestData, Argument1)) {
+							excelUtils.setCellData(sheetName, "Results", Irow, "Pass");
+						}
+
+						else {
+							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+						}
+						break;
+					case "verifyColumnRemovedFromDB":
+						if (classAction.verifyColumnRemovedFromDB(TestData, Argument1)) {
+							excelUtils.setCellData(sheetName, "Results", Irow, "Pass");
+						}
+
+						else {
+							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+						}
+						break;
+					case "verifyColumnInPegaClass":
+						if (classAction.verifyColumnInPegaClass(TestData)) {
+							excelUtils.setCellData(sheetName, "Results", Irow, "Pass");
+						}
+
+						else {
+							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+						}
+						break;
+					case "discardCurrentVersionIfCheckedOut":
+						if (classAction.discardCurrentVersionIfCheckedOut()) {
+							excelUtils.setCellData(sheetName, "Results", Irow, "Pass");
+						}
+
+						else {
+							try {
+								Thread.sleep(10000);
+								if (osName.equalsIgnoreCase("Linux")) {
+									FullPageScreenShot("ScreenShots/", TestCaseID + "_" + ActionKeyWord + "_" + ".png");
+
+								} else {
+
+									FullPageScreenShot("ScreenShots\\",
+											TestCaseID + "_" + ActionKeyWord + "_" + ".png");
+								}
+							} catch (Exception e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							Reporter.log("Failed in " + ActionKeyWord);
+							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+						}
+						break;
+					case "verifyOfferisNotPresentInCurrentVersion":
+						if (classAction.verifyOfferisNotPresentInCurrentVersion(TestData, Argument1)) {
+							excelUtils.setCellData(sheetName, "Results", Irow, "Pass");
+						}
+
+						else {
+							try {
+								Thread.sleep(10000);
+								if (osName.equalsIgnoreCase("Linux")) {
+									FullPageScreenShot("ScreenShots/", TestCaseID + "_" + ActionKeyWord + "_" + ".png");
+
+								} else {
+
+									FullPageScreenShot("ScreenShots\\",
+											TestCaseID + "_" + ActionKeyWord + "_" + ".png");
+								}
+							} catch (Exception e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							Reporter.log("Failed in " + ActionKeyWord);
+							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+						}
+						break;
+					case "rollbackToVersionByName":
+						if (classAction.rollbackToVersionByName(TestData)) {
+							excelUtils.setCellData(sheetName, "Results", Irow, "Pass");
+						}
+
+						else {
+							try {
+								Thread.sleep(10000);
+								if (osName.equalsIgnoreCase("Linux")) {
+									FullPageScreenShot("ScreenShots/", TestCaseID + "_" + ActionKeyWord + "_" + ".png");
+
+								} else {
+
+									FullPageScreenShot("ScreenShots\\",
+											TestCaseID + "_" + ActionKeyWord + "_" + ".png");
+								}
+							} catch (Exception e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							Reporter.log("Failed in " + ActionKeyWord);
+							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+						}
+						break;
+					case "verifyGenerateEngineCompleted":
+						if (classAction.verifyGenerateEngineCompleted()) {
+							excelUtils.setCellData(sheetName, "Results", Irow, "Pass");
+						}
+
+						else {
+							try {
+								Thread.sleep(10000);
+								if (osName.equalsIgnoreCase("Linux")) {
+									FullPageScreenShot("ScreenShots/", TestCaseID + "_" + ActionKeyWord + "_" + ".png");
+
+								} else {
+
+									FullPageScreenShot("ScreenShots\\",
+											TestCaseID + "_" + ActionKeyWord + "_" + ".png");
+								}
+							} catch (Exception e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							Reporter.log("Failed in " + ActionKeyWord);
+							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+						}
+						break;
 					default:
 						break;
 					}
