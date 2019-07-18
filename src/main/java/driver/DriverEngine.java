@@ -196,6 +196,7 @@ public class DriverEngine extends TestBaseClass {
 							}
 							Reporter.log("Failed in " + ActionKeyWord);
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+
 						}
 						break;
 					case "login":
@@ -218,6 +219,7 @@ public class DriverEngine extends TestBaseClass {
 							}
 							Reporter.log("Failed in " + ActionKeyWord);
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+
 						}
 						break;
 					case "enterText":
@@ -240,6 +242,7 @@ public class DriverEngine extends TestBaseClass {
 							}
 							Reporter.log("Failed in " + ActionKeyWord);
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+
 						}
 						break;
 					case "click":
@@ -262,6 +265,7 @@ public class DriverEngine extends TestBaseClass {
 							}
 							Reporter.log("Failed in " + ActionKeyWord);
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+
 						}
 						break;
 					case "clickUsingJScript":
@@ -284,6 +288,7 @@ public class DriverEngine extends TestBaseClass {
 							}
 							Reporter.log("Failed in " + ActionKeyWord);
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+
 						}
 						break;
 
@@ -307,6 +312,7 @@ public class DriverEngine extends TestBaseClass {
 							}
 							Reporter.log("Failed in " + ActionKeyWord);
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+
 						}
 						break;
 
@@ -330,6 +336,7 @@ public class DriverEngine extends TestBaseClass {
 							}
 							Reporter.log("Failed in " + ActionKeyWord);
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+
 						}
 						break;
 					case "mouseOver":
@@ -352,6 +359,7 @@ public class DriverEngine extends TestBaseClass {
 							}
 							Reporter.log("Failed in " + ActionKeyWord);
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+
 						}
 						break;
 					case "SwitchNclick":
@@ -376,6 +384,7 @@ public class DriverEngine extends TestBaseClass {
 							}
 							Reporter.log("Failed in " + ActionKeyWord);
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+
 						}
 						break;
 					case "ToggleButtonClick":
@@ -400,6 +409,7 @@ public class DriverEngine extends TestBaseClass {
 							}
 							Reporter.log("Failed in " + ActionKeyWord);
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+
 						}
 						break;
 					case "SelectListItem":
@@ -425,6 +435,7 @@ public class DriverEngine extends TestBaseClass {
 							}
 							Reporter.log("Failed in " + ActionKeyWord);
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+
 						}
 						break;
 
@@ -449,6 +460,7 @@ public class DriverEngine extends TestBaseClass {
 							}
 							Reporter.log("Failed in " + ActionKeyWord);
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+
 						}
 						break;
 					case "checkboxUncheck":
@@ -472,6 +484,7 @@ public class DriverEngine extends TestBaseClass {
 							}
 							Reporter.log("Failed in " + ActionKeyWord);
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+
 						}
 						break;
 					case "sleepTime":
@@ -488,6 +501,7 @@ public class DriverEngine extends TestBaseClass {
 							excelUtils.setCellData(sheetName, "Results", Irow, "Pass");
 						} else {
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+
 						}
 						break;
 					case "elementPropertyCheck":
@@ -495,6 +509,7 @@ public class DriverEngine extends TestBaseClass {
 							excelUtils.setCellData(sheetName, "Results", Irow, "Pass");
 						} else {
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+
 						}
 
 						break;
@@ -518,6 +533,7 @@ public class DriverEngine extends TestBaseClass {
 							}
 							Reporter.log("Failed in " + ActionKeyWord);
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+
 						}
 						break;
 					case "selectRadioButton":
@@ -540,6 +556,7 @@ public class DriverEngine extends TestBaseClass {
 							}
 							Reporter.log("Failed in " + ActionKeyWord);
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+
 						}
 						break;
 					case "VerifyEngineStatus":
@@ -562,6 +579,7 @@ public class DriverEngine extends TestBaseClass {
 							}
 							Reporter.log("Failed in " + ActionKeyWord);
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+
 						}
 						break;
 					case "ValidateBatchDecisionOutputCSV":
@@ -586,6 +604,7 @@ public class DriverEngine extends TestBaseClass {
 							}
 							Reporter.log("Failed in " + ActionKeyWord);
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+
 						}
 
 						break;
@@ -611,6 +630,7 @@ public class DriverEngine extends TestBaseClass {
 							}
 							Reporter.log("Failed in " + ActionKeyWord);
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+
 						}
 
 						break;
@@ -636,6 +656,7 @@ public class DriverEngine extends TestBaseClass {
 							}
 							Reporter.log("Failed in " + ActionKeyWord);
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+
 						}
 
 						break;
@@ -661,6 +682,7 @@ public class DriverEngine extends TestBaseClass {
 							}
 							Reporter.log("Failed in " + ActionKeyWord);
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+
 						}
 
 						break;
@@ -686,6 +708,7 @@ public class DriverEngine extends TestBaseClass {
 							}
 							Reporter.log("Failed in " + ActionKeyWord);
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+
 						}
 
 						break;
@@ -696,6 +719,7 @@ public class DriverEngine extends TestBaseClass {
 
 						} else {
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+
 						}
 
 						break;
@@ -706,6 +730,7 @@ public class DriverEngine extends TestBaseClass {
 
 						} else {
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+
 						}
 
 						break;
@@ -716,6 +741,7 @@ public class DriverEngine extends TestBaseClass {
 
 						} else {
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+
 						}
 
 						break;
@@ -726,6 +752,7 @@ public class DriverEngine extends TestBaseClass {
 
 						} else {
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+
 						}
 
 						break;
@@ -736,6 +763,7 @@ public class DriverEngine extends TestBaseClass {
 
 						} else {
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+
 						}
 
 						// excelUtils.saveFile("TestDataAndResults\\SophieAutomationResults.xlsx");
@@ -760,6 +788,7 @@ public class DriverEngine extends TestBaseClass {
 
 						} else {
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+
 						}
 
 						// excelUtils.saveFile("TestDataAndResults\\SophieAutomationResults.xlsx");
@@ -772,6 +801,7 @@ public class DriverEngine extends TestBaseClass {
 
 						else {
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+
 						}
 						break;
 
@@ -797,6 +827,7 @@ public class DriverEngine extends TestBaseClass {
 							}
 							Reporter.log("Failed in " + ActionKeyWord);
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+
 						}
 						break;
 					case "verifyLabelText":
@@ -821,6 +852,7 @@ public class DriverEngine extends TestBaseClass {
 							}
 							Reporter.log("Failed in " + ActionKeyWord);
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+
 						}
 						break;
 					case "verfyInputTextValue":
@@ -845,6 +877,7 @@ public class DriverEngine extends TestBaseClass {
 							}
 							Reporter.log("Failed in " + ActionKeyWord);
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+
 						}
 						break;
 					case "switchOnToggleButton":
@@ -869,6 +902,7 @@ public class DriverEngine extends TestBaseClass {
 							}
 							Reporter.log("Failed in " + ActionKeyWord);
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+
 						}
 						break;
 
@@ -894,6 +928,7 @@ public class DriverEngine extends TestBaseClass {
 							}
 							Reporter.log("Failed in " + ActionKeyWord);
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+
 						}
 						break;
 					case "closeTab":
@@ -918,6 +953,7 @@ public class DriverEngine extends TestBaseClass {
 							}
 							Reporter.log("Failed in " + ActionKeyWord);
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+
 						}
 						break;
 					case "realtimeSpineAPIPostRequest":
@@ -927,6 +963,7 @@ public class DriverEngine extends TestBaseClass {
 
 						else {
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+
 						}
 						break;
 					case "pageScrollDownToView":
@@ -936,6 +973,7 @@ public class DriverEngine extends TestBaseClass {
 
 						else {
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+
 						}
 						break;
 					case "pageScrollUpToView":
@@ -945,6 +983,7 @@ public class DriverEngine extends TestBaseClass {
 
 						else {
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+
 						}
 						break;
 					case "verifyDBSpecificColumnExistsOrNot":
@@ -954,6 +993,7 @@ public class DriverEngine extends TestBaseClass {
 
 						else {
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+
 						}
 						break;
 					case "verifyColumnRemovedFromDB":
@@ -971,7 +1011,23 @@ public class DriverEngine extends TestBaseClass {
 						}
 
 						else {
+							try {
+								Thread.sleep(10000);
+								if (osName.equalsIgnoreCase("Linux")) {
+									FullPageScreenShot("ScreenShots/", TestCaseID + "_" + ActionKeyWord + "_" + ".png");
+
+								} else {
+
+									FullPageScreenShot("ScreenShots\\",
+											TestCaseID + "_" + ActionKeyWord + "_" + ".png");
+								}
+							} catch (Exception e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							Reporter.log("Failed in " + ActionKeyWord);
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+
 						}
 						break;
 					case "discardCurrentVersionIfCheckedOut":
@@ -996,6 +1052,7 @@ public class DriverEngine extends TestBaseClass {
 							}
 							Reporter.log("Failed in " + ActionKeyWord);
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+
 						}
 						break;
 					case "verifyOfferisNotPresentInCurrentVersion":
@@ -1020,6 +1077,7 @@ public class DriverEngine extends TestBaseClass {
 							}
 							Reporter.log("Failed in " + ActionKeyWord);
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+
 						}
 						break;
 					case "rollbackToVersionByName":
@@ -1044,6 +1102,7 @@ public class DriverEngine extends TestBaseClass {
 							}
 							Reporter.log("Failed in " + ActionKeyWord);
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+
 						}
 						break;
 					case "verifyGenerateEngineCompleted":
@@ -1068,6 +1127,7 @@ public class DriverEngine extends TestBaseClass {
 							}
 							Reporter.log("Failed in " + ActionKeyWord);
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+
 						}
 						break;
 					default:

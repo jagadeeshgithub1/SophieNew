@@ -1177,6 +1177,185 @@ public class ActionClass extends TestBaseClass {
 		return flag;
 	}
 
+	public boolean Orig_ValidateBatchDecisionOutputCSV(String testCaseID) {
+
+		/*
+		 * @author:Deepa Panikkaveetil
+		 * 
+		 * @date:3/20/2019
+		 * 
+		 * @modified by:
+		 * 
+		 * @modified date:
+		 * 
+		 * @USED_FOR:Method used for validating the downloded csv
+		 * 
+		 * @Parameter:Passing the xpath of the web element , and the expected text in
+		 * the element
+		 */
+
+		GeneralUtilities generalUtilities = null;
+		String ColumnToBeValidated = null;
+		String ValueToBeChecked = null;
+		String ExpectedResult = null;
+		String osName = System.getProperty("os.name").trim();
+
+		try {
+			generalUtilities = new GeneralUtilities();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ExcelUtils ObjTestdataFile = null;
+		try {
+			if (osName.equalsIgnoreCase("Linux")) {
+				ObjTestdataFile = new ExcelUtils("TestDataAndResults/Run1/SophieAutomation.xlsx");
+			} else {
+
+				ObjTestdataFile = new ExcelUtils("TestDataAndResults\\Run1\\SophieAutomation.xlsx");// for windows
+			}
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		boolean flag = false;
+		System.out.println("This is the csv validation");
+
+		File file = generalUtilities.getLatestFileFromDir("Downloads", "BatchDecisionOutput");
+		if (file == null) {
+
+			return false;
+		} else {
+			int CsvColumnCount = 0;
+
+			// Below code is to get the column count for the downloaded csv
+			try {
+				CsvColumnCount = generalUtilities.toGetTheNumberOfFieldsInCSV(file);
+				System.out.println(CsvColumnCount);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			CSVReader csvReader = null;
+			try {
+				csvReader = new CSVReader(new FileReader(file));
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			List<String[]> records = null;
+			try {
+				records = csvReader.readAll();
+				csvReader.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			// try {
+			int iTestStart = 0;
+
+			int iTestEnd = 0;
+
+			// for (int it = 4; it <=
+			// ObjTestdataFile.getRowCount("BatchDecisionOutputValidations"); it++) {
+
+			try {
+				iTestStart = ObjTestdataFile.getRowContains(testCaseID, "TestCaseID", "BatchDecisionOutputValidations");
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				System.out.println("method getRowContains fails ");
+			}
+			try {
+				iTestEnd = ObjTestdataFile.getTestStepsCount("BatchDecisionOutputValidations", testCaseID, iTestStart,
+						"TestCaseID");
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				System.out.println("method getTestStepsCount fails ");
+			}
+			// }
+			for (int i = iTestStart; i <= iTestEnd; i++) {
+				ColumnToBeValidated = ObjTestdataFile.getCellData("BatchDecisionOutputValidations", i,
+						"ColumnToBeValidated");
+
+				ValueToBeChecked = ObjTestdataFile.getCellData("BatchDecisionOutputValidations", i, "ValueToBeChecked");
+				ExpectedResult = ObjTestdataFile.getCellData("BatchDecisionOutputValidations", i, "Expected");
+
+				for (int j = 0; j < CsvColumnCount; j++) {
+
+					if (records.get(0)[j].equals(ColumnToBeValidated.trim())) {
+						for (int k = 1; k < records.size(); k++) {
+							if (records.get(k)[j].equals(ValueToBeChecked.trim())) {
+								// ObjTestdataFile.setCellData("BatchDecisionOutput_Test", "Actual", i, "Pass");
+								if (ExpectedResult.trim().equalsIgnoreCase("Available")) {
+									flag = true;
+								} else {
+									flag = false;
+								}
+								break;
+							} else {
+								// ObjTestdataFile.setCellData("BatchDecisionOutput_Test", "Actual", i, "Fail");
+								if (ExpectedResult.trim().equalsIgnoreCase("Not Available")) {
+									flag = true;
+								} else {
+									flag = false;
+								}
+
+							}
+						}
+
+						break;
+					}
+				}
+
+				if (flag == true) {
+					ObjTestdataFile.setCellData("BatchDecisionOutputValidations", "Actual", i, "Pass");
+				} else {
+					ObjTestdataFile.setCellData("BatchDecisionOutputValidations", "Actual", i, "Fail");
+				}
+			}
+
+			// The below code will move the downloaded CSV from Downloads to
+
+			try {
+
+				// here should do the code to move the file to Archive
+				File dest = null;
+				if (osName.equalsIgnoreCase("Linux")) {
+					dest = new File("Downloads/Archive/");
+				} else {
+					dest = new File("Downloads\\Archive\\");
+				}
+
+				if (generalUtilities.CopyFile(file, dest)) {
+					System.out.println("File moved to archive");
+				} else {
+					System.err.println("File move failed");
+				}
+
+				// return true;
+			}
+
+			catch (Exception e) {
+
+				// return false;
+				// TODO: handle exception
+			}
+
+			return true;
+		}
+
+		// catch (Exception e) {
+
+		// return false;
+		// TODO: handle exception
+		// }
+
+	}
+
 	public boolean ValidateBatchDecisionOutputCSV(String testCaseID) {
 
 		/*
@@ -1199,6 +1378,64 @@ public class ActionClass extends TestBaseClass {
 		String ValueToBeChecked = null;
 		String ExpectedResult = null;
 		String osName = System.getProperty("os.name").trim();
+		boolean flag = false;
+		boolean engineStatus = false;
+
+		// Adding the run engine trigger section ,
+		// verify the engine run done successfully or not,if successfull proceed, or
+		// return fail
+
+		click("btnRunEngine");
+
+		try {
+			engineStatus = new WebDriverWait(driver, 300).until(ExpectedConditions.textToBePresentInElementValue(
+					By.xpath("//span[@data-test-id='SelectedEngineStatus']"), "FAILED!  Please check with support"));
+			flag = false;
+			return flag;
+		} catch (Exception e2) {
+			// TODO Auto-generated catch block
+			flag = true;
+			System.out.println("Engine run didn't fail so far.." + e2.getMessage());
+
+		}
+
+		try {
+			engineStatus = new WebDriverWait(driver, 300).until(ExpectedConditions
+					.textToBePresentInElementValue(By.xpath("//span[@data-test-id='SelectedEngineStatus']"), "Paused"));
+		} catch (Exception e2) {
+			// TODO Auto-generated catch block
+			flag = false;
+
+			System.out.println("Engine run didnt complete with the status Paused" + e2.getMessage());
+			return flag;
+		}
+
+		// if "Paused" continue..
+
+		if (engineStatus == true) {
+			click("lnkClickToCheckData");
+
+			if (driver.getPageSource().equalsIgnoreCase("Data Set BatchDecisionOutput is empty")) {
+				flag = false;
+				System.out.println("Dataset is empty");
+				return flag;
+			}
+
+			click("lnkDownloadCSV");
+			try {
+				Thread.sleep(10000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		} else {
+			flag = false;
+			return flag;
+		}
+
+		click("btnResumeRun");
+
 		try {
 			generalUtilities = new GeneralUtilities();
 		} catch (Exception e) {
@@ -1218,7 +1455,7 @@ public class ActionClass extends TestBaseClass {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		boolean flag = false;
+
 		System.out.println("This is the csv validation");
 
 		File file = generalUtilities.getLatestFileFromDir("Downloads", "BatchDecisionOutput");
@@ -2150,8 +2387,6 @@ public class ActionClass extends TestBaseClass {
 				excelUtil = new ExcelUtils("TestDataAndResults\\TestData\\RealTimeAutoAPI.xlsx");
 
 			}
-
-			excelUtil = new ExcelUtils("TestDataAndResults\\TestData\\RealTimeAutoAPI.xlsx");
 
 			int colCount = excelUtil.getColumnCount("RealtimeSpineData");
 

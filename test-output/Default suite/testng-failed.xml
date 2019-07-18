@@ -5,7 +5,7 @@
     <classes>
       <class name="regressionTests.RegressionCases">
         <methods>
-          <include name="Verify_Rollback_Is_Working_As_Expected"/>
+          <include name="Verify_Existing_Attribute_Can_be_Added_In_OCCTemplate"/>
           <include name="setUp"/>
         </methods>
       </class> <!-- regressionTests.RegressionCases -->

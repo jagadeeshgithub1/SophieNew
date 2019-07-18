@@ -1,38 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="0" ignored="10" total="11" passed="1">
+<testng-results skipped="0" failed="0" ignored="11" total="12" passed="1">
   <reporter-output>
     <line>
-      <![CDATA[NewPropEvent exists in the db]]>
+      <![CDATA[NewPropCust exists in the db]]>
     </line>
     <line>
-      <![CDATA[NewPropEvent doesn't exist in the db]]>
-    </line>
-    <line>
-      <![CDATA[NewPropEvent exists in the db]]>
+      <![CDATA[NewPropCust doesn't exist in the db]]>
     </line>
   </reporter-output>
-  <suite name="Default suite" duration-ms="1349867" started-at="2019-07-03T12:07:39Z" finished-at="2019-07-03T12:30:09Z">
+  <suite name="Default suite" duration-ms="603414" started-at="2019-07-17T13:11:42Z" finished-at="2019-07-17T13:21:46Z">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="1349867" started-at="2019-07-03T12:07:39Z" finished-at="2019-07-03T12:30:09Z">
+    <test name="Default test" duration-ms="603414" started-at="2019-07-17T13:11:42Z" finished-at="2019-07-17T13:21:46Z">
       <class name="regressionTests.RegressionCases">
-        <test-method status="PASS" signature="setUp()[pri:0, instance:regressionTests.RegressionCases@289d1c02]" name="setUp" is-config="true" duration-ms="78" started-at="2019-07-03T12:07:39Z" finished-at="2019-07-03T12:07:39Z">
+        <test-method status="PASS" signature="setUp()[pri:0, instance:regressionTests.RegressionCases@17d0685f]" name="setUp" is-config="true" duration-ms="60" started-at="2019-07-17T13:11:42Z" finished-at="2019-07-17T13:11:43Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method status="PASS" signature="Verify_Rollback_Is_Working_As_Expected()[pri:0, instance:regressionTests.RegressionCases@289d1c02]" name="Verify_Rollback_Is_Working_As_Expected" duration-ms="1349752" started-at="2019-07-03T12:07:39Z" finished-at="2019-07-03T12:30:09Z">
+        <test-method status="PASS" signature="Verify_Discard_Version_Is_Successful()[pri:10, instance:regressionTests.RegressionCases@17d0685f]" name="Verify_Discard_Version_Is_Successful" duration-ms="603311" started-at="2019-07-17T13:11:43Z" finished-at="2019-07-17T13:21:46Z">
           <reporter-output>
             <line>
-              <![CDATA[NewPropEvent exists in the db]]>
+              <![CDATA[NewPropCust exists in the db]]>
             </line>
             <line>
-              <![CDATA[NewPropEvent doesn't exist in the db]]>
-            </line>
-            <line>
-              <![CDATA[NewPropEvent exists in the db]]>
+              <![CDATA[NewPropCust doesn't exist in the db]]>
             </line>
           </reporter-output>
-        </test-method> <!-- Verify_Rollback_Is_Working_As_Expected -->
+        </test-method> <!-- Verify_Discard_Version_Is_Successful -->
       </class> <!-- regressionTests.RegressionCases -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
