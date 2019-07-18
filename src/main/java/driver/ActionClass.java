@@ -1177,7 +1177,7 @@ public class ActionClass extends TestBaseClass {
 		return flag;
 	}
 
-	public boolean Orig_ValidateBatchDecisionOutputCSV(String testCaseID) {
+	public boolean ValidateBatchDecisionOutputCSV(String testCaseID) {
 
 		/*
 		 * @author:Deepa Panikkaveetil
@@ -1356,7 +1356,7 @@ public class ActionClass extends TestBaseClass {
 
 	}
 
-	public boolean ValidateBatchDecisionOutputCSV(String testCaseID) {
+	public boolean InProgress_ValidateBatchDecisionOutputCSV(String testCaseID) {
 
 		/*
 		 * @author:Deepa Panikkaveetil
