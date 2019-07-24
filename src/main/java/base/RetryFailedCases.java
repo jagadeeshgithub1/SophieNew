@@ -5,14 +5,14 @@ import org.testng.ITestResult;
 
 public class RetryFailedCases implements IRetryAnalyzer {
 
-	private int retryCount = 0;
-	private int MaxCount = 2;
+	private int retryCount;
+	private int MaxCount = 1;
 
 	public RetryFailedCases() {
 		// TODO Auto-generated constructor stub
 	}
 
-	@Override
+	@SuppressWarnings("unused")
 	public boolean retry(ITestResult result) {
 
 		for (retryCount = 0; retryCount < MaxCount; retryCount++) {

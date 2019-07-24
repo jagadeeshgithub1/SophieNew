@@ -59,6 +59,7 @@ public class ActionClass extends TestBaseClass {
 	public ChromeOptions options = null;
 	public String osName = System.getProperty("os.name");
 	Actions actions = null;
+	public static String OfferName = null;
 
 	public ActionClass() throws Exception {
 
@@ -2851,6 +2852,12 @@ public class ActionClass extends TestBaseClass {
 		if (ele != null) {
 			System.out.println("Version is checked out!! lets discard");
 			ele.click();
+			try {
+				Thread.sleep(7000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			flag = true;
 
 		} else {
@@ -2972,4 +2979,111 @@ public class ActionClass extends TestBaseClass {
 		return flag;
 	}
 
+	public boolean unSubscribeEmail() {
+
+		boolean flag = false;
+
+		WebElement offerNameSpan = null, Btnunsubscribe = null;
+		WebElement lnkOpen = null, unSubLink = null, radBtnUnsubscribe = null;
+
+		try {
+			offerNameSpan = new WebDriverWait(driver, 60).until(
+					ExpectedConditions.presenceOfElementLocated(By.xpath(prop.getProperty("spanForFirstOffer"))));
+		} catch (Exception e) {
+
+			flag = false;
+			// TODO Auto-generated catch block
+
+			System.out.println("Outbound Email grid is empty??" + e.getMessage());
+
+			Reporter.log("Outbound Email grid is empty??" + e.getMessage());
+
+			return flag;
+
+		}
+
+		OfferName = offerNameSpan.getText();// getting the first row offer name
+
+		try {
+			lnkOpen = new WebDriverWait(driver, 60)
+					.until(ExpectedConditions.presenceOfElementLocated(By.xpath(prop.getProperty("lnkOpenOffer"))));
+		} catch (Exception e) {
+
+			flag = false;
+			// TODO Auto-generated catch block
+			System.out.println("Open link is not present??" + e.getMessage());
+
+			Reporter.log("Open link is not present??" + e.getMessage());
+
+			return flag;
+
+		}
+
+		lnkOpen.click();
+
+		try {
+			unSubLink = new WebDriverWait(driver, 60)
+					.until(ExpectedConditions.presenceOfElementLocated(By.xpath(prop.getProperty("lnkUnsubscribe"))));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			flag = false;
+			// TODO Auto-generated catch block
+			System.out.println("UnSubscription link is not seen " + e.getMessage());
+
+			Reporter.log("UnSubscription link is not seen" + e.getMessage());
+
+			return flag;
+		}
+
+		unSubLink.click();
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		switchToNewWindow(3);// switching to a new window
+
+		switchToFrame("MarketingMicrositeIfr");
+
+		try {
+			radBtnUnsubscribe = new WebDriverWait(driver, 60).until(
+					ExpectedConditions.presenceOfElementLocated(By.xpath(prop.getProperty("radBtnUnsubscribe"))));
+		} catch (Exception e) {
+			flag = false;
+			// TODO Auto-generated catch block
+			System.out.println("Usubscribe radio button is not visible " + e.getMessage());
+
+			Reporter.log("Usubscribe radio button is not visible" + e.getMessage());
+
+			return flag;
+		}
+
+		radBtnUnsubscribe.click();// select unsub radio button
+
+		try {
+			Btnunsubscribe = new WebDriverWait(driver, 60)
+					.until(ExpectedConditions.presenceOfElementLocated(By.xpath(prop.getProperty("Btnunsubscribe"))));
+		} catch (Exception e) {
+
+			flag = false;
+			// TODO Auto-generated catch block
+			System.out.println("Usubscribe  button is not visible " + e.getMessage());
+
+			Reporter.log("Usubscribe  button is not visible" + e.getMessage());
+
+			return flag;
+		}
+
+		Btnunsubscribe.click();
+
+		flag = true;
+
+		return flag;
+
+	}
+
+	public void verifyAdaptiveModelForNegResponse(String response) {
+
+	}
 }

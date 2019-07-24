@@ -3,12 +3,12 @@
 <suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="regressionTests.RegressionCases">
+      <class name="regressionTests.EngineGeneration">
         <methods>
-          <include name="Verify_Existing_Attribute_Can_be_Added_In_OCCTemplate"/>
           <include name="setUp"/>
+          <include name="GenerateEngine"/>
         </methods>
-      </class> <!-- regressionTests.RegressionCases -->
+      </class> <!-- regressionTests.EngineGeneration -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

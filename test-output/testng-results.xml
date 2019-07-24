@@ -1,33 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="0" ignored="11" total="12" passed="1">
+<testng-results skipped="0" failed="0" ignored="0" total="1" passed="1">
   <reporter-output>
-    <line>
-      <![CDATA[NewPropCust exists in the db]]>
-    </line>
-    <line>
-      <![CDATA[NewPropCust doesn't exist in the db]]>
-    </line>
   </reporter-output>
-  <suite name="Default suite" duration-ms="603414" started-at="2019-07-17T13:11:42Z" finished-at="2019-07-17T13:21:46Z">
+  <suite name="Default suite" duration-ms="494592" started-at="2019-07-24T06:25:29Z" finished-at="2019-07-24T06:33:44Z">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="603414" started-at="2019-07-17T13:11:42Z" finished-at="2019-07-17T13:21:46Z">
-      <class name="regressionTests.RegressionCases">
-        <test-method status="PASS" signature="setUp()[pri:0, instance:regressionTests.RegressionCases@17d0685f]" name="setUp" is-config="true" duration-ms="60" started-at="2019-07-17T13:11:42Z" finished-at="2019-07-17T13:11:43Z">
+    <test name="Default test" duration-ms="494592" started-at="2019-07-24T06:25:29Z" finished-at="2019-07-24T06:33:44Z">
+      <class name="regressionTests.EngineGeneration">
+        <test-method status="PASS" signature="setUp()[pri:0, instance:regressionTests.EngineGeneration@2a70a3d8]" name="setUp" is-config="true" duration-ms="72" started-at="2019-07-24T06:25:29Z" finished-at="2019-07-24T06:25:29Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method status="PASS" signature="Verify_Discard_Version_Is_Successful()[pri:10, instance:regressionTests.RegressionCases@17d0685f]" name="Verify_Discard_Version_Is_Successful" duration-ms="603311" started-at="2019-07-17T13:11:43Z" finished-at="2019-07-17T13:21:46Z">
+        <test-method status="PASS" signature="VerifyGenerateEngineCompletesWithoutFail()[pri:1, instance:regressionTests.EngineGeneration@2a70a3d8]" name="VerifyGenerateEngineCompletesWithoutFail" duration-ms="494483" started-at="2019-07-24T06:25:29Z" finished-at="2019-07-24T06:33:44Z">
           <reporter-output>
-            <line>
-              <![CDATA[NewPropCust exists in the db]]>
-            </line>
-            <line>
-              <![CDATA[NewPropCust doesn't exist in the db]]>
-            </line>
           </reporter-output>
-        </test-method> <!-- Verify_Discard_Version_Is_Successful -->
-      </class> <!-- regressionTests.RegressionCases -->
+        </test-method> <!-- VerifyGenerateEngineCompletesWithoutFail -->
+      </class> <!-- regressionTests.EngineGeneration -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>

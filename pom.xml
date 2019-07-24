@@ -33,7 +33,7 @@
             <version>2.22.1</version>
             <configuration>
           <suiteXmlFiles>
-            <suiteXmlFile>src/test/java/testNG.xml</suiteXmlFile>            
+            <suiteXmlFile>src/test/java/testNGGen.xml</suiteXmlFile>            
           </suiteXmlFiles>
         </configuration>
         </plugin>  
