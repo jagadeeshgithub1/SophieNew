@@ -6,11 +6,14 @@ import java.io.IOException;
 import org.apache.commons.io.FileUtils;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
+import base.InvokationListner;
 import driver.DriverEngine;
 
+@Listeners(InvokationListner.class)
 public class EngineGeneration {
 
 	public DriverEngine driverEngine = null;
@@ -63,7 +66,7 @@ public class EngineGeneration {
 		}
 	}
 
-	@Test(priority = 1, invocationCount = 1)
+	@Test(invocationCount = 30)
 	// First test to validate the CSV after engine run
 	public void VerifyGenerateEngineCompletesWithoutFail() {
 

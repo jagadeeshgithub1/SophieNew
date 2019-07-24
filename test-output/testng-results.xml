@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="0" ignored="0" total="1" passed="1">
+<testng-results skipped="0" failed="0" ignored="0" total="2" passed="2">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="494592" started-at="2019-07-24T06:25:29Z" finished-at="2019-07-24T06:33:44Z">
+  <suite name="Default suite" duration-ms="946951" started-at="2019-07-24T07:23:18Z" finished-at="2019-07-24T07:39:05Z">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="494592" started-at="2019-07-24T06:25:29Z" finished-at="2019-07-24T06:33:44Z">
+    <test name="Default test" duration-ms="946951" started-at="2019-07-24T07:23:18Z" finished-at="2019-07-24T07:39:05Z">
       <class name="regressionTests.EngineGeneration">
-        <test-method status="PASS" signature="setUp()[pri:0, instance:regressionTests.EngineGeneration@2a70a3d8]" name="setUp" is-config="true" duration-ms="72" started-at="2019-07-24T06:25:29Z" finished-at="2019-07-24T06:25:29Z">
+        <test-method status="PASS" signature="setUp()[pri:0, instance:regressionTests.EngineGeneration@22eeefeb]" name="setUp" is-config="true" duration-ms="84" started-at="2019-07-24T07:23:18Z" finished-at="2019-07-24T07:23:18Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method status="PASS" signature="VerifyGenerateEngineCompletesWithoutFail()[pri:1, instance:regressionTests.EngineGeneration@2a70a3d8]" name="VerifyGenerateEngineCompletesWithoutFail" duration-ms="494483" started-at="2019-07-24T06:25:29Z" finished-at="2019-07-24T06:33:44Z">
+        <test-method status="PASS" signature="VerifyGenerateEngineCompletesWithoutFail()[pri:0, instance:regressionTests.EngineGeneration@22eeefeb]" name="VerifyGenerateEngineCompletesWithoutFail" duration-ms="498534" started-at="2019-07-24T07:23:18Z" finished-at="2019-07-24T07:31:36Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- VerifyGenerateEngineCompletesWithoutFail -->
+        <test-method status="PASS" signature="VerifyGenerateEngineCompletesWithoutFail()[pri:0, instance:regressionTests.EngineGeneration@22eeefeb]" name="VerifyGenerateEngineCompletesWithoutFail" duration-ms="448286" started-at="2019-07-24T07:31:36Z" finished-at="2019-07-24T07:39:05Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- VerifyGenerateEngineCompletesWithoutFail -->
