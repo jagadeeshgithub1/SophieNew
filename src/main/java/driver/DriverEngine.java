@@ -196,6 +196,9 @@ public class DriverEngine extends TestBaseClass {
 							}
 							Reporter.log("Failed in " + ActionKeyWord);
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+							Finalflag = false;
+							classAction.quitBrowser();
+							return Finalflag;
 
 						}
 						break;
@@ -219,6 +222,9 @@ public class DriverEngine extends TestBaseClass {
 							}
 							Reporter.log("Failed in " + ActionKeyWord);
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+							Finalflag = false;
+							classAction.quitBrowser();
+							return Finalflag;
 
 						}
 						break;
@@ -242,6 +248,9 @@ public class DriverEngine extends TestBaseClass {
 							}
 							Reporter.log("Failed in " + ActionKeyWord);
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+							Finalflag = false;
+							classAction.quitBrowser();
+							return Finalflag;
 
 						}
 						break;
@@ -265,6 +274,9 @@ public class DriverEngine extends TestBaseClass {
 							}
 							Reporter.log("Failed in " + ActionKeyWord);
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+							Finalflag = false;
+							classAction.quitBrowser();
+							return Finalflag;
 
 						}
 						break;
@@ -288,6 +300,9 @@ public class DriverEngine extends TestBaseClass {
 							}
 							Reporter.log("Failed in " + ActionKeyWord);
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+							Finalflag = false;
+							classAction.quitBrowser();
+							return Finalflag;
 
 						}
 						break;
@@ -312,6 +327,9 @@ public class DriverEngine extends TestBaseClass {
 							}
 							Reporter.log("Failed in " + ActionKeyWord);
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+							Finalflag = false;
+							classAction.quitBrowser();
+							return Finalflag;
 
 						}
 						break;
@@ -336,6 +354,9 @@ public class DriverEngine extends TestBaseClass {
 							}
 							Reporter.log("Failed in " + ActionKeyWord);
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+							Finalflag = false;
+							classAction.quitBrowser();
+							return Finalflag;
 
 						}
 						break;
@@ -359,6 +380,9 @@ public class DriverEngine extends TestBaseClass {
 							}
 							Reporter.log("Failed in " + ActionKeyWord);
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+							Finalflag = false;
+							classAction.quitBrowser();
+							return Finalflag;
 
 						}
 						break;
@@ -384,6 +408,9 @@ public class DriverEngine extends TestBaseClass {
 							}
 							Reporter.log("Failed in " + ActionKeyWord);
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+							Finalflag = false;
+							classAction.quitBrowser();
+							return Finalflag;
 
 						}
 						break;
@@ -409,6 +436,9 @@ public class DriverEngine extends TestBaseClass {
 							}
 							Reporter.log("Failed in " + ActionKeyWord);
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+							Finalflag = false;
+							classAction.quitBrowser();
+							return Finalflag;
 
 						}
 						break;
@@ -435,6 +465,9 @@ public class DriverEngine extends TestBaseClass {
 							}
 							Reporter.log("Failed in " + ActionKeyWord);
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+							Finalflag = false;
+							classAction.quitBrowser();
+							return Finalflag;
 
 						}
 						break;
@@ -460,6 +493,9 @@ public class DriverEngine extends TestBaseClass {
 							}
 							Reporter.log("Failed in " + ActionKeyWord);
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+							Finalflag = false;
+							classAction.quitBrowser();
+							return Finalflag;
 
 						}
 						break;
@@ -484,37 +520,15 @@ public class DriverEngine extends TestBaseClass {
 							}
 							Reporter.log("Failed in " + ActionKeyWord);
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+							Finalflag = false;
+							classAction.quitBrowser();
+							return Finalflag;
 
 						}
 						break;
 					case "sleepTime":
 
 						if (classAction.sleepTime((long) (Float.parseFloat(TestData.trim())))) {
-							excelUtils.setCellData(sheetName, "Results", Irow, "Pass");
-						} else {
-							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
-						}
-						break;
-					case "gettingHandle":
-
-						if (classAction.gettingHandle()) {
-							excelUtils.setCellData(sheetName, "Results", Irow, "Pass");
-						} else {
-							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
-
-						}
-						break;
-					case "elementPropertyCheck":
-						if (classAction.elementPropertyCheck(PageObject, TestData)) {
-							excelUtils.setCellData(sheetName, "Results", Irow, "Pass");
-						} else {
-							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
-
-						}
-
-						break;
-					case "rollBackToBaselineVersion":
-						if (classAction.rollBackToBaselineVersion(String.valueOf((int) Float.parseFloat(TestData)))) {
 							excelUtils.setCellData(sheetName, "Results", Irow, "Pass");
 						} else {
 							try {
@@ -533,6 +547,89 @@ public class DriverEngine extends TestBaseClass {
 							}
 							Reporter.log("Failed in " + ActionKeyWord);
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+							Finalflag = false;
+							classAction.quitBrowser();
+							return Finalflag;
+
+						}
+						break;
+					case "gettingHandle":
+
+						if (classAction.gettingHandle()) {
+							excelUtils.setCellData(sheetName, "Results", Irow, "Pass");
+						} else {
+							try {
+								Thread.sleep(10000);
+								if (osName.equalsIgnoreCase("Linux")) {
+									FullPageScreenShot("ScreenShots/", TestCaseID + "_" + ActionKeyWord + "_" + ".png");
+
+								} else {
+
+									FullPageScreenShot("ScreenShots\\",
+											TestCaseID + "_" + ActionKeyWord + "_" + ".png");
+								}
+							} catch (Exception e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							Reporter.log("Failed in " + ActionKeyWord);
+							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+							Finalflag = false;
+							classAction.quitBrowser();
+							return Finalflag;
+
+						}
+						break;
+					case "elementPropertyCheck":
+						if (classAction.elementPropertyCheck(PageObject, TestData)) {
+							excelUtils.setCellData(sheetName, "Results", Irow, "Pass");
+						} else {
+							try {
+								Thread.sleep(10000);
+								if (osName.equalsIgnoreCase("Linux")) {
+									FullPageScreenShot("ScreenShots/", TestCaseID + "_" + ActionKeyWord + "_" + ".png");
+
+								} else {
+
+									FullPageScreenShot("ScreenShots\\",
+											TestCaseID + "_" + ActionKeyWord + "_" + ".png");
+								}
+							} catch (Exception e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							Reporter.log("Failed in " + ActionKeyWord);
+							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+							Finalflag = false;
+							classAction.quitBrowser();
+							return Finalflag;
+
+						}
+
+						break;
+					case "rollBackToBaselineVersion":
+						if (classAction.rollBackToBaselineVersion()) {
+							excelUtils.setCellData(sheetName, "Results", Irow, "Pass");
+						} else {
+							try {
+								Thread.sleep(10000);
+								if (osName.equalsIgnoreCase("Linux")) {
+									FullPageScreenShot("ScreenShots/", TestCaseID + "_" + ActionKeyWord + "_" + ".png");
+
+								} else {
+
+									FullPageScreenShot("ScreenShots\\",
+											TestCaseID + "_" + ActionKeyWord + "_" + ".png");
+								}
+							} catch (Exception e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							Reporter.log("Failed in " + ActionKeyWord);
+							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+							Finalflag = false;
+							classAction.quitBrowser();
+							return Finalflag;
 
 						}
 						break;
@@ -556,6 +653,9 @@ public class DriverEngine extends TestBaseClass {
 							}
 							Reporter.log("Failed in " + ActionKeyWord);
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+							Finalflag = false;
+							classAction.quitBrowser();
+							return Finalflag;
 
 						}
 						break;
@@ -579,6 +679,9 @@ public class DriverEngine extends TestBaseClass {
 							}
 							Reporter.log("Failed in " + ActionKeyWord);
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+							Finalflag = false;
+							classAction.quitBrowser();
+							return Finalflag;
 
 						}
 						break;
@@ -604,6 +707,9 @@ public class DriverEngine extends TestBaseClass {
 							}
 							Reporter.log("Failed in " + ActionKeyWord);
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+							Finalflag = false;
+							classAction.quitBrowser();
+							return Finalflag;
 
 						}
 
@@ -630,6 +736,9 @@ public class DriverEngine extends TestBaseClass {
 							}
 							Reporter.log("Failed in " + ActionKeyWord);
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+							Finalflag = false;
+							classAction.quitBrowser();
+							return Finalflag;
 
 						}
 
@@ -656,6 +765,9 @@ public class DriverEngine extends TestBaseClass {
 							}
 							Reporter.log("Failed in " + ActionKeyWord);
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+							Finalflag = false;
+							classAction.quitBrowser();
+							return Finalflag;
 
 						}
 
@@ -682,6 +794,9 @@ public class DriverEngine extends TestBaseClass {
 							}
 							Reporter.log("Failed in " + ActionKeyWord);
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+							Finalflag = false;
+							classAction.quitBrowser();
+							return Finalflag;
 
 						}
 
@@ -708,6 +823,9 @@ public class DriverEngine extends TestBaseClass {
 							}
 							Reporter.log("Failed in " + ActionKeyWord);
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+							Finalflag = false;
+							classAction.quitBrowser();
+							return Finalflag;
 
 						}
 
@@ -718,7 +836,25 @@ public class DriverEngine extends TestBaseClass {
 							excelUtils.setCellData(sheetName, "Results", Irow, "Pass");
 
 						} else {
+							try {
+								Thread.sleep(10000);
+								if (osName.equalsIgnoreCase("Linux")) {
+									FullPageScreenShot("ScreenShots/", TestCaseID + "_" + ActionKeyWord + "_" + ".png");
+
+								} else {
+
+									FullPageScreenShot("ScreenShots\\",
+											TestCaseID + "_" + ActionKeyWord + "_" + ".png");
+								}
+							} catch (Exception e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							Reporter.log("Failed in " + ActionKeyWord);
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+							Finalflag = false;
+							classAction.quitBrowser();
+							return Finalflag;
 
 						}
 
@@ -729,7 +865,25 @@ public class DriverEngine extends TestBaseClass {
 							excelUtils.setCellData(sheetName, "Results", Irow, "Pass");
 
 						} else {
+							try {
+								Thread.sleep(10000);
+								if (osName.equalsIgnoreCase("Linux")) {
+									FullPageScreenShot("ScreenShots/", TestCaseID + "_" + ActionKeyWord + "_" + ".png");
+
+								} else {
+
+									FullPageScreenShot("ScreenShots\\",
+											TestCaseID + "_" + ActionKeyWord + "_" + ".png");
+								}
+							} catch (Exception e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							Reporter.log("Failed in " + ActionKeyWord);
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+							Finalflag = false;
+							classAction.quitBrowser();
+							return Finalflag;
 
 						}
 
@@ -740,7 +894,25 @@ public class DriverEngine extends TestBaseClass {
 							excelUtils.setCellData(sheetName, "Results", Irow, "Pass");
 
 						} else {
+							try {
+								Thread.sleep(10000);
+								if (osName.equalsIgnoreCase("Linux")) {
+									FullPageScreenShot("ScreenShots/", TestCaseID + "_" + ActionKeyWord + "_" + ".png");
+
+								} else {
+
+									FullPageScreenShot("ScreenShots\\",
+											TestCaseID + "_" + ActionKeyWord + "_" + ".png");
+								}
+							} catch (Exception e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							Reporter.log("Failed in " + ActionKeyWord);
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+							Finalflag = false;
+							classAction.quitBrowser();
+							return Finalflag;
 
 						}
 
@@ -751,7 +923,25 @@ public class DriverEngine extends TestBaseClass {
 							excelUtils.setCellData(sheetName, "Results", Irow, "Pass");
 
 						} else {
+							try {
+								Thread.sleep(10000);
+								if (osName.equalsIgnoreCase("Linux")) {
+									FullPageScreenShot("ScreenShots/", TestCaseID + "_" + ActionKeyWord + "_" + ".png");
+
+								} else {
+
+									FullPageScreenShot("ScreenShots\\",
+											TestCaseID + "_" + ActionKeyWord + "_" + ".png");
+								}
+							} catch (Exception e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							Reporter.log("Failed in " + ActionKeyWord);
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+							Finalflag = false;
+							classAction.quitBrowser();
+							return Finalflag;
 
 						}
 
@@ -762,7 +952,25 @@ public class DriverEngine extends TestBaseClass {
 							excelUtils.setCellData(sheetName, "Results", Irow, "Pass");
 
 						} else {
+							try {
+								Thread.sleep(10000);
+								if (osName.equalsIgnoreCase("Linux")) {
+									FullPageScreenShot("ScreenShots/", TestCaseID + "_" + ActionKeyWord + "_" + ".png");
+
+								} else {
+
+									FullPageScreenShot("ScreenShots\\",
+											TestCaseID + "_" + ActionKeyWord + "_" + ".png");
+								}
+							} catch (Exception e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							Reporter.log("Failed in " + ActionKeyWord);
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+							Finalflag = false;
+							classAction.quitBrowser();
+							return Finalflag;
 
 						}
 
@@ -775,7 +983,26 @@ public class DriverEngine extends TestBaseClass {
 							excelUtils.setCellData(sheetName, "Results", Irow, "Pass");
 
 						} else {
+							try {
+								Thread.sleep(10000);
+								if (osName.equalsIgnoreCase("Linux")) {
+									FullPageScreenShot("ScreenShots/", TestCaseID + "_" + ActionKeyWord + "_" + ".png");
+
+								} else {
+
+									FullPageScreenShot("ScreenShots\\",
+											TestCaseID + "_" + ActionKeyWord + "_" + ".png");
+								}
+							} catch (Exception e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							Reporter.log("Failed in " + ActionKeyWord);
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+							Finalflag = false;
+							classAction.quitBrowser();
+							return Finalflag;
+
 						}
 
 						// excelUtils.saveFile("TestDataAndResults\\SophieAutomationResults.xlsx");
@@ -787,7 +1014,25 @@ public class DriverEngine extends TestBaseClass {
 							excelUtils.setCellData(sheetName, "Results", Irow, "Pass");
 
 						} else {
+							try {
+								Thread.sleep(10000);
+								if (osName.equalsIgnoreCase("Linux")) {
+									FullPageScreenShot("ScreenShots/", TestCaseID + "_" + ActionKeyWord + "_" + ".png");
+
+								} else {
+
+									FullPageScreenShot("ScreenShots\\",
+											TestCaseID + "_" + ActionKeyWord + "_" + ".png");
+								}
+							} catch (Exception e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							Reporter.log("Failed in " + ActionKeyWord);
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+							Finalflag = false;
+							classAction.quitBrowser();
+							return Finalflag;
 
 						}
 
@@ -800,7 +1045,25 @@ public class DriverEngine extends TestBaseClass {
 						}
 
 						else {
+							try {
+								Thread.sleep(10000);
+								if (osName.equalsIgnoreCase("Linux")) {
+									FullPageScreenShot("ScreenShots/", TestCaseID + "_" + ActionKeyWord + "_" + ".png");
+
+								} else {
+
+									FullPageScreenShot("ScreenShots\\",
+											TestCaseID + "_" + ActionKeyWord + "_" + ".png");
+								}
+							} catch (Exception e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							Reporter.log("Failed in " + ActionKeyWord);
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+							Finalflag = false;
+							classAction.quitBrowser();
+							return Finalflag;
 
 						}
 						break;
@@ -827,6 +1090,9 @@ public class DriverEngine extends TestBaseClass {
 							}
 							Reporter.log("Failed in " + ActionKeyWord);
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+							Finalflag = false;
+							classAction.quitBrowser();
+							return Finalflag;
 
 						}
 						break;
@@ -852,6 +1118,9 @@ public class DriverEngine extends TestBaseClass {
 							}
 							Reporter.log("Failed in " + ActionKeyWord);
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+							Finalflag = false;
+							classAction.quitBrowser();
+							return Finalflag;
 
 						}
 						break;
@@ -877,7 +1146,9 @@ public class DriverEngine extends TestBaseClass {
 							}
 							Reporter.log("Failed in " + ActionKeyWord);
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
-
+							Finalflag = false;
+							classAction.quitBrowser();
+							return Finalflag;
 						}
 						break;
 					case "switchOnToggleButton":
@@ -902,8 +1173,11 @@ public class DriverEngine extends TestBaseClass {
 							}
 							Reporter.log("Failed in " + ActionKeyWord);
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
-
+							Finalflag = false;
+							classAction.quitBrowser();
+							return Finalflag;
 						}
+
 						break;
 
 					case "verifyLoadType":
@@ -928,8 +1202,12 @@ public class DriverEngine extends TestBaseClass {
 							}
 							Reporter.log("Failed in " + ActionKeyWord);
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+							Finalflag = false;
+							classAction.quitBrowser();
+							return Finalflag;
 
 						}
+
 						break;
 					case "closeTab":
 						if (classAction.closeTab(TestData)) {
@@ -953,8 +1231,12 @@ public class DriverEngine extends TestBaseClass {
 							}
 							Reporter.log("Failed in " + ActionKeyWord);
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+							Finalflag = false;
+							classAction.quitBrowser();
+							return Finalflag;
 
 						}
+
 						break;
 					case "realtimeSpineAPIPostRequest":
 						if (classAction.realtimeSpineAPIPostRequest()) {
@@ -962,7 +1244,25 @@ public class DriverEngine extends TestBaseClass {
 						}
 
 						else {
+							try {
+								Thread.sleep(10000);
+								if (osName.equalsIgnoreCase("Linux")) {
+									FullPageScreenShot("ScreenShots/", TestCaseID + "_" + ActionKeyWord + "_" + ".png");
+
+								} else {
+
+									FullPageScreenShot("ScreenShots\\",
+											TestCaseID + "_" + ActionKeyWord + "_" + ".png");
+								}
+							} catch (Exception e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							Reporter.log("Failed in " + ActionKeyWord);
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+							Finalflag = false;
+							classAction.quitBrowser();
+							return Finalflag;
 
 						}
 						break;
@@ -972,8 +1272,25 @@ public class DriverEngine extends TestBaseClass {
 						}
 
 						else {
-							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+							try {
+								Thread.sleep(10000);
+								if (osName.equalsIgnoreCase("Linux")) {
+									FullPageScreenShot("ScreenShots/", TestCaseID + "_" + ActionKeyWord + "_" + ".png");
 
+								} else {
+
+									FullPageScreenShot("ScreenShots\\",
+											TestCaseID + "_" + ActionKeyWord + "_" + ".png");
+								}
+							} catch (Exception e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							Reporter.log("Failed in " + ActionKeyWord);
+							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+							Finalflag = false;
+							classAction.quitBrowser();
+							return Finalflag;
 						}
 						break;
 					case "pageScrollUpToView":
@@ -982,7 +1299,25 @@ public class DriverEngine extends TestBaseClass {
 						}
 
 						else {
+							try {
+								Thread.sleep(10000);
+								if (osName.equalsIgnoreCase("Linux")) {
+									FullPageScreenShot("ScreenShots/", TestCaseID + "_" + ActionKeyWord + "_" + ".png");
+
+								} else {
+
+									FullPageScreenShot("ScreenShots\\",
+											TestCaseID + "_" + ActionKeyWord + "_" + ".png");
+								}
+							} catch (Exception e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							Reporter.log("Failed in " + ActionKeyWord);
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+							Finalflag = false;
+							classAction.quitBrowser();
+							return Finalflag;
 
 						}
 						break;
@@ -992,7 +1327,25 @@ public class DriverEngine extends TestBaseClass {
 						}
 
 						else {
+							try {
+								Thread.sleep(10000);
+								if (osName.equalsIgnoreCase("Linux")) {
+									FullPageScreenShot("ScreenShots/", TestCaseID + "_" + ActionKeyWord + "_" + ".png");
+
+								} else {
+
+									FullPageScreenShot("ScreenShots\\",
+											TestCaseID + "_" + ActionKeyWord + "_" + ".png");
+								}
+							} catch (Exception e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							Reporter.log("Failed in " + ActionKeyWord);
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+							Finalflag = false;
+							classAction.quitBrowser();
+							return Finalflag;
 
 						}
 						break;
@@ -1002,8 +1355,27 @@ public class DriverEngine extends TestBaseClass {
 						}
 
 						else {
+							try {
+								Thread.sleep(10000);
+								if (osName.equalsIgnoreCase("Linux")) {
+									FullPageScreenShot("ScreenShots/", TestCaseID + "_" + ActionKeyWord + "_" + ".png");
+
+								} else {
+
+									FullPageScreenShot("ScreenShots\\",
+											TestCaseID + "_" + ActionKeyWord + "_" + ".png");
+								}
+							} catch (Exception e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							Reporter.log("Failed in " + ActionKeyWord);
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+							Finalflag = false;
+							classAction.quitBrowser();
+							return Finalflag;
 						}
+
 						break;
 					case "verifyColumnInPegaClass":
 						if (classAction.verifyColumnInPegaClass(TestData)) {
@@ -1027,6 +1399,9 @@ public class DriverEngine extends TestBaseClass {
 							}
 							Reporter.log("Failed in " + ActionKeyWord);
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+							Finalflag = false;
+							classAction.quitBrowser();
+							return Finalflag;
 
 						}
 						break;
@@ -1052,6 +1427,9 @@ public class DriverEngine extends TestBaseClass {
 							}
 							Reporter.log("Failed in " + ActionKeyWord);
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+							Finalflag = false;
+							classAction.quitBrowser();
+							return Finalflag;
 
 						}
 						break;
@@ -1078,6 +1456,9 @@ public class DriverEngine extends TestBaseClass {
 							Reporter.log("Failed in " + ActionKeyWord);
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
 
+							Finalflag = false;
+							classAction.quitBrowser();
+							return Finalflag;
 						}
 						break;
 					case "rollbackToVersionByName":
@@ -1103,6 +1484,9 @@ public class DriverEngine extends TestBaseClass {
 							Reporter.log("Failed in " + ActionKeyWord);
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
 
+							Finalflag = false;
+							classAction.quitBrowser();
+							return Finalflag;
 						}
 						break;
 					case "verifyGenerateEngineCompleted":
@@ -1128,17 +1512,105 @@ public class DriverEngine extends TestBaseClass {
 							Reporter.log("Failed in " + ActionKeyWord);
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
 
+							Finalflag = false;
+							classAction.quitBrowser();
+							return Finalflag;
+
+						}
+						break;
+					case "unSubscribeEmail":
+						if (classAction.unSubscribeEmail()) {
+							excelUtils.setCellData(sheetName, "Results", Irow, "Pass");
+						}
+
+						else {
+							try {
+								Thread.sleep(10000);
+								if (osName.equalsIgnoreCase("Linux")) {
+									FullPageScreenShot("ScreenShots/", TestCaseID + "_" + ActionKeyWord + "_" + ".png");
+
+								} else {
+
+									FullPageScreenShot("ScreenShots\\",
+											TestCaseID + "_" + ActionKeyWord + "_" + ".png");
+								}
+							} catch (Exception e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							Reporter.log("Failed in " + ActionKeyWord);
+							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+							Finalflag = false;
+							classAction.quitBrowser();
+							return Finalflag;
+
+						}
+						break;
+					case "verifyAdaptiveModelForNegResponse":
+						if (classAction.verifyAdaptiveModelForNegResponse(TestData)) {
+							excelUtils.setCellData(sheetName, "Results", Irow, "Pass");
+						}
+
+						else {
+							Finalflag = false;
+							try {
+								Thread.sleep(10000);
+								if (osName.equalsIgnoreCase("Linux")) {
+									FullPageScreenShot("ScreenShots/", TestCaseID + "_" + ActionKeyWord + "_" + ".png");
+
+								} else {
+
+									FullPageScreenShot("ScreenShots\\",
+											TestCaseID + "_" + ActionKeyWord + "_" + ".png");
+								}
+							} catch (Exception e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							Reporter.log("Failed in " + ActionKeyWord);
+							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+
+							Finalflag = false;
+							classAction.quitBrowser();
+							return Finalflag;
+						}
+						break;
+					case "verifyIHRecordsAreAvailable":
+						if (classAction.verifyIHRecordsAreAvailable(TestData)) {
+							excelUtils.setCellData(sheetName, "Results", Irow, "Pass");
+						}
+
+						else {
+							Finalflag = false;
+							try {
+								Thread.sleep(10000);
+								if (osName.equalsIgnoreCase("Linux")) {
+									FullPageScreenShot("ScreenShots/", TestCaseID + "_" + ActionKeyWord + "_" + ".png");
+
+								} else {
+
+									FullPageScreenShot("ScreenShots\\",
+											TestCaseID + "_" + ActionKeyWord + "_" + ".png");
+								}
+							} catch (Exception e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							Reporter.log("Failed in " + ActionKeyWord);
+							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+
+							Finalflag = false;
+							classAction.quitBrowser();
+							return Finalflag;
 						}
 						break;
 					default:
 						break;
 					}
 
-					// String finalResult=excelUtils.getCellData(sheetName, Irow, "Results");
 				}
 			}
 		}
-
 		Finalflag = finalResult(sheetName);
 		return Finalflag;
 
@@ -1156,6 +1628,7 @@ public class DriverEngine extends TestBaseClass {
 			if (Result == null || Result.equalsIgnoreCase("Fail")) {
 
 				finalResult = false;
+
 				return finalResult;
 
 			}

@@ -144,9 +144,20 @@ public class ActionClass extends TestBaseClass {
 
 			// WebElement ele = new WebDriverWait(driver, 90)
 			// .until(ExpectedConditions.elementToBeClickable(By.xpath(prop.getProperty(object))));
-			boolean ele = new WebDriverWait(driver, 600).until(ExpectedConditions.and(
-					ExpectedConditions.visibilityOfElementLocated(By.xpath(prop.getProperty(object))),
-					ExpectedConditions.elementToBeClickable(By.xpath(prop.getProperty(object)))));
+			boolean ele = false;
+			try {
+				ele = new WebDriverWait(driver, 600).until(ExpectedConditions.and(
+						ExpectedConditions.visibilityOfElementLocated(By.xpath(prop.getProperty(object))),
+						ExpectedConditions.elementToBeClickable(By.xpath(prop.getProperty(object)))));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				flag = false;
+
+				System.out.print("Click failed>>" + e.getMessage());
+				Reporter.log("Click failed>>" + e.getMessage());
+				return flag;
+
+			}
 
 			if (ele == true) {
 
@@ -518,7 +529,7 @@ public class ActionClass extends TestBaseClass {
 
 	}
 
-	public boolean rollBackToBaselineVersion(String versionId) {
+	public boolean rollBackToBaselineVersion() {
 
 		/*
 		 * @author:Deepa Panikkaeetil
@@ -535,6 +546,8 @@ public class ActionClass extends TestBaseClass {
 		 */
 
 		boolean flag = false;
+
+		String versionId = prop.getProperty("BaselineversionId");
 
 		// below code switch to the frame
 
@@ -973,27 +986,28 @@ public class ActionClass extends TestBaseClass {
 		 * 
 		 * @modified date:
 		 * 
-		 * @USED_FOR:Method used for unchecking the check boxes
+		 * @USED_FOR:Method used for selecting the radio buttons
 		 * 
 		 * @Parameter:Passing the xpath of the web elements
 		 */
 
-		Boolean ele = false;
+		WebElement ele = null;
 		boolean flag = false;
 
 		try {
-			ele = new WebDriverWait(driver, 200).until(ExpectedConditions
-					.and(ExpectedConditions.elementToBeClickable(By.xpath(prop.getProperty(object)))));
+
+			ele = new WebDriverWait(driver, 20)
+					.until(ExpectedConditions.presenceOfElementLocated(By.xpath(prop.getProperty(object))));
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 
-			Reporter.log("Element" + object + "is not present");
-			System.out.println("Element" + object + "is not present");
+			Reporter.log("Element" + object + "is not present" + e.getMessage());
+			System.out.println("Element" + object + "is not present" + e.getMessage());
 
 		}
 
-		if (ele == true) {
+		if (ele != null) {
 
 			if (!driver.findElement(By.xpath(prop.getProperty(object))).isSelected()) {
 
@@ -3019,6 +3033,13 @@ public class ActionClass extends TestBaseClass {
 
 		}
 
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+
 		lnkOpen.click();
 
 		try {
@@ -3033,6 +3054,13 @@ public class ActionClass extends TestBaseClass {
 			Reporter.log("UnSubscription link is not seen" + e.getMessage());
 
 			return flag;
+		}
+
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
 		}
 
 		unSubLink.click();
@@ -3059,6 +3087,12 @@ public class ActionClass extends TestBaseClass {
 			return flag;
 		}
 
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		radBtnUnsubscribe.click();// select unsub radio button
 
 		try {
@@ -3075,6 +3109,13 @@ public class ActionClass extends TestBaseClass {
 			return flag;
 		}
 
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+
 		Btnunsubscribe.click();
 
 		flag = true;
@@ -3083,7 +3124,115 @@ public class ActionClass extends TestBaseClass {
 
 	}
 
-	public void verifyAdaptiveModelForNegResponse(String response) {
+	public boolean verifyAdaptiveModelForNegResponse(String response) {
+
+		boolean flag = false;
+		WebElement proposition = null, outCome = null;
+
+		switchToParent();
+
+		switchToFrameByIndex(1);
+
+		try {
+			proposition = new WebDriverWait(driver, 60).until(
+					ExpectedConditions.presenceOfElementLocated(By.xpath(prop.getProperty("divPropositionName"))));
+		} catch (Exception e) {
+			flag = false;
+			// TODO Auto-generated catch block
+
+			System.out.println("Proposition element is not located" + e.getMessage());
+			Reporter.log("Proposition element is not located" + e.getMessage());
+			return flag;
+		}
+
+		if (proposition.getText().trim().equalsIgnoreCase(OfferName)) {
+			flag = true;
+		} else {
+			flag = false;
+			System.out.println(
+					"latest response is of different proposition  " + OfferName + "\tand" + proposition.getText());
+			Reporter.log("latest response is of different proposition  " + OfferName + "\tand" + proposition.getText());
+			return flag;
+		}
+
+		try {
+			outCome = new WebDriverWait(driver, 60)
+					.until(ExpectedConditions.presenceOfElementLocated(By.xpath(prop.getProperty("divOutcome"))));
+		} catch (Exception e) {
+
+			flag = false;
+			// TODO Auto-generated catch block
+			System.out.println("Outcome is not present?? " + e.getMessage());
+
+			Reporter.log("Outcome is not present?? " + e.getMessage());
+
+			return flag;
+		}
+
+		if (outCome.getText().trim().equalsIgnoreCase(response)) {
+			flag = true;
+
+			System.out.println("Reponse matches" + outCome.getText() + "\tand" + response);
+		} else {
+			flag = false;
+			System.out.println("latest response is not matching  " + outCome.getText() + "\tand" + response);
+			Reporter.log("latest response is not matching  " + outCome.getText() + "\tand" + response);
+			return flag;
+
+		}
+
+		return flag;
 
 	}
+
+	public boolean verifyIHRecordsAreAvailable(String expected) {
+
+		boolean flag = false;
+		WebElement ihTable = null;
+
+		try {
+			ihTable = new WebDriverWait(driver, 60)
+					.until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//table[@id='bodyTbl_right'])[2]")));
+		} catch (Exception e) {
+
+			flag = false;
+
+			System.out.println("IH table is not located" + e.getMessage());
+			Reporter.log("IH table is not located" + e.getMessage());
+
+			return flag;
+			// TODO Auto-generated catch block
+
+		}
+
+		List<WebElement> tableRows = driver.findElements(By.xpath("(//table[@id='bodyTbl_right'])[2]//tr"));
+
+		if (tableRows.size() > 2) {
+
+			if (expected.equalsIgnoreCase("Yes")) {
+				flag = true;
+			} else {
+				flag = false;
+				System.out.println("IH is empty");
+				Reporter.log("IH is empty");
+				return flag;
+			}
+
+		} else {
+			if (expected.equalsIgnoreCase("No")) {
+				flag = true;
+
+			} else {
+				flag = false;
+				System.out.println("IH should be empty");
+				Reporter.log("IH should be empty");
+				return flag;
+
+			}
+
+		}
+
+		return flag;
+	}
+
 }
