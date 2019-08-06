@@ -5,7 +5,8 @@
     <classes>
       <class name="regressionTests.RegressionCases">
         <methods>
-          <include name="Verify_AdaptiveModel_For_Negative_Response"/>
+          <include name="beforeMethod"/>
+          <include name="Verify_Offer_Rename_Is_Successfull"/>
           <include name="setUp"/>
         </methods>
       </class> <!-- regressionTests.RegressionCases -->

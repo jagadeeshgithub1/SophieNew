@@ -2,10 +2,12 @@ package regressionTests;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Method;
 
 import org.apache.commons.io.FileUtils;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -16,6 +18,12 @@ public class RegressionCases {
 
 	public DriverEngine driverEngine = null;
 	SoftAssert softAssert = new SoftAssert();
+
+	@BeforeMethod
+
+	public void beforeMethod(Method method) {
+		System.out.println("Current Executing Test  :" + method.getName());
+	}
 
 	@BeforeClass
 	public void setUp() {
@@ -64,7 +72,7 @@ public class RegressionCases {
 		}
 	}
 
-	@Test(priority = 1, retryAnalyzer = RetryFailedCases.class)
+	@Test(priority = 1, enabled = false)
 	// First test to validate the CSV after engine run
 	public void Verify_DownloadedCSV_For_Existing_Version() {
 
@@ -74,7 +82,7 @@ public class RegressionCases {
 
 	}
 
-	@Test(priority = 2, retryAnalyzer = RetryFailedCases.class)
+	@Test(priority = 2, enabled = false)
 	// Second case to verify the event API integration
 	public void Verify_DownloadedCSV_For_New_version() {
 
@@ -88,16 +96,22 @@ public class RegressionCases {
 
 	}
 
-	@Test(priority = 3, retryAnalyzer = RetryFailedCases.class)
+	@Test(priority = 3, enabled = false)
 	public void Verify_IH_Deleted_For_All() {
 		Assert.assertTrue(driverEngine.mainMethod("VerifyIHDeleted"));
 
 	}
 
-	@Test(priority = 4, retryAnalyzer = RetryFailedCases.class)
+	@Test(priority = 4, enabled = false)
 	public void Verify_Deleted_Offer_Is_Not_Present_In_CSV() {
 		Assert.assertTrue(driverEngine.mainMethod("VerifyDeleteOffer"));
 
+	}
+
+	@Test(priority = 5)
+	public void Verify_Offer_Rename_Is_Successfull() {
+
+		Assert.assertTrue(driverEngine.mainMethod("RenameOffer"));
 	}
 
 	@Test(enabled = false)
@@ -112,24 +126,24 @@ public class RegressionCases {
 		Assert.assertTrue(driverEngine.mainMethod("AdpativeModelForUnsubscribe"));
 	}
 
-	@Test(priority = 6)
+	@Test(priority = 6, enabled = false)
 	public void Verify_NewEmailTemp_ByCloning() {
 		Assert.assertTrue(driverEngine.mainMethod("EmailTempWithNewAttribute"));
 
 	}
 
-	@Test(priority = 7)
+	@Test(priority = 7, enabled = false)
 	public void Verify_Creating_NewMicrositeTemp_ByAdding_Existing_Attribute() {
 		Assert.assertTrue(driverEngine.mainMethod("MicrositeTempWithExistingAttrib"));
 
 	}
 
-	@Test(priority = 8)
+	@Test(priority = 8, enabled = false)
 	public void Verify_Existing_Attribute_Can_be_Added_In_OCCTemplate() {
 		Assert.assertTrue(driverEngine.mainMethod("OBCCTempWithExistingAttrib"));
 	}
 
-	@Test(priority = 9, retryAnalyzer = RetryFailedCases.class)
+	@Test(priority = 9, enabled = false)
 	public void Verify_NewProperty_Added_Is_Available_in_DB() {
 		Assert.assertTrue(driverEngine.mainMethod("VerifyDBForNewAgreementModel"));
 
@@ -147,7 +161,7 @@ public class RegressionCases {
 
 	}
 
-	@Test(priority = 11, retryAnalyzer = RetryFailedCases.class, enabled = false)
+	@Test(priority = 12, retryAnalyzer = RetryFailedCases.class, enabled = false)
 	public void Verify_Rollback_Is_Working_As_Expected() {
 
 		Assert.assertTrue(driverEngine.mainMethod("EnsureRollbackIsSuccessful"));

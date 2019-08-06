@@ -491,7 +491,7 @@ public class ActionClass extends TestBaseClass {
 		 * @Parameter:Passing the web element xpath, and the data to be typed
 		 */
 		try {
-			WebElement ele = new WebDriverWait(driver, 90)
+			WebElement ele = new WebDriverWait(driver, 120)
 					.until(ExpectedConditions.presenceOfElementLocated(By.xpath(prop.getProperty(object))));
 
 			ele.clear();
@@ -686,6 +686,7 @@ public class ActionClass extends TestBaseClass {
 			// ChromeOptions options = new ChromeOptions();
 
 			options.setExperimentalOption("prefs", chromePrefs);
+			// options.setPageLoadStrategy(PageLoadStrategy.NONE);
 
 			// added the below 2 lines on 5/2/19
 			// options.addArguments("--remote-debugging-port=9222");
@@ -693,7 +694,7 @@ public class ActionClass extends TestBaseClass {
 			// options.addArguments("--disable-dev-shm-usage");
 			// options.addArguments("--headless");
 			// options.addArguments("window-size=1200x600");
-			// options.addArguments("--disable-gpu");
+			options.addArguments("--disable-gpu");
 
 			try {
 				driver = new ChromeDriver(options);// some exception is coming hre
@@ -705,7 +706,8 @@ public class ActionClass extends TestBaseClass {
 			}
 			// driver.manage().window().setSize(new Dimension(1920, 1080));
 			driver.manage().window().maximize();
-			driver.manage().deleteAllCookies();
+			// driver.manage().deleteAllCookies();
+			// driver.manage().timeouts().pageLoadTimeout(200, TimeUnit.SECONDS);
 
 			driver.get(prop.getProperty("url"));
 
@@ -747,8 +749,9 @@ public class ActionClass extends TestBaseClass {
 		 * 
 		 */
 		try {
+			Thread.sleep(5000);
 			driver.quit();
-			System.out.println("Driver quit");
+			System.out.println("Driver instance is  quitting ");
 			flag = true;
 		} catch (Exception e) {
 			flag = false;
@@ -3233,6 +3236,113 @@ public class ActionClass extends TestBaseClass {
 		}
 
 		return flag;
+	}
+
+	public boolean enableOverride(String offerName) {
+
+		boolean flag = false;
+		WebElement chkOverride = null;
+		try {
+			chkOverride = new WebDriverWait(driver, 60).until(ExpectedConditions.presenceOfElementLocated(
+					By.xpath("//table[@class='offer-table table table-bordered table-hover dataTable']//td[text()='"
+							+ offerName + "']//parent::tr//td//input[@type='checkbox']")));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			flag = false;
+			System.out.println("Override check box is not located" + e.getMessage());
+			Reporter.log("Override check box is not located" + e.getMessage());
+			return flag;
+		}
+
+		if (!chkOverride.isSelected()) {
+			chkOverride.click();
+			flag = true;
+		}
+
+		return flag;
+
+	}
+
+	public boolean increaseWeightIfRequired(String offerName) {
+		boolean flag = false;
+
+		WebElement overridetable = null;
+		int rowNumberOfOffer = 0;
+
+		try {
+			overridetable = new WebDriverWait(driver, 60).until(ExpectedConditions.presenceOfElementLocated(
+					By.xpath("//table[@class='override-table table table-bordered table-hover dataTable']")));
+		} catch (Exception e) {
+			flag = false;
+			// TODO Auto-generated catch block
+
+			System.out.println("override table is not located" + e.getMessage());
+
+			Reporter.log("override table is not located" + e.getMessage());
+
+			return flag;
+
+		}
+
+		// getting the number of rows from the table
+
+		int numRows = 0;
+		List<WebElement> rows = driver.findElements(
+				By.xpath("//table[@class='override-table table table-bordered table-hover dataTable']//tr//td[2]"));
+
+		numRows = rows.size();
+
+		System.out.println("Number of rows>>" + numRows);
+
+		if (numRows == 2) {
+			flag = true;
+		} else if (numRows > 2) {
+			for (int i = 0; i < rows.size(); i++) {
+				if (rows.get(i).getText().equalsIgnoreCase(offerName)) {
+					rowNumberOfOffer = i + 1;
+
+				}
+
+			}
+
+			Actions actions = new Actions(driver);
+			WebElement To = null;
+
+			try {
+				To = new WebDriverWait(driver, 60).until(ExpectedConditions.presenceOfElementLocated(By
+						.xpath("//table[@class='override-table table table-bordered table-hover dataTable']//tr[2]")));
+			} catch (Exception e) {
+
+				flag = false;
+				// TODO Auto-generated catch block
+				System.out.println("Drop to element is not located" + e.getMessage());
+
+				Reporter.log("Drop to element is not located" + e.getMessage());
+
+				return flag;
+			}
+			WebElement From = null;
+			try {
+				From = new WebDriverWait(driver, 60).until(ExpectedConditions.presenceOfElementLocated(
+						By.xpath("//table[@class='override-table table table-bordered table-hover dataTable']//tr["
+								+ rowNumberOfOffer + "]")));
+			} catch (Exception e) {
+				flag = false;
+				// TODO Auto-generated catch block
+				System.out.println("Drop From element is not located" + e.getMessage());
+
+				Reporter.log("Drop From element is not located" + e.getMessage());
+
+				return flag;
+			}
+
+			// actions.dragAndDrop(From, To).build().perform();
+			actions.clickAndHold(From).moveToElement(To).release(To).build().perform();
+
+		}
+
+		return flag;
+
 	}
 
 }

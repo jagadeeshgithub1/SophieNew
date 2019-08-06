@@ -1604,6 +1604,64 @@ public class DriverEngine extends TestBaseClass {
 							return Finalflag;
 						}
 						break;
+					case "enableOverride":
+						if (classAction.enableOverride(TestData)) {
+							excelUtils.setCellData(sheetName, "Results", Irow, "Pass");
+						}
+
+						else {
+							Finalflag = false;
+							try {
+								Thread.sleep(10000);
+								if (osName.equalsIgnoreCase("Linux")) {
+									FullPageScreenShot("ScreenShots/", TestCaseID + "_" + ActionKeyWord + "_" + ".png");
+
+								} else {
+
+									FullPageScreenShot("ScreenShots\\",
+											TestCaseID + "_" + ActionKeyWord + "_" + ".png");
+								}
+							} catch (Exception e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							Reporter.log("Failed in " + ActionKeyWord);
+							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+
+							Finalflag = false;
+							classAction.quitBrowser();
+							return Finalflag;
+						}
+						break;
+					case "increaseWeightIfRequired":
+						if (classAction.increaseWeightIfRequired(TestData)) {
+							excelUtils.setCellData(sheetName, "Results", Irow, "Pass");
+						}
+
+						else {
+							Finalflag = false;
+							try {
+								Thread.sleep(10000);
+								if (osName.equalsIgnoreCase("Linux")) {
+									FullPageScreenShot("ScreenShots/", TestCaseID + "_" + ActionKeyWord + "_" + ".png");
+
+								} else {
+
+									FullPageScreenShot("ScreenShots\\",
+											TestCaseID + "_" + ActionKeyWord + "_" + ".png");
+								}
+							} catch (Exception e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							Reporter.log("Failed in " + ActionKeyWord);
+							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+
+							Finalflag = false;
+							classAction.quitBrowser();
+							return Finalflag;
+						}
+						break;
 					default:
 						break;
 					}

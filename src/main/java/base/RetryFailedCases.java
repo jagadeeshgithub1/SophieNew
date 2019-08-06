@@ -5,19 +5,20 @@ import org.testng.ITestResult;
 
 public class RetryFailedCases implements IRetryAnalyzer {
 
-	private int retryCount;
-	private int MaxCount = 0;
+	private int retryCount = 0;
+	private int MaxCount = 1;
 
 	public RetryFailedCases() {
 		// TODO Auto-generated constructor stub
 	}
 
-	@SuppressWarnings("unused")
 	public boolean retry(ITestResult result) {
 
-		for (retryCount = 0; retryCount < MaxCount; retryCount++) {
+		if (retryCount < MaxCount) {
 
 			System.out.println("Retrying the method" + result.getName() + "for" + retryCount + "times..");
+
+			retryCount++;
 			return true;
 
 		}
