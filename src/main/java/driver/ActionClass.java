@@ -21,6 +21,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 import org.json.simple.JSONObject;
 import org.openqa.selenium.By;
@@ -502,6 +503,8 @@ public class ActionClass extends TestBaseClass {
 			flag = true;
 		} catch (Exception e) {
 			flag = false;
+			System.out.println("Failed in entering the details");
+			System.out.println(e.getMessage());
 			// TODO: handle exception
 		}
 
@@ -707,7 +710,7 @@ public class ActionClass extends TestBaseClass {
 			// driver.manage().window().setSize(new Dimension(1920, 1080));
 			driver.manage().window().maximize();
 			// driver.manage().deleteAllCookies();
-			// driver.manage().timeouts().pageLoadTimeout(200, TimeUnit.SECONDS);
+			driver.manage().timeouts().pageLoadTimeout(200, TimeUnit.SECONDS);
 
 			driver.get(prop.getProperty("url"));
 
@@ -750,6 +753,7 @@ public class ActionClass extends TestBaseClass {
 		 */
 		try {
 			Thread.sleep(5000);
+			driver.close();
 			driver.quit();
 			System.out.println("Driver instance is  quitting ");
 			flag = true;
