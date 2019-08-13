@@ -21,7 +21,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.TimeUnit;
 
 import org.json.simple.JSONObject;
 import org.openqa.selenium.By;
@@ -282,51 +281,50 @@ public class ActionClass extends TestBaseClass {
 		 * 
 		 */
 		boolean flag = false;
-		try {
 
-			boolean ele = new WebDriverWait(driver, 600).until(ExpectedConditions.and(
+		boolean ele;
+		try {
+			ele = new WebDriverWait(driver, 600).until(ExpectedConditions.and(
 					ExpectedConditions.visibilityOfElementLocated(By.xpath(prop.getProperty(object))),
 					ExpectedConditions.elementToBeClickable(By.xpath(prop.getProperty(object)))));
-			if (ele == true) {
-
-				WebElement element = driver.findElement(By.xpath(prop.getProperty(object)));
-
-				// Actions action = new Actions(driver);
-				System.out.println("is this the element???>>" + element);
-				element.click();
-				// action.moveToElement(element).click(element).build().perform();
-
-				Thread.sleep(5000);
-
-				// action.moveToElement(element).sendKeys(Keys.RETURN);
-				// driver.findElement(By.xpath(prop.getProperty(object))).click();
-				if (driver.getPageSource().equalsIgnoreCase("Data Set BatchDecisionOutput is empty")) {
-					flag = false;
-					System.out.println("Dataset is empty");
-					return flag;
-				}
-				flag = true;
-			} else {
-				System.out.println("run engine is not clicked..");
-				flag = false;
-				return flag;
-			}
-
-		} catch (TimeoutException e) {
-
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			System.out.println("Time out..Are you sure the element is present");
-			flag = false;
-			return flag;
-
-			// TODO: handle exception
 		} catch (Exception e) {
+
 			System.out.println("element is not clicked" + " " + e.getMessage());
 			flag = false;
 			return flag;
-			// TODO: handle exception
+
 		}
+		if (ele == true) {
+
+			WebElement element = driver.findElement(By.xpath(prop.getProperty(object)));
+
+			// Actions action = new Actions(driver);
+			System.out.println("is this the element???>>" + element);
+			element.click();
+			// action.moveToElement(element).click(element).build().perform();
+
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			// action.moveToElement(element).sendKeys(Keys.RETURN);
+			// driver.findElement(By.xpath(prop.getProperty(object))).click();
+			if (driver.getPageSource().equalsIgnoreCase("Data Set BatchDecisionOutput is empty")) {
+				flag = false;
+				System.out.println("Dataset is empty");
+				return flag;
+			}
+			flag = true;
+		} else {
+			System.out.println("run engine is not clicked..");
+			flag = false;
+			return flag;
+		}
+
+		// TODO: handle exception
 
 		// TODO: handle exception
 		return flag;
@@ -492,7 +490,7 @@ public class ActionClass extends TestBaseClass {
 		 * @Parameter:Passing the web element xpath, and the data to be typed
 		 */
 		try {
-			WebElement ele = new WebDriverWait(driver, 120)
+			WebElement ele = new WebDriverWait(driver, 90)
 					.until(ExpectedConditions.presenceOfElementLocated(By.xpath(prop.getProperty(object))));
 
 			ele.clear();
@@ -697,7 +695,7 @@ public class ActionClass extends TestBaseClass {
 			// options.addArguments("--disable-dev-shm-usage");
 			// options.addArguments("--headless");
 			// options.addArguments("window-size=1200x600");
-			options.addArguments("--disable-gpu");
+			// options.addArguments("--disable-gpu");
 
 			try {
 				driver = new ChromeDriver(options);// some exception is coming hre
@@ -708,9 +706,15 @@ public class ActionClass extends TestBaseClass {
 				e.printStackTrace();
 			}
 			// driver.manage().window().setSize(new Dimension(1920, 1080));
+
 			driver.manage().window().maximize();
-			// driver.manage().deleteAllCookies();
-			driver.manage().timeouts().pageLoadTimeout(200, TimeUnit.SECONDS);
+
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+
+			js.executeScript("document.body.style.zoom='80%'");
+
+			driver.manage().deleteAllCookies();
+			// driver.manage().timeouts().pageLoadTimeout(200, TimeUnit.SECONDS);
 
 			driver.get(prop.getProperty("url"));
 
@@ -1003,7 +1007,7 @@ public class ActionClass extends TestBaseClass {
 
 		try {
 
-			ele = new WebDriverWait(driver, 20)
+			ele = new WebDriverWait(driver, 90)
 					.until(ExpectedConditions.presenceOfElementLocated(By.xpath(prop.getProperty(object))));
 
 		} catch (Exception e) {
@@ -1045,7 +1049,7 @@ public class ActionClass extends TestBaseClass {
 		boolean flag = false;
 		WebElement chkTrigger = null;
 		try {
-			chkTrigger = new WebDriverWait(driver, 40).until(ExpectedConditions.presenceOfElementLocated(By.xpath(
+			chkTrigger = new WebDriverWait(driver, 90).until(ExpectedConditions.presenceOfElementLocated(By.xpath(
 					"(//tr/td/div[@title='" + titleOftheEvent.trim() + "']/following::td/input)[" + index + "]")));
 			flag = true;
 		} catch (Exception e) {
@@ -2942,7 +2946,7 @@ public class ActionClass extends TestBaseClass {
 		boolean flag = false;
 
 		try {
-			WebElement ele = new WebDriverWait(driver, 600)
+			WebElement ele = new WebDriverWait(driver, 1200)
 					.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//p[text()='Load/Read From:']")));
 			flag = true;
 		} catch (Exception e) {
@@ -2950,6 +2954,7 @@ public class ActionClass extends TestBaseClass {
 			flag = false;
 
 			System.out.println("Engine generation didnt complete!!" + e.getMessage());
+			e.printStackTrace();
 			return flag;
 		}
 		return flag;
@@ -3298,12 +3303,12 @@ public class ActionClass extends TestBaseClass {
 
 		System.out.println("Number of rows>>" + numRows);
 
-		if (numRows == 2) {
+		if (numRows == 1) {
 			flag = true;
-		} else if (numRows > 2) {
+		} else if (numRows > 1) {
 			for (int i = 0; i < rows.size(); i++) {
 				if (rows.get(i).getText().equalsIgnoreCase(offerName)) {
-					rowNumberOfOffer = i + 1;
+					rowNumberOfOffer = i + 2;
 
 				}
 
@@ -3340,8 +3345,19 @@ public class ActionClass extends TestBaseClass {
 				return flag;
 			}
 
-			// actions.dragAndDrop(From, To).build().perform();
-			actions.clickAndHold(From).moveToElement(To).release(To).build().perform();
+			try {
+				actions.dragAndDrop(From, To).build().perform();
+				flag = true;
+
+				// actions.clickAndHold(From).moveToElement(To).release(To).build().perform();
+			} catch (Exception e) {
+				flag = false;
+
+				System.out.println("Increase the weight of the offer failed" + e.getMessage());
+				Reporter.log("Increase the weight of the offer failed" + e.getMessage());
+				// TODO Auto-generated catch block
+				return flag;
+			}
 
 		}
 
