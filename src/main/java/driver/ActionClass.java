@@ -21,6 +21,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 import org.json.simple.JSONObject;
 import org.openqa.selenium.By;
@@ -709,12 +710,14 @@ public class ActionClass extends TestBaseClass {
 
 			driver.manage().window().maximize();
 
-			JavascriptExecutor js = (JavascriptExecutor) driver;
-
-			js.executeScript("document.body.style.zoom='80%'");
+			/*
+			 * JavascriptExecutor js = (JavascriptExecutor) driver;
+			 * 
+			 * js.executeScript("document.body.style.zoom='80%'");
+			 */
 
 			driver.manage().deleteAllCookies();
-			// driver.manage().timeouts().pageLoadTimeout(200, TimeUnit.SECONDS);
+			driver.manage().timeouts().pageLoadTimeout(1200, TimeUnit.SECONDS);
 
 			driver.get(prop.getProperty("url"));
 
@@ -1083,11 +1086,13 @@ public class ActionClass extends TestBaseClass {
 		 */
 		boolean flag = false;
 		try {
+			Thread.sleep(5000);
 			driver.findElement(By.xpath(prop.getProperty(object))).sendKeys(Keys.ENTER);
 			flag = true;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			System.out.println("KeyPressEnter didn't complete");
+			System.out.println("KeyPressEnter didn't complete" + e.getMessage());
+			Reporter.log("KeyPressEnter didn't complete" + e.getMessage());
 			flag = false;
 		}
 
@@ -1717,7 +1722,7 @@ public class ActionClass extends TestBaseClass {
 			Thread.sleep(3000);
 			click("lnkTechAdmin");
 			switchToFrameByIndex(2);
-			selectRadioButton("radBtnAllForIH");
+			selectRadioButton("radioBtnAllForIH");
 			Thread.sleep(5000);
 			click("btnClearIH");
 			click("btnResetEngStat");
@@ -2256,13 +2261,13 @@ public class ActionClass extends TestBaseClass {
 			WebElement ele = new WebDriverWait(driver, 50)
 					.until(ExpectedConditions.presenceOfElementLocated(By.xpath(prop.getProperty(object))));
 
-			if (ele.getAttribute("class").equalsIgnoreCase("btn btn-toggle btn-lg")) {
+			if (ele.getAttribute("class").trim().equalsIgnoreCase("btn btn-toggle btn-lg")) {
 
 				ele.click();
 
 			}
 
-			if (ele.getAttribute("class").equalsIgnoreCase("btn btn-toggle btn-lg active")) {
+			if (ele.getAttribute("class").trim().equalsIgnoreCase("btn btn-toggle btn-lg active")) {
 
 				flag = true;
 
@@ -2447,7 +2452,7 @@ public class ActionClass extends TestBaseClass {
 				RequestSpecification before = request.body(jsobj.toJSONString());
 				// System.out.println(before);
 
-				Response res = request.post("http://auto-test-mavis74.adqura.com:7003/stream/RTStreamDataSet");
+				Response res = request.post(prop.getProperty("realTimeAPIURL"));
 
 				if (res.getStatusCode() == 202) {
 
@@ -2455,7 +2460,7 @@ public class ActionClass extends TestBaseClass {
 					System.out.println("Post sucessfully complted and status code is" + res.getStatusCode());
 
 				} else {
-					System.out.println("Failed due and status code is  " + res.getStatusCode());
+					System.out.println("Failed  and status code is  " + res.getStatusCode());
 				}
 
 			}
@@ -2984,8 +2989,15 @@ public class ActionClass extends TestBaseClass {
 		WebElement btnRollback = null;
 
 		try {
-			rollbackVersionTab = new WebDriverWait(driver, 60).until(ExpectedConditions
-					.presenceOfElementLocated(By.xpath("(//button[contains(text(),'" + versionName + "')])[1]")));
+
+			/*
+			 * List<WebElement> rollTabs = driver
+			 * .findElements(By.xpath("//button[contains(text(),'" + versionName + "')]"));
+			 */
+
+			rollbackVersionTab = new WebDriverWait(driver, 60).until(ExpectedConditions.presenceOfElementLocated(
+					By.xpath("(//button[text() [normalize-space()='" + versionName.trim() + "']])[1]")));
+
 			rollbackVersionTab.click();
 			btnRollback = new WebDriverWait(driver, 60)
 					.until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//a[text()=' Rollback To '])[1]")));
@@ -3203,8 +3215,8 @@ public class ActionClass extends TestBaseClass {
 		WebElement ihTable = null;
 
 		try {
-			ihTable = new WebDriverWait(driver, 60)
-					.until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//table[@id='bodyTbl_right'])[2]")));
+			ihTable = new WebDriverWait(driver, 60).until(ExpectedConditions.presenceOfElementLocated(By.xpath(
+					"(//table[@id='bodyTbl_right' and @pl_prop_class='ADQURA-FW-AppsFW-Data-OutboundEmail' ])[1]")));
 		} catch (Exception e) {
 
 			flag = false;
@@ -3217,7 +3229,8 @@ public class ActionClass extends TestBaseClass {
 
 		}
 
-		List<WebElement> tableRows = driver.findElements(By.xpath("(//table[@id='bodyTbl_right'])[2]//tr"));
+		List<WebElement> tableRows = driver.findElements(By.xpath(
+				"(//table[@id='bodyTbl_right' and @pl_prop_class='ADQURA-FW-AppsFW-Data-OutboundEmail' ])[1]//tr"));
 
 		if (tableRows.size() > 2) {
 

@@ -90,13 +90,7 @@ public class RegressionCases {
 
 	}
 
-	@Test(enabled = false)
-	public void Verify_RealTimeEvent_API_Response_For_NewEvent() {
-		Assert.assertTrue(driverEngine.mainMethod("VerifyEventAPI"));
-
-	}
-
-	@Test(priority = 3)
+	@Test(priority = 3, retryAnalyzer = RetryFailedCases.class)
 	public void Verify_Deleted_Offer_Is_Not_Present_In_CSV() {
 		Assert.assertTrue(driverEngine.mainMethod("VerifyDeleteOffer"));
 
@@ -114,33 +108,28 @@ public class RegressionCases {
 		Assert.assertTrue(driverEngine.mainMethod("RenameOffer"));
 	}
 
-	@Test(enabled = false)
-	public void Verify_RealtimeSpine_Api() {
-		Assert.assertTrue(driverEngine.mainMethod("VerifyRealtimeSpineAPI"));
+	@Test(priority = 6)
+	public void Verify_RealTimeEvent_API_Response_For_NewEvent() {
+		Assert.assertTrue(driverEngine.mainMethod("VerifyEventAPI"));
 
 	}
 
-	@Test(priority = 6, retryAnalyzer = RetryFailedCases.class)
+	@Test(priority = 7, retryAnalyzer = RetryFailedCases.class)
 
 	public void Verify_AdaptiveModel_For_Negative_Response() {
 		Assert.assertTrue(driverEngine.mainMethod("AdpativeModelForUnsubscribe"));
 	}
 
-	@Test(priority = 7, retryAnalyzer = RetryFailedCases.class)
+	@Test(priority = 8, retryAnalyzer = RetryFailedCases.class)
 	public void Verify_NewEmailTemp_ByCloning() {
 		Assert.assertTrue(driverEngine.mainMethod("EmailTempWithNewAttribute"));
 
 	}
 
-	@Test(priority = 8, retryAnalyzer = RetryFailedCases.class)
+	@Test(priority = 9, retryAnalyzer = RetryFailedCases.class)
 	public void Verify_Creating_NewMicrositeTemp_ByAdding_Existing_Attribute() {
 		Assert.assertTrue(driverEngine.mainMethod("MicrositeTempWithExistingAttrib"));
 
-	}
-
-	@Test(priority = 9)
-	public void Verify_Existing_Attribute_Can_be_Added_In_OCCTemplate() {
-		Assert.assertTrue(driverEngine.mainMethod("OBCCTempWithExistingAttrib"));
 	}
 
 	@Test(priority = 10, retryAnalyzer = RetryFailedCases.class)
@@ -165,6 +154,12 @@ public class RegressionCases {
 	public void Verify_Rollback_Is_Working_As_Expected() {
 
 		Assert.assertTrue(driverEngine.mainMethod("EnsureRollbackIsSuccessful"));
+	}
+
+	@Test(priority = 14, retryAnalyzer = RetryFailedCases.class)
+	public void Verify_RealtimeSpine_Api() {
+		Assert.assertTrue(driverEngine.mainMethod("VerifyRealtimeSpineAPI"));
+
 	}
 
 }
