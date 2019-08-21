@@ -5,10 +5,22 @@
     <classes>
       <class name="regressionTests.RegressionCases">
         <methods>
-          <include name="beforeMethod"/>
-          <include name="Verify_Rollback_Is_Working_As_Expected"/>
-          <include name="setUp"/>
+          <include name="Verify_Deleted_Offer_Is_Not_Present_In_CSV"/>
+          <include name="Verify_NewProperty_Added_Is_Available_in_DB"/>
+          <include name="Verify_Discard_Version_Is_Successful"/>
+          <include name="Verify_Offer_Rename_Is_Successfull"/>
+          <include name="Verify_Creating_NewMicrositeTemp_ByAdding_Existing_Attribute"/>
+          <include name="Verify_NewProperty_Added_Is_Available_in_PegaClass"/>
+          <include name="Verify_DownloadedCSV_For_Existing_Version"/>
           <include name="Verify_RealTimeEvent_API_Response_For_NewEvent"/>
+          <include name="beforeMethod"/>
+          <include name="Verify_AdaptiveModel_For_Negative_Response"/>
+          <include name="Verify_Rollback_Is_Working_As_Expected"/>
+          <include name="Verify_DownloadedCSV_For_New_version"/>
+          <include name="Verify_RealtimeSpine_Api"/>
+          <include name="Verify_IH_Deleted_For_All"/>
+          <include name="setUp"/>
+          <include name="Verify_NewEmailTemp_ByCloning"/>
         </methods>
       </class> <!-- regressionTests.RegressionCases -->
     </classes>

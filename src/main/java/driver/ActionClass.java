@@ -1018,6 +1018,8 @@ public class ActionClass extends TestBaseClass {
 
 			Reporter.log("Element" + object + "is not present" + e.getMessage());
 			System.out.println("Element" + object + "is not present" + e.getMessage());
+			flag = false;
+			return flag;
 
 		}
 
@@ -1722,6 +1724,7 @@ public class ActionClass extends TestBaseClass {
 			Thread.sleep(3000);
 			click("lnkTechAdmin");
 			switchToFrameByIndex(2);
+			Thread.sleep(3000);
 			selectRadioButton("radioBtnAllForIH");
 			Thread.sleep(5000);
 			click("btnClearIH");

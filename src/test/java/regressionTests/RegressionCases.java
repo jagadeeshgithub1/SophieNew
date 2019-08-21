@@ -108,7 +108,7 @@ public class RegressionCases {
 		Assert.assertTrue(driverEngine.mainMethod("RenameOffer"));
 	}
 
-	@Test(priority = 6)
+	@Test(priority = 6, retryAnalyzer = RetryFailedCases.class)
 	public void Verify_RealTimeEvent_API_Response_For_NewEvent() {
 		Assert.assertTrue(driverEngine.mainMethod("VerifyEventAPI"));
 

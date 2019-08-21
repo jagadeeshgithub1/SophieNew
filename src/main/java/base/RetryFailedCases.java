@@ -6,7 +6,7 @@ import org.testng.ITestResult;
 public class RetryFailedCases implements IRetryAnalyzer {
 
 	private int retryCount = 0;
-	private int MaxCount = 1;
+	private int MaxCount = 2;
 
 	public RetryFailedCases() {
 		// TODO Auto-generated constructor stub

@@ -1717,7 +1717,7 @@ public class DriverEngine extends TestBaseClass {
 			if (method[i].getName().equals(ActionKeyWord)) {
 				// In case of match found, it will execute the matched method
 				try {
-					method[i].invoke(ActionKeyWord, PageObject, TestData);
+					method[i].invoke(classAction);
 				} catch (IllegalAccessException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
