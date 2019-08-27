@@ -162,4 +162,17 @@ public class RegressionCases {
 
 	}
 
+	@Test(priority = 15, retryAnalyzer = RetryFailedCases.class)
+	public void Ensure_Only_Expected_Channels_Are_Selected() {
+		Assert.assertTrue(driverEngine.mainMethod("VerifyChannelSelection"));
+
+	}
+
+	@Test(priority = 16, retryAnalyzer = RetryFailedCases.class)
+	public void Ensure_PickBestChannel_Works_With_Channel_Heirarchy() {
+
+		Assert.assertTrue(driverEngine.mainMethod("PickBestChannel"));
+
+	}
+
 }

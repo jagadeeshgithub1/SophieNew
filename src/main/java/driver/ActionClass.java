@@ -16,6 +16,8 @@ import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Base64;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -2806,6 +2808,63 @@ public class ActionClass extends TestBaseClass {
 
 	}
 
+	public boolean verifyEligibleChannelForOfferInDB(String sql, String channel) {
+		/*
+		 * @author :DeepaPanikkavetil
+		 * 
+		 * @date :8/27/2019
+		 * 
+		 * @modified by:
+		 * 
+		 * @modified date:
+		 * 
+		 * @USEFOR :to perform the validation to check the eligible channel for the
+		 * offer
+		 * 
+		 * @Parameters:sql and expected channel name
+		 * 
+		 */
+
+		boolean flag = false;
+		ResultSet resultSet = null;
+		ResultSetMetaData metaData = null;
+		String ActualChannel = null;
+
+		try {
+			DBConnectivity();
+			resultSet = statement.executeQuery(sql);
+			metaData = resultSet.getMetaData();
+
+		} catch (SQLException e) {
+
+			flag = false;
+
+			// TODO Auto-generated catch block
+			System.out.println("Failed in db connectivity " + e.getMessage());
+			Reporter.log("Failed in db connectivity " + e.getMessage());
+		}
+		try {
+			while (resultSet.next()) {
+				ActualChannel = resultSet.getString("channel");
+
+			}
+		} catch (SQLException e) {
+			flag = false;
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return flag;
+		}
+
+		if (ActualChannel.equalsIgnoreCase(channel)) {
+			flag = true;
+			System.out.println("Offer Eligible for the pickbest channel" + channel);
+
+		}
+
+		return flag;
+
+	}
+
 	public boolean verifyColumnInPegaClass(String colName) {
 
 		/*
@@ -3288,15 +3347,15 @@ public class ActionClass extends TestBaseClass {
 
 	}
 
-	public boolean increaseWeightIfRequired(String offerName) {
+	public boolean increaseWeightIfRequired(String object, String offerName) {
 		boolean flag = false;
 
 		WebElement overridetable = null;
 		int rowNumberOfOffer = 0;
 
 		try {
-			overridetable = new WebDriverWait(driver, 60).until(ExpectedConditions.presenceOfElementLocated(
-					By.xpath("//table[@class='override-table table table-bordered table-hover dataTable']")));
+			overridetable = new WebDriverWait(driver, 60)
+					.until(ExpectedConditions.presenceOfElementLocated(By.xpath(prop.getProperty(object))));
 		} catch (Exception e) {
 			flag = false;
 			// TODO Auto-generated catch block
@@ -3312,8 +3371,7 @@ public class ActionClass extends TestBaseClass {
 		// getting the number of rows from the table
 
 		int numRows = 0;
-		List<WebElement> rows = driver.findElements(
-				By.xpath("//table[@class='override-table table table-bordered table-hover dataTable']//tr//td[2]"));
+		List<WebElement> rows = driver.findElements(By.xpath(prop.getProperty(object) + "//tr//td[2]"));
 
 		numRows = rows.size();
 
@@ -3334,8 +3392,8 @@ public class ActionClass extends TestBaseClass {
 			WebElement To = null;
 
 			try {
-				To = new WebDriverWait(driver, 60).until(ExpectedConditions.presenceOfElementLocated(By
-						.xpath("//table[@class='override-table table table-bordered table-hover dataTable']//tr[2]")));
+				To = new WebDriverWait(driver, 60).until(
+						ExpectedConditions.presenceOfElementLocated(By.xpath(prop.getProperty(object) + "//tr[2]")));
 			} catch (Exception e) {
 
 				flag = false;
@@ -3349,8 +3407,142 @@ public class ActionClass extends TestBaseClass {
 			WebElement From = null;
 			try {
 				From = new WebDriverWait(driver, 60).until(ExpectedConditions.presenceOfElementLocated(
-						By.xpath("//table[@class='override-table table table-bordered table-hover dataTable']//tr["
-								+ rowNumberOfOffer + "]")));
+						By.xpath(prop.getProperty(object) + "//tr[" + rowNumberOfOffer + "]")));
+			} catch (Exception e) {
+				flag = false;
+				// TODO Auto-generated catch block
+				System.out.println("Drop From element is not located" + e.getMessage());
+
+				Reporter.log("Drop From element is not located" + e.getMessage());
+
+				return flag;
+			}
+
+			try {
+				actions.dragAndDrop(From, To).build().perform();
+				flag = true;
+
+				// actions.clickAndHold(From).moveToElement(To).release(To).build().perform();
+			} catch (Exception e) {
+				flag = false;
+
+				System.out.println("Increase the weight of the offer failed" + e.getMessage());
+				Reporter.log("Increase the weight of the offer failed" + e.getMessage());
+				// TODO Auto-generated catch block
+				return flag;
+			}
+
+		}
+
+		return flag;
+
+	}
+
+	public boolean verifyOnlyExpectedChannelIsSelected(String channels) {
+
+		List<WebElement> chkBoxes = null;
+		List<String> selectedChannels = new ArrayList<String>();
+
+		String[] channelList = channels.split(",");
+
+		boolean flag = false;
+
+		try {
+			chkBoxes = driver
+					.findElements(By.xpath("//div[@id='applicable-channel-list-outbound']//input[@type='checkbox']"));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+
+			flag = false;
+
+			System.out.println("Channels are not located" + e.getMessage());
+
+			Reporter.log("Channels are not located" + e.getMessage());
+
+			return flag;
+		}
+
+		for (int i = 0; i < chkBoxes.size(); i++) {
+
+			System.out.println("is this checked??" + chkBoxes.get(i).isSelected());
+			if (chkBoxes.get(i).isSelected())
+
+				selectedChannels.add(chkBoxes.get(i).getAttribute("id"));
+		}
+
+		// compare two array and list
+
+		String[] selectedChannelsArray = selectedChannels.toArray(new String[selectedChannels.size()]);
+
+		if (Arrays.equals(selectedChannelsArray, channelList)) {
+			flag = true;
+		}
+
+		return flag;
+
+	}
+
+	public boolean changeChannelPriorityIfRequired(String object, String channelName) {
+		boolean flag = false;
+
+		WebElement overridetable = null;
+		int rowNumberOfOffer = 0;
+
+		try {
+			overridetable = new WebDriverWait(driver, 60)
+					.until(ExpectedConditions.presenceOfElementLocated(By.xpath(prop.getProperty(object))));
+		} catch (Exception e) {
+			flag = false;
+			// TODO Auto-generated catch block
+
+			System.out.println("override table is not located" + e.getMessage());
+
+			Reporter.log("override table is not located" + e.getMessage());
+
+			return flag;
+
+		}
+
+		// getting the number of rows from the table
+
+		int numRows = 0;
+		List<WebElement> rows = driver.findElements(By.xpath(prop.getProperty(object) + "//tr//td[2]"));
+
+		numRows = rows.size();
+
+		System.out.println("Number of rows>>" + numRows);
+
+		if (numRows == 1) {
+			flag = true;
+		} else if (numRows > 1) {
+			for (int i = 0; i < rows.size(); i++) {
+				if (rows.get(i).getText().equalsIgnoreCase(channelName)) {
+					rowNumberOfOffer = i + 1;
+
+				}
+
+			}
+
+			Actions actions = new Actions(driver);
+			WebElement To = null;
+
+			try {
+				To = new WebDriverWait(driver, 60).until(
+						ExpectedConditions.presenceOfElementLocated(By.xpath(prop.getProperty(object) + "//tr[1]")));
+			} catch (Exception e) {
+
+				flag = false;
+				// TODO Auto-generated catch block
+				System.out.println("Drop to element is not located" + e.getMessage());
+
+				Reporter.log("Drop to element is not located" + e.getMessage());
+
+				return flag;
+			}
+			WebElement From = null;
+			try {
+				From = new WebDriverWait(driver, 60).until(ExpectedConditions.presenceOfElementLocated(
+						By.xpath(prop.getProperty(object) + "//tr[" + rowNumberOfOffer + "]")));
 			} catch (Exception e) {
 				flag = false;
 				// TODO Auto-generated catch block

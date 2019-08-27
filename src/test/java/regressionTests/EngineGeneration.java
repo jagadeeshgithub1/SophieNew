@@ -4,17 +4,22 @@ import java.io.File;
 import java.io.IOException;
 
 import org.apache.commons.io.FileUtils;
-import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 import base.InvokationListner;
+import driver.ActionClass;
 import driver.DriverEngine;
 
 @Listeners(InvokationListner.class)
 public class EngineGeneration {
+
+	public EngineGeneration() throws Exception {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	public DriverEngine driverEngine = null;
 	SoftAssert softAssert = new SoftAssert();
@@ -66,14 +71,17 @@ public class EngineGeneration {
 		}
 	}
 
-	@Test(invocationCount = 30)
+	@Test()
 	// First test to validate the CSV after engine run
-	public void VerifyGenerateEngineCompletesWithoutFail() {
-
-		Assert.assertTrue(driverEngine.mainMethod("EngineGeneration"));
-
-		// TODO Auto-generated catch block
-
+	public void testPickbest() {
+		ActionClass classAction = null;
+		try {
+			classAction = new ActionClass();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		classAction.verifyEligibleChannelForOfferInDB(
+				"select distinct channel from interaction_history_v where associatedoffer='PickBestOffer'", "Email");
 	}
-
 }

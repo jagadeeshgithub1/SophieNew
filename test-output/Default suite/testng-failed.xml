@@ -20,7 +20,9 @@
           <include name="Verify_RealtimeSpine_Api"/>
           <include name="Verify_IH_Deleted_For_All"/>
           <include name="setUp"/>
+          <include name="Ensure_Only_Expected_Channels_Are_Selected"/>
           <include name="Verify_NewEmailTemp_ByCloning"/>
+          <include name="Ensure_PickBestChannel_Works_With_Channel_Heirarchy"/>
         </methods>
       </class> <!-- regressionTests.RegressionCases -->
     </classes>
