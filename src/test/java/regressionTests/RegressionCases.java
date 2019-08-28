@@ -72,7 +72,7 @@ public class RegressionCases {
 		}
 	}
 
-	@Test(priority = 1, retryAnalyzer = RetryFailedCases.class)
+	@Test(priority = 1, retryAnalyzer = RetryFailedCases.class, enabled = false)
 	// First test to validate the CSV after engine run
 	public void Verify_DownloadedCSV_For_Existing_Version() {
 
@@ -83,6 +83,12 @@ public class RegressionCases {
 	}
 
 	@Test(priority = 2, retryAnalyzer = RetryFailedCases.class)
+
+	public void Verify_AdaptiveModel_For_Negative_Response() {
+		Assert.assertTrue(driverEngine.mainMethod("AdpativeModelForUnsubscribe"));
+	}
+
+	@Test(priority = 3, retryAnalyzer = RetryFailedCases.class, enabled = false)
 	// Second case to verify the event API integration
 	public void Verify_DownloadedCSV_For_New_version() {
 
@@ -90,55 +96,49 @@ public class RegressionCases {
 
 	}
 
-	@Test(priority = 3, retryAnalyzer = RetryFailedCases.class)
+	@Test(priority = 4, retryAnalyzer = RetryFailedCases.class, enabled = false)
 	public void Verify_Deleted_Offer_Is_Not_Present_In_CSV() {
 		Assert.assertTrue(driverEngine.mainMethod("VerifyDeleteOffer"));
 
 	}
 
-	@Test(priority = 4, retryAnalyzer = RetryFailedCases.class)
+	@Test(priority = 5, retryAnalyzer = RetryFailedCases.class, enabled = false)
 	public void Verify_IH_Deleted_For_All() {
 		Assert.assertTrue(driverEngine.mainMethod("VerifyIHDeleted"));
 
 	}
 
-	@Test(priority = 5, retryAnalyzer = RetryFailedCases.class)
+	@Test(priority = 6, retryAnalyzer = RetryFailedCases.class, enabled = false)
 	public void Verify_Offer_Rename_Is_Successfull() {
 
 		Assert.assertTrue(driverEngine.mainMethod("RenameOffer"));
 	}
 
-	@Test(priority = 6, retryAnalyzer = RetryFailedCases.class)
+	@Test(priority = 7, retryAnalyzer = RetryFailedCases.class)
 	public void Verify_RealTimeEvent_API_Response_For_NewEvent() {
 		Assert.assertTrue(driverEngine.mainMethod("VerifyEventAPI"));
 
 	}
 
-	@Test(priority = 7, retryAnalyzer = RetryFailedCases.class)
-
-	public void Verify_AdaptiveModel_For_Negative_Response() {
-		Assert.assertTrue(driverEngine.mainMethod("AdpativeModelForUnsubscribe"));
-	}
-
-	@Test(priority = 8, retryAnalyzer = RetryFailedCases.class)
+	@Test(priority = 8, retryAnalyzer = RetryFailedCases.class, enabled = false)
 	public void Verify_NewEmailTemp_ByCloning() {
 		Assert.assertTrue(driverEngine.mainMethod("EmailTempWithNewAttribute"));
 
 	}
 
-	@Test(priority = 9, retryAnalyzer = RetryFailedCases.class)
+	@Test(priority = 9, retryAnalyzer = RetryFailedCases.class, enabled = false)
 	public void Verify_Creating_NewMicrositeTemp_ByAdding_Existing_Attribute() {
 		Assert.assertTrue(driverEngine.mainMethod("MicrositeTempWithExistingAttrib"));
 
 	}
 
-	@Test(priority = 10, retryAnalyzer = RetryFailedCases.class)
+	@Test(priority = 10, retryAnalyzer = RetryFailedCases.class, enabled = false)
 	public void Verify_NewProperty_Added_Is_Available_in_DB() {
 		Assert.assertTrue(driverEngine.mainMethod("VerifyDBForNewAgreementModel"));
 
 	}
 
-	@Test(priority = 11, retryAnalyzer = RetryFailedCases.class)
+	@Test(priority = 11, retryAnalyzer = RetryFailedCases.class, enabled = false)
 	public void Verify_NewProperty_Added_Is_Available_in_PegaClass() {
 		Assert.assertTrue(driverEngine.mainMethod("VerifyAgreementClassFornewProp"));
 
@@ -150,7 +150,7 @@ public class RegressionCases {
 
 	}
 
-	@Test(priority = 13, retryAnalyzer = RetryFailedCases.class)
+	@Test(priority = 13, retryAnalyzer = RetryFailedCases.class, enabled = false)
 	public void Verify_Rollback_Is_Working_As_Expected() {
 
 		Assert.assertTrue(driverEngine.mainMethod("EnsureRollbackIsSuccessful"));

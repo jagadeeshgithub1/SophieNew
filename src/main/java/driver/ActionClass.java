@@ -2846,6 +2846,7 @@ public class ActionClass extends TestBaseClass {
 		try {
 			while (resultSet.next()) {
 				ActualChannel = resultSet.getString("channel");
+				System.out.println("Eligible channel>>" + ActualChannel);
 
 			}
 		} catch (SQLException e) {
