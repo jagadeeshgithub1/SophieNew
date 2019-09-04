@@ -2269,6 +2269,7 @@ public class ActionClass extends TestBaseClass {
 			if (ele.getAttribute("class").trim().equalsIgnoreCase("btn btn-toggle btn-lg")) {
 
 				ele.click();
+				flag = true;
 
 			}
 
@@ -2316,6 +2317,7 @@ public class ActionClass extends TestBaseClass {
 			if (ele.getAttribute("class").equalsIgnoreCase("btn btn-toggle btn-lg active")) {
 
 				ele.click();
+				flag = true;
 
 			}
 
@@ -3574,4 +3576,64 @@ public class ActionClass extends TestBaseClass {
 
 	}
 
+	public boolean verifyDataTypeForNewSubChannels(String subChannel, String channel) {
+
+		List<WebElement> tablerows = null;
+		String subChannelColumn = null;
+		String ChannelColumn = null;
+
+		boolean flag = false;
+
+		try {
+			tablerows = driver.findElements(
+					By.xpath("//table[@pl_prop_class='ADQURA-FW-AppsFW-Data-SubChannelsData']//tr[@oaargs]"));
+		} catch (Exception e) {
+
+			flag = false;
+			// TODO Auto-generated catch block
+			System.out.println("SubchannelsData table is empty" + e.getMessage());
+			Reporter.log("SubchannelsData table is empty" + e.getMessage());
+
+		}
+
+		for (int i = 1; i <= tablerows.size(); i++) {
+
+			ChannelColumn = driver.findElement(
+					By.xpath("(//table[@pl_prop_class='ADQURA-FW-AppsFW-Data-SubChannelsData']//tr[@oaargs])[" + i
+							+ "]//td[@data-attribute-name='Channel (required)']/div"))
+					.getText();
+
+			subChannelColumn = driver.findElement(
+					By.xpath("(//table[@pl_prop_class='ADQURA-FW-AppsFW-Data-SubChannelsData']//tr[@oaargs])[" + i
+							+ "]//td[@data-attribute-name='SubChannel (required)']/div"))
+					.getText();
+
+			if (subChannelColumn.trim().equalsIgnoreCase(subChannel)) {
+
+				if (ChannelColumn.trim().equalsIgnoreCase(channel)) {
+					flag = true;
+					break;
+
+				}
+
+			} else {
+				flag = false;
+
+			}
+		}
+		if (flag == true) {
+			System.out.println("Subchannel " + subChannelColumn + " and Channel " + ChannelColumn
+					+ " is present in the data type");
+			Reporter.log("Subchannel " + subChannelColumn + " and Channel " + ChannelColumn
+					+ " is present in the data type");
+
+		} else {
+			System.out.println("Subchannel " + subChannelColumn + " is not present");
+			Reporter.log("Subchannel " + subChannelColumn + " is not present");
+			return flag;
+
+		}
+
+		return flag;
+	}
 }

@@ -5,24 +5,14 @@
     <classes>
       <class name="regressionTests.RegressionCases">
         <methods>
-          <include name="Verify_Deleted_Offer_Is_Not_Present_In_CSV"/>
-          <include name="Verify_NewProperty_Added_Is_Available_in_DB"/>
-          <include name="Verify_Discard_Version_Is_Successful"/>
-          <include name="Verify_Offer_Rename_Is_Successfull"/>
-          <include name="Verify_Creating_NewMicrositeTemp_ByAdding_Existing_Attribute"/>
-          <include name="Verify_NewProperty_Added_Is_Available_in_PegaClass"/>
-          <include name="Verify_DownloadedCSV_For_Existing_Version"/>
-          <include name="Verify_RealTimeEvent_API_Response_For_NewEvent"/>
           <include name="beforeMethod"/>
           <include name="Verify_AdaptiveModel_For_Negative_Response"/>
-          <include name="Verify_Rollback_Is_Working_As_Expected"/>
-          <include name="Verify_DownloadedCSV_For_New_version"/>
-          <include name="Verify_RealtimeSpine_Api"/>
-          <include name="Verify_IH_Deleted_For_All"/>
+          <include name="Verify_NewlyAdded_Subchannel_Is_Present_In_the_DataType"/>
+          <include name="Verify_Discard_Version_Is_Successful"/>
           <include name="setUp"/>
           <include name="Ensure_Only_Expected_Channels_Are_Selected"/>
-          <include name="Verify_NewEmailTemp_ByCloning"/>
           <include name="Ensure_PickBestChannel_Works_With_Channel_Heirarchy"/>
+          <include name="Verify_RealTimeEvent_API_Response_For_NewEvent"/>
         </methods>
       </class> <!-- regressionTests.RegressionCases -->
     </classes>
